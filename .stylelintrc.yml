@@ -1,0 +1,11 @@
+extends: stylelint-config-standard
+
+rules:
+  string-quotes: double
+  function-url-quotes: always
+  font-family-name-quotes: always-unless-keyword
+  declaration-block-properties-order: alphabetical
+  selector-no-id: true
+  declaration-no-important: true
+  indentation: 4
+
