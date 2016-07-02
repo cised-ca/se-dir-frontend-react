@@ -4,11 +4,15 @@ require('styles/App.css');
 import React from 'react';
 
 import SearchForm from './SearchFormComponent.js';
+import Results from './ResultsListComponent.js';
 
 class AppComponent extends React.Component {
     render() {
         return (
-            <SearchForm />
+        	<div>
+	            <SearchForm />
+	            <Results />
+	        </div>
         );
     }
 }

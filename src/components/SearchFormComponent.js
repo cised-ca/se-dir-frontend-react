@@ -7,12 +7,12 @@ require('styles//SearchForm.scss');
 class SearchFormComponent extends React.Component {
   render() {
     return (
-      <div className="searchform-component">
-        <form>
-          <input name="q" />
-          <input type="submit" value="Search" />
-        </form>
-      </div>
+      <form className="search-form js-search-form">
+        <div className="search__field-button">
+          <input className="search-field" name="q" placeholder="Find Social Enterprises" type="search" />
+          <input className="search-button" type="submit" value="Search" />
+        </div>
+      </form>
     );
   }
 }
