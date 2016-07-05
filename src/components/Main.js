@@ -1,5 +1,6 @@
 require('normalize.css/normalize.css');
 require('styles/App.css');
+require('styles/extlib/skeleton.css');
 
 import React from 'react';
 
