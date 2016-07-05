@@ -78,20 +78,21 @@ require('styles//SearchResults.scss');
 class SearchResultsComponent extends React.Component {
   render() {
     var list = directory.listOfEnterprises;
+
     return (
-      <div className='searchresults-component'>
+      <ol className='search-results js-search-results'>
         {
         	list.map(function(enterprise, index) {
         		return (
-        			<div key={index} class='searchresults-component__listing four columns'>
-      					<div key={index + 'title'} className="searchresults-component__listing__enterprise">{enterprise.title}</div>
-      					<div key={index + 'description'} className="searchresults-component__listing__description">{enterprise.description}</div>
-      					<div key={index + 'website'} className="searchresults-component__listing__website"><a key={index + 'link'} href={enterprise.website}>Website</a></div>
-        			</div>
+                    <li key={index} className='search-result organization four columns'>
+                        <h2 key={index + 'title'} className="organization__title">{enterprise.title}</h2>
+                        <div key={index + 'description'} className="organization__description">{enterprise.description}</div>
+                        <div key={index + 'website'} className="organization__website"><a key={index + 'link'} href={enterprise.website}>Website</a></div>
+                    </li>
         		);
         	})
         }
-      </div>
+      </ol>
     );
   }
 }
