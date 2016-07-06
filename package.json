@@ -70,7 +70,6 @@
   "dependencies": {
     "core-js": "^2.0.0",
     "lunr": "^0.7.0",
-    "normalize.css": "^4.0.0",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
     "stylelint": "^6.8.0",
