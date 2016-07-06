@@ -1,6 +1,6 @@
 require('normalize.css/normalize.css');
 require('styles/App.css');
-require('styles/extlib/skeleton.css');
+require('styles/extlib/grids/skeleton.css');
 
 var lunr = require('lunr');
 

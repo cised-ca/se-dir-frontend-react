@@ -9,7 +9,7 @@ class EnterpriseComponent extends React.Component {
     var enterprise = this.props.enterprise;
 
     return (
-      <div className="col span_1_of_4">
+      <div className="three columns">
         <div className='search-result'>
           <div className="organization">
             <h2 className="organization__title">{enterprise.title}</h2>
