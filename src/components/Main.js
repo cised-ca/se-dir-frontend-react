@@ -1,5 +1,6 @@
 require('normalize.css/normalize.css');
 require('styles/App.css');
+
 var lunr = require('lunr');
 
 import React from 'react';
@@ -119,11 +120,11 @@ class AppComponent extends React.Component {
     });
 
     // Index enterprises
-    directory.enterprises.forEach(function(enterprise) {
+    directory.enterprises.forEach(function(enterprise, index) {
       lunr_index.add({
         title: enterprise.title,
         description: enterprise.description,
-        id: enterprise._id
+        id: index
       });
     });
 
