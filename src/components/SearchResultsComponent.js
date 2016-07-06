@@ -36,7 +36,7 @@ class SearchResultsComponent extends React.Component {
     }
 
     return (
-      <div className='search-results js-search-results'>
+      <div className='container search-results js-search-results'>
         {jsx}
       </div>
     );

@@ -8,7 +8,7 @@ require('styles//EnterpriseRow.scss');
 class EnterpriseRowComponent extends React.Component {
   render() {
     return (
-      <div className='section group'>
+      <div className='row'>
         {
           this.props.row.map(function(enterprise, index) {
             return (
