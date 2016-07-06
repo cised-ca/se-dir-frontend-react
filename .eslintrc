@@ -21,6 +21,7 @@
     "comma-dangle": 1,
     "quotes": [ 1, "single" ],
     "global-strict": 0,
+    "indent": [ 1, 2 ],
     "no-undef": 1,
     "no-extra-semi": 1,
     "no-underscore-dangle": 0,

@@ -7,5 +7,5 @@ rules:
   declaration-block-properties-order: alphabetical
   selector-no-id: true
   declaration-no-important: true
-  indentation: 4
+  indentation: 2
 
