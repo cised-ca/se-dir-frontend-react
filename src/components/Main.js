@@ -1,5 +1,6 @@
 require('normalize.css/normalize.css');
 require('styles/App.css');
+require('styles/extlib/grids/flexbox-grids.css');
 
 var lunr = require('lunr');
 

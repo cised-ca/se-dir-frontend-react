@@ -18,7 +18,7 @@ class SearchResultsComponent extends React.Component {
       lunr_results.forEach(function(result, index) {
         enterprise = list[result.ref];
         jsx.push(
-          <li key={index} className='search-result organization'>
+          <li key={index} className='grid__cell search-result organization'>
             <h2 key={index + 'title'} className="organization__title">{enterprise.title}</h2>
             <div key={index + 'description'} className="organization__description">{enterprise.description}</div>
             <div key={index + 'website'} className="organization__website"><a key={index + 'link'} href={enterprise.website}>Website</a></div>
@@ -28,7 +28,7 @@ class SearchResultsComponent extends React.Component {
     }
 
     return (
-      <ol className='search-results js-search-results'>
+      <ol className='grid grid--1of4 search-results js-search-results'>
         {jsx}
       </ol>
     );
