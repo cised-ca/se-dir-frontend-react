@@ -121,27 +121,6 @@ body {
 	background-color: #360;
 }
 
-.search-results {
-    background-color: #fff;
-    border-radius: 5px;
-    list-style-type: none;
-    margin: 20px auto;
-    opacity: 0;
-    padding: 15px 30px;
-    text-align: left;
-    width: 75%;
-}
-
-.search-result {
-    border-bottom: 1px solid #ddd;
-    margin-top: 15px;
-    padding-bottom: 15px;
-}
-
-.search-result:last-child {
-    border: 0;
-}
-
 .slide-up {
     max-height: 0;
     overflow: hidden;
