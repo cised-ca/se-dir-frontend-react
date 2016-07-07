@@ -9,7 +9,7 @@ class EnterpriseComponent extends React.Component {
     var enterprise = this.props.enterprise;
 
     return (
-      <div className='search-result'>
+      <div className='search-result col span_1_of_4'>
         <div className="enterprise">
           <div className="enterprise__logo">
             <img src={'/images/logos/' + enterprise.logo} alt={enterprise.title + ' logo'}

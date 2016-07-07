@@ -1,15 +1,10 @@
-.enterprise {
-  display: table;
-}
+.enterprise__logo {
+  text-align: center;
 
-.enterprise__logo,
-.enterprise__details {
-  display: table-cell;
-  vertical-align: middle;
-}
-
-.enterprise__logo img {
-  margin-right: 10px;
-  width: 140px;
+  /* Tmp: until we have resized images */
+  img {
+    height: 140px;
+    width: 140px;
+  }
 }
 
