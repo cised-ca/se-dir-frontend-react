@@ -19,6 +19,10 @@ class SearchResultsComponent extends React.Component {
         enterprise = list[result.ref];
         jsx.push(
           <li key={index} className='grid__cell search-result organization'>
+            <div className="organization__logo">
+              <img src={'/images/logos/' + enterprise.logo}
+                alt={enterprise.title + ' logo'} title={enterprise.title + ' logo'} />
+            </div>
             <h2 key={index + 'title'} className="organization__title">{enterprise.title}</h2>
             <div key={index + 'description'} className="organization__description">{enterprise.description}</div>
             <div key={index + 'website'} className="organization__website"><a key={index + 'link'} href={enterprise.website}>Website</a></div>
