@@ -55,7 +55,7 @@ class TemplateComponent extends React.Component {
       lunr_index.add({
         title: enterprise.title,
         description: enterprise.description,
-        id: index
+        id: index + 1 // index starts at zero, enterprise ids start a one
       });
     });
 

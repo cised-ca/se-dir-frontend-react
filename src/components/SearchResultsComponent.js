@@ -21,7 +21,8 @@ class SearchResultsComponent extends React.Component {
       list = directory.enterprises;
 
       lunr_results.forEach(function(result) {
-        enterprises.push(list[result.ref]);
+        // Array indexes are zero-based, enterprise ids aren't
+        enterprises.push(list[result.ref - 1]);
       });
 
       // FIXME: The number of cols is hard-coded here. And the relevant class
