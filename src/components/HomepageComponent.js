@@ -97,7 +97,6 @@ class HomepageComponent extends React.Component {
     return (
       <div>
         <TopNavigation />
-
         <main>
           <div className="intro js-intro">
             <h1 className="title">Ottawa Social Enterprise MarketPlace</h1>
