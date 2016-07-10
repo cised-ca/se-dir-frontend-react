@@ -1,10 +1,10 @@
 'use strict';
 
 import React from 'react';
+import { withRouter } from 'react-router';
 
 import SearchForm from './SearchFormComponent.js';
 import SearchResults from './SearchResultsComponent.js';
-import TopNavigation from './TopNavigationComponent.js';
 
 var lunr = require('lunr');
 require('styles/Homepage.scss');
@@ -42,6 +42,11 @@ class HomepageComponent extends React.Component {
 
     this.setState({
       searchText: searchText
+    });
+
+    this.props.router.push({
+      'pathname': '/',
+      'query': {'q': searchText}
     });
   }
 
@@ -96,7 +101,6 @@ class HomepageComponent extends React.Component {
   render() {
     return (
       <div>
-        <TopNavigation />
         <main>
           <div className="intro js-intro">
             <h1 className="title">Ottawa Social Enterprise MarketPlace</h1>
@@ -121,4 +125,4 @@ HomepageComponent.displayName = 'HomepageComponent';
 // HomepageComponent.propTypes = {};
 // HomepageComponent.defaultProps = {};
 
-export default HomepageComponent;
+export default withRouter(HomepageComponent);

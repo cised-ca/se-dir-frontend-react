@@ -2,8 +2,6 @@
 
 import React from 'react';
 
-import TopNavigation from './TopNavigationComponent.js';
-
 require('styles/EnterprisePage.scss');
 
 class EnterprisePageComponent extends React.Component {
@@ -15,12 +13,8 @@ class EnterprisePageComponent extends React.Component {
     //       if not, fetch data from API then display that info
 
     return (
-      <div>
-        <TopNavigation />
-
-        <div className="enterprise-details">
-          Enterprise details for enterprise id "{id}" will be here.
-        </div>
+      <div className="enterprise-details">
+        Enterprise details for enterprise id "{id}" will be here.
       </div>
     );
   }
