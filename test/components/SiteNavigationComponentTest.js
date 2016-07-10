@@ -7,13 +7,13 @@
 // import TestUtils from 'react-addons-test-utils';
 import createComponent from 'helpers/shallowRenderHelper';
 
-import TopNavigationComponent from 'components//TopNavigationComponent.js';
+import SiteNavigationComponent from 'components//SiteNavigationComponent.js';
 
-describe('TopNavigationComponent', () => {
+describe('SiteNavigationComponent', () => {
   let component;
 
   beforeEach(() => {
-    component = createComponent(TopNavigationComponent);
+    component = createComponent(SiteNavigationComponent);
   });
 
   it('should have its component name as default className', () => {

@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import TopNavigation from './TopNavigationComponent.js';
+import SiteNavigation from './SiteNavigationComponent.js';
 
 var lunr = require('lunr');
 
@@ -73,7 +73,7 @@ class TemplateComponent extends React.Component {
     return (
       <div>
         {/* Every page will have the navigation component */}
-        <TopNavigation />
+        <SiteNavigation />
 
         {/* The router will decide what to render here based on the URL we're at */}
         {childWithProps}

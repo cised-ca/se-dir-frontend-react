@@ -3,9 +3,9 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-require('styles/TopNavigation.scss');
+require('styles/SiteNavigation.scss');
 
-class TopNavigationComponent extends React.Component {
+class SiteNavigationComponent extends React.Component {
   render() {
     return (
       <header className="header">
@@ -27,10 +27,10 @@ class TopNavigationComponent extends React.Component {
   }
 }
 
-TopNavigationComponent.displayName = 'TopNavigationComponent';
+SiteNavigationComponent.displayName = 'SiteNavigationComponent';
 
 // Uncomment properties you need
-// TopNavigationComponent.propTypes = {};
-// TopNavigationComponent.defaultProps = {};
+// SiteNavigationComponent.propTypes = {};
+// SiteNavigationComponent.defaultProps = {};
 
-export default TopNavigationComponent;
+export default SiteNavigationComponent;
