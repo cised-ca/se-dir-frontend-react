@@ -8,14 +8,17 @@ require('styles/SearchResults.scss');
 
 class SearchResultsComponent extends React.Component {
   render() {
-    var list = this.props.directory.enterprises,
+    var directory = this.props.directory,
+      lunr_index = this.props.lunr_index,
+      list,
       lunr_results,
       jsx = [],
       enterprises = [];
 
     // Make sure the lunr index has been built
-    if (this.props.lunr_index !== null) {
-      lunr_results = this.props.lunr_index.search(this.props.searchText);
+    if (lunr_index !== null && directory.enterprises !== null) {
+      lunr_results = lunr_index.search(this.props.searchText);
+      list = directory.enterprises;
 
       lunr_results.forEach(function(result) {
         enterprises.push(list[result.ref]);

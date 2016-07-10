@@ -6,16 +6,13 @@ import { withRouter } from 'react-router';
 import SearchForm from './SearchFormComponent.js';
 import SearchResults from './SearchResultsComponent.js';
 
-var lunr = require('lunr');
 require('styles/Homepage.scss');
 
 class HomepageComponent extends React.Component {
   constructor() {
     super();
     this.state = {
-      searchText: '',
-      index: null,
-      directory: {}
+      searchText: ''
     };
   }
 
@@ -50,54 +47,6 @@ class HomepageComponent extends React.Component {
     });
   }
 
-  /**
-   * This is called automatically by React. Immediately after the initial render.
-   * See: https://facebook.github.io/react/docs/component-specs.html#mounting-componentwillmount
-   */
-  componentDidMount() {
-    var app = this; // Cache 'this' so we can use it in xhr callback
-    this.serverRequest = new XMLHttpRequest();
-
-    this.serverRequest.onreadystatechange = function(response) {
-      if (this.readyState === 4){
-        // TODO: Error handling
-        var directory = JSON.parse(response.target.response);
-        app.initializeClientSideSearch(directory);
-      }
-    };
-
-    this.serverRequest.open('GET', '/data/directory.json', true);
-    this.serverRequest.send();
-  }
-
-  /**
-   * Initialize the Lunr search
-   * @param {Object} directory The CISED directory data
-   */
-  initializeClientSideSearch(directory) {
-    // Init lunr
-    var lunr_index = lunr(function() {
-      this.field('title', {boost: 10});
-      this.field('description');
-      this.ref('id');
-    });
-
-    // Index enterprises
-    directory.enterprises.forEach(function(enterprise, index) {
-      lunr_index.add({
-        title: enterprise.title,
-        description: enterprise.description,
-        id: index
-      });
-    });
-
-    // Save the index and directory data
-    this.setState({
-      index: lunr_index,
-      directory: directory
-    });
-  }
-
   render() {
     return (
       <div>
@@ -113,7 +62,7 @@ class HomepageComponent extends React.Component {
         </main>
 
         <SearchForm onSearch={this.handleSearch.bind(this)} />
-        <SearchResults searchText={this.state.searchText} directory={this.state.directory} lunr_index={this.state.index} />
+        <SearchResults searchText={this.state.searchText} directory={this.props.directory} lunr_index={this.props.index} />
       </div>
     );
   }
