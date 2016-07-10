@@ -4,6 +4,7 @@ import React from 'react';
 
 import SearchForm from './SearchFormComponent.js';
 import SearchResults from './SearchResultsComponent.js';
+import TopNavigation from './TopNavigationComponent.js';
 
 var lunr = require('lunr');
 require('styles/Homepage.scss');
@@ -95,6 +96,19 @@ class HomepageComponent extends React.Component {
   render() {
     return (
       <div>
+        <TopNavigation />
+
+        <main>
+          <div className="intro js-intro">
+            <h1 className="title">Ottawa Social Enterprise MarketPlace</h1>
+
+            <p className="tagline">
+              An interactive platform that enables consumers of all types to
+              source goods and services from Ottawa's vibrant social enterprise sector.
+            </p>
+          </div>
+        </main>
+
         <SearchForm onSearch={this.handleSearch.bind(this)} />
         <SearchResults searchText={this.state.searchText} directory={this.state.directory} lunr_index={this.state.index} />
       </div>
