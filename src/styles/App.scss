@@ -1,139 +1,139 @@
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 a:link {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 a:link,
 a:visited {
-    color: #693;
+  color: #693;
 }
 
 a:hover {
-    color: #360;
-    text-decoration: underline;
+  color: #360;
+  text-decoration: underline;
 }
 
 html,
 body,
 .main,
 .tint {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    background: #4c4c4c url("/images/background.jpg") no-repeat scroll 0% 0% / 100% auto;
-	font-family: "Open Sans", "sans-serif";
-    overflow-y: scroll;
+  background: #4c4c4c url("/images/background.jpg") no-repeat scroll 0% 0% / 100% auto;
+  font-family: "Open Sans", sans-serif;
+  overflow-y: scroll;
 }
 
 .tint {
-    background-color: rgba(0 ,0 ,0 , 0.7);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .nav__items {
-    margin: 0;
-    padding: 0;
-    text-align: right;
+  margin: 0;
+  padding: 0;
+  text-align: right;
 }
 
 .nav__item {
-    display: inline-block;
+  display: inline-block;
 }
 
 .nav__link {
-    background-color: #693;
-    border-radius: 0 0 5px 5px;
-    display: inline-block;
-    margin-right: 10px;
-    padding: 8px;
-    text-decoration: none;
+  background-color: #693;
+  border-radius: 0 0 5px 5px;
+  display: inline-block;
+  margin-right: 10px;
+  padding: 8px;
+  text-decoration: none;
 }
 
 .nav__link:hover {
-    background-color: #360;
-    text-decoration: underline;
+  background-color: #360;
+  text-decoration: underline;
 }
 
 .nav__link:link,
 .nav__link:visited,
 .title,
 .tagline {
-    color: #fff;
+  color: #fff;
 }
 
 .title {
-    font-size: 60px;
-	font-weight: 500;
-    margin: 0;
+  font-size: 60px;
+  font-weight: 500;
+  margin: 0;
 }
 
 .tagline {
-    font-size: 32px;
+  font-size: 32px;
 }
 
 .intro {
-    max-height: 360px;
-    padding-top: 180px;
-    text-align: center;
+  max-height: 360px;
+  padding-top: 180px;
+  text-align: center;
 }
 
 .search__field-button {
-	border: 1px solid #000;
-	border-radius: 5px;
-	height: 55px;
-	margin: 0 auto;
-	overflow: hidden;
-	position: relative;
-	width: 50%;
+  border: 1px solid #000;
+  border-radius: 5px;
+  height: 55px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  width: 50%;
 }
 
 .search-field {
-	border: 0;
-	border-radius: 5px;
-	display: inline-block;
-	font-size: 25px;
-	margin: 0;
-	padding: 12px;
-	padding-right: 98px;
-	width: 100%;
+  border: 0;
+  border-radius: 5px;
+  display: inline-block;
+  font-size: 25px;
+  margin: 0;
+  padding: 12px;
+  padding-right: 98px;
+  width: 100%;
 }
 
 .search-button {
-    background-color: #693;
-    border: 1px solid #000;
-	border-width: 0 0 0 1px;
-    color: #fff;
-	cursor: pointer;
-	font-size: 25px;
-	height: 100%;
-	position: absolute;
-	right: 0;
-	top: 0;
-	width: 98px;
+  background-color: #693;
+  border: 1px solid #000;
+  border-width: 0 0 0 1px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 25px;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 98px;
 }
 
 .search-button:hover {
-	background-color: #360;
+  background-color: #360;
 }
 
 .slide-up {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 2s;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 2s;
 }
 
 .fade-out {
-    opacity: 0;
-    transition: opacity 2s;
+  opacity: 0;
+  transition: opacity 2s;
 }
 
 .fade-in {
-    opacity: 1;
-    transition: opacity 4s;
+  opacity: 1;
+  transition: opacity 4s;
 }
 
