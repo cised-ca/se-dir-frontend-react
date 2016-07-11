@@ -1,10 +1,15 @@
 .enterprise__logo {
-  text-align: center;
+  display: inline;
+}
 
+ .enterprise__title {
+ 	padding: 0em 1em; 
+ 	vertical-align: top;
+  display: inline;
+}
   /* Tmp: until we have resized images */
   img {
-    height: 140px;
-    width: 140px;
+    height: 78px;
+    width: 78px;
   }
-}
 

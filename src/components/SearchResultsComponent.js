@@ -25,7 +25,7 @@ class SearchResultsComponent extends React.Component {
       //        name is in EnterpriseRowComponent. It would be nice to make
       //        this easier to configure.
       enterprises.reduce(function(rows, enterprise, index) {
-        if (index % 4 === 0) {
+        if (index % 2 === 0) {
           rows.push([]);
         }
         rows[rows.length - 1].push(enterprise);

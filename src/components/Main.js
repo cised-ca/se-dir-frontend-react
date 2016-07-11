@@ -3,7 +3,7 @@ require('styles/App.css');
 
 // Grids
 require('styles/extlib/grids/col.css');
-require('styles/extlib/grids/4cols.css');
+require('styles/extlib/grids/2cols.css');
 
 var lunr = require('lunr');
 
