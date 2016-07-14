@@ -14,19 +14,40 @@ class AppComponent extends React.Component {
     this.state = {
       searchText: '',
       index: null,
-      directory: {}
+      directory: {},
+      config: {}  // FIXME: Should this really be a state?
     };
   }
 
-  /**
-   * This is called automatically by React. Immediately after the initial render.
-   * See: https://facebook.github.io/react/docs/component-specs.html#mounting-componentwillmount
-   */
-  componentDidMount() {
-    var app = this; // Cache 'this' so we can use it in xhr callback
-    this.serverRequest = new XMLHttpRequest();
+  get_config(callback) {
+    var xhr = new XMLHttpRequest(),
+      app = this;
 
-    this.serverRequest.onreadystatechange = function(response) {
+    // TODO: Error handling
+    xhr.onreadystatechange = function(response) {
+      if (this.readyState === 4) {
+        app.parse_config(response.target.response);
+        callback.call(app);
+      }
+    };
+
+    xhr.open('GET', 'config.json', true);
+    xhr.send();
+  }
+
+  parse_config(response) {
+    // TODO: Error handling
+    var config = JSON.parse(response);
+
+    // TODO: Sanity check / Error handling / Merge, overwrite default values
+    this.state.config = config;
+  }
+
+  get_enterprises() {
+    var xhr = new XMLHttpRequest(),
+      app = this;
+
+    xhr.onreadystatechange = function(response) {
       if (this.readyState === 4){
         // TODO: Error handling
         var directory = JSON.parse(response.target.response);
@@ -34,8 +55,16 @@ class AppComponent extends React.Component {
       }
     };
 
-    this.serverRequest.open('GET', '/data/directory.json', true);
-    this.serverRequest.send();
+    xhr.open('GET', this.state.config.api_root + '/enterprises', true);
+    xhr.send();
+  }
+
+  /**
+   * This is called automatically by React. Immediately after the initial render.
+   * See: https://facebook.github.io/react/docs/component-specs.html#mounting-componentwillmount
+   */
+  componentDidMount() {
+    this.get_config(this.get_enterprises); // TODO: Using promises would be nice.
   }
 
   /**
