@@ -19,22 +19,48 @@ class AppComponent extends React.Component {
     };
   }
 
-  get_config(callback) {
-    var xhr = new XMLHttpRequest(),
-      app = this;
+  /**
+   * A wrapper around XMLHttpRequest that uses Promises
+   * since they're nicer to work with than callbacks
+   *
+   * @param {String} url The url to request
+   * @return A promise
+   */
+  http_get(url) {
+    var promise = new Promise(function(resolve, reject) {
+      var xhr = new XMLHttpRequest();
 
-    // TODO: Error handling
-    xhr.onreadystatechange = function(response) {
-      if (this.readyState === 4) {
-        app.parse_config(response.target.response);
-        callback.call(app);
-      }
-    };
+      xhr.onload = function() {
+        if (this.status >= 200 && this.status < 300) {
+          resolve(this.response);
+        } else {
+          reject(this.statusText);
+        }
+      };
 
-    xhr.open('GET', 'config.json', true);
-    xhr.send();
+      xhr.onerror = function() {
+        reject(this.statusText);
+      };
+
+      xhr.open('GET', url);
+      xhr.send();
+    });
+
+    return promise;
   }
 
+  /**
+   * Get the configuration file
+   *
+   * @return A promise
+   */
+  get_config() {
+    return this.http_get('config.json');
+  }
+
+  /**
+   * Parse the configuration file
+   */
   parse_config(response) {
     // TODO: Error handling
     var config = JSON.parse(response);
@@ -43,20 +69,13 @@ class AppComponent extends React.Component {
     this.state.config = config;
   }
 
+  /**
+   * Get the list of enterprises from the API endpoint
+   *
+   * @return A promise
+   */
   get_enterprises() {
-    var xhr = new XMLHttpRequest(),
-      app = this;
-
-    xhr.onreadystatechange = function(response) {
-      if (this.readyState === 4){
-        // TODO: Error handling
-        var directory = JSON.parse(response.target.response);
-        app.initializeClientSideSearch(directory);
-      }
-    };
-
-    xhr.open('GET', this.state.config.api_root + '/enterprises', true);
-    xhr.send();
+    return this.http_get(this.state.config.api_root + '/enterprises');
   }
 
   /**
@@ -64,7 +83,24 @@ class AppComponent extends React.Component {
    * See: https://facebook.github.io/react/docs/component-specs.html#mounting-componentwillmount
    */
   componentDidMount() {
-    this.get_config(this.get_enterprises); // TODO: Using promises would be nice.
+    var app = this;
+
+    this
+      .get_config()
+      .then(function(response) {
+        app.parse_config(response);
+
+        return app.get_enterprises();
+      })
+      .then(function(response) {
+        // TODO: Error handling
+        var directory = JSON.parse(response);
+
+        app.initializeClientSideSearch(directory);
+      })
+      .catch(function(/*reason*/) {
+        // TODO: Error handling
+      });
   }
 
   /**
