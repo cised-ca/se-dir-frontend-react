@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import { Link } from 'react-router';
 
 require('styles/Enterprise.scss');
 
@@ -16,7 +17,9 @@ class EnterpriseComponent extends React.Component {
               title={enterprise.title + ' logo'} />
           </div>
           <div className="enterprise__details">
-            <h2 className="enterprise__title">{enterprise.title}</h2>
+            <h2 className="enterprise__title">
+              <Link to={'/enterprise/' + enterprise._id}>{enterprise.title}</Link>
+            </h2>
             <div className="enterprise__description">{enterprise.description}</div>
             <div className="enterprise__website">
               <a href={enterprise.website}>Website</a>
