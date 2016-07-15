@@ -7,7 +7,7 @@ require('styles/Enterprise.scss');
 class EnterpriseComponent extends React.Component {
   render() {
     var enterprise = this.props.enterprise;
-
+// this is a comment with a dim future
     return (
       <div className='search-result col span_1_of_2'>
         <div className="enterprise">
