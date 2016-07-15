@@ -25,13 +25,17 @@ class SearchResultsComponent extends React.Component {
     }
 
     return (
-      <div className='search-results js-search-results'>
+      <ol className='search-results js-search-results'>
       {
         enterprises.map(function(enterprise, index) {
-          return <Enterprise key={index} enterprise={enterprise} />;
+          return (
+            <li className='search-result'>
+              <Enterprise key={index} enterprise={enterprise} />
+            </li>
+          );
         })
       }
-      </div>
+      </ol>
     );
   }
 }
