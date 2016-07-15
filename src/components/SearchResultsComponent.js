@@ -1,9 +1,8 @@
 'use strict';
 
 import React from 'react';
-import EnterpriseRow from './EnterpriseRowComponent.js';
+import Enterprise from './EnterpriseComponent.js';
 
-require('lunr');
 require('styles/SearchResults.scss');
 
 class SearchResultsComponent extends React.Component {
@@ -12,7 +11,6 @@ class SearchResultsComponent extends React.Component {
       lunr_index = this.props.lunr_index,
       list,
       lunr_results,
-      jsx = [],
       enterprises = [];
 
     // Make sure the lunr index has been built
@@ -24,24 +22,15 @@ class SearchResultsComponent extends React.Component {
         // Array indexes are zero-based, enterprise ids aren't
         enterprises.push(list[result.ref - 1]);
       });
-
-      // FIXME: The number of cols is hard-coded here. And the relevant class
-      //        name is in EnterpriseRowComponent. It would be nice to make
-      //        this easier to configure.
-      enterprises.reduce(function(rows, enterprise, index) {
-        if (index % 4 === 0) {
-          rows.push([]);
-        }
-        rows[rows.length - 1].push(enterprise);
-        return rows;
-      }, []).map(function(row, index) {
-        jsx.push(<EnterpriseRow key={index} row={row} />);
-      });
     }
 
     return (
       <div className='search-results js-search-results'>
-        {jsx}
+      {
+        enterprises.map(function(enterprise, index) {
+          return <Enterprise key={index} enterprise={enterprise} />;
+        })
+      }
       </div>
     );
   }
