@@ -1,15 +1,22 @@
 .enterprise {
-  display: table;
+	margin-top: 20px;
 }
 
-.enterprise__logo,
-.enterprise__details {
-  display: table-cell;
-  vertical-align: middle;
+.enterprise__logo {
+  display: inline;
 }
 
-.enterprise__logo img {
-  margin-right: 10px;
-  width: 140px;
+ .enterprise__title {
+ 	padding: 0em 1em; 
+ 	vertical-align: top;
+  display: inline;
 }
+  /* Tmp: until we have resized images */
+  img {
+    height: 78px;
+    width: 78px;
+  }
 
+.enterprise__description {
+	margin: 15px 0;
+}

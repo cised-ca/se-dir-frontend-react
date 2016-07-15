@@ -1,6 +1,10 @@
 require('normalize.css/normalize.css');
 require('styles/App.scss');
 
+// Grids
+require('styles/extlib/grids/col.css');
+require('styles/extlib/grids/2cols.css');
+
 var lunr = require('lunr');
 
 import React from 'react';

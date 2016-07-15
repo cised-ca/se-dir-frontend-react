@@ -203,6 +203,42 @@
       "primary-purpose" : "kjljlk;kj",
       "secondary-purpose" : "whateve",
       "website" : "http://google.com"
+    },
+    {
+      "_id" : "18",
+      "title" : "Cycle Salvation",
+      "description" : "Cycle Salvation is a social enterprise operating under the umbrella of Causeway Work Centre. Our business strivesto achieve a triple bottom line (profit, people, planet) by providing training and employment in the field of bike mechanics to people who are economically disadvantaged, while at the same time diverting bikes destined for scrap and landfill sites.",
+      "logo" : "cycle-salvation.jpg",
+      "offering" : "Bob Smith",
+      "phone" : 27777777777,
+      "email" : "test1@test.com",
+      "primary-purpose" : "kjljlk;kj",
+      "secondary-purpose" : "whateve",
+      "website" : "http://google.com"
+    },
+    {
+      "_id" : "19",
+      "title" : "Cycle Salvation",
+      "description" : "Cycle Salvation is a social enterprise operating under the umbrella of Causeway Work Centre. Our business strivesto achieve a triple bottom line (profit, people, planet) by providing training and employment in the field of bike mechanics to people who are economically disadvantaged, while at the same time diverting bikes destined for scrap and landfill sites.",
+      "logo" : "cycle-salvation.jpg",
+      "offering" : "Bob Smith",
+      "phone" : 27777777777,
+      "email" : "test1@test.com",
+      "primary-purpose" : "kjljlk;kj",
+      "secondary-purpose" : "whateve",
+      "website" : "http://google.com"
+    },
+    {
+      "_id" : "20",
+      "title" : "Cycle Salvation",
+      "description" : "Cycle Salvation is a social enterprise operating under the umbrella of Causeway Work Centre. Our business strivesto achieve a triple bottom line (profit, people, planet) by providing training and employment in the field of bike mechanics to people who are economically disadvantaged, while at the same time diverting bikes destined for scrap and landfill sites.",
+      "logo" : "cycle-salvation.jpg",
+      "offering" : "Bob Smith",
+      "phone" : 27777777777,
+      "email" : "test1@test.com",
+      "primary-purpose" : "kjljlk;kj",
+      "secondary-purpose" : "whateve",
+      "website" : "http://google.com"
     }
   ]
 }
