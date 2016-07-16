@@ -1,3 +1,39 @@
-.homepage-component {
-  border: 1px dashed #f00;
+.title,
+.tagline {
+  color: #fff;
 }
+
+.title {
+  font-size: 60px;
+  font-weight: bold;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.tagline {
+  font-size: 32px;
+}
+
+.intro {
+  max-height: 360px;
+  padding-top: 180px;
+  text-align: center;
+}
+
+/**
+ * Mobile (smaller than iPad)
+ */
+@media only screen and (max-width: 768px) {
+  .title {
+    font-size: 32px;
+  }
+
+  .tagline {
+    font-size: 28px;
+  }
+
+  .intro {
+    padding-top: 30px;
+  }
+}
+

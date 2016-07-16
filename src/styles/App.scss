@@ -35,27 +35,6 @@ body {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-.title,
-.tagline {
-  color: #fff;
-}
-
-.title {
-  font-size: 60px;
-  font-weight: 500;
-  margin: 0;
-}
-
-.tagline {
-  font-size: 32px;
-}
-
-.intro {
-  max-height: 360px;
-  padding-top: 180px;
-  text-align: center;
-}
-
 .slide-up {
   max-height: 0;
   overflow: hidden;
@@ -70,5 +49,18 @@ body {
 .fade-in {
   opacity: 1;
   transition: opacity 4s;
+}
+
+/**
+ * Mobile (smaller than iPad)
+ */
+@media only screen and (max-width: 768px) {
+  body {
+    background-size: auto auto;
+  }
+
+  .main-container {
+    margin: 0 20px;
+  }
 }
 

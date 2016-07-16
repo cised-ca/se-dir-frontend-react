@@ -13,3 +13,22 @@
   width: 140px;
 }
 
+/**
+ * Mobile (smaller than iPad)
+ */
+@media only screen and (max-width: 768px) {
+  .enterprise,
+  .enterprise__logo,
+  .enterprise__details {
+    display: block;
+  }
+
+  .enterprise__logo {
+    text-align: center;
+  }
+
+  .enterprise__details {
+    margin-top: 0;
+  }
+}
+

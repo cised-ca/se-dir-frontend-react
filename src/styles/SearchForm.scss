@@ -37,3 +37,27 @@
   background-color: #360;
 }
 
+/**
+ * Mobile (smaller than iPad)
+ */
+@media only screen and (max-width: 768px) {
+  .search__field-button {
+    border: 0;
+    height: auto;
+    width: auto;
+  }
+
+  .search-field {
+    padding-right: 12px;
+  }
+
+  .search-button {
+    border: 0;
+    border-radius: 5px;
+    display: block;
+    margin: 20px auto 0;
+    padding: 8px;
+    position: static;
+  }
+}
+

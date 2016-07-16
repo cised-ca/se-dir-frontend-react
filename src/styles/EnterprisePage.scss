@@ -6,3 +6,12 @@
   width: 75%;
 }
 
+/**
+ * Mobile (smaller than iPad)
+ */
+@media only screen and (max-width: 768px) {
+  .enterprise-details {
+    border-radius: 0;
+    width: auto;
+  }
+}
