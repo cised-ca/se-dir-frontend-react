@@ -17,7 +17,7 @@ class EnterpriseComponent extends React.Component {
         </div>
         <div className="enterprise__details">
           <h2 className="enterprise__title">
-            <Link to={'/enterprise/' + enterprise._id}>{enterprise.title}</Link>
+            <Link to={'/enterprise/' + enterprise.id}>{enterprise.name}</Link>
           </h2>
           <div className="enterprise__description">{enterprise.description}</div>
           <div className="enterprise__website">

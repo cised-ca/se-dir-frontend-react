@@ -14,9 +14,9 @@ class SearchResultsComponent extends React.Component {
       enterprises = [];
 
     // Make sure the lunr index has been built
-    if (lunr_index !== null && directory.enterprises !== null) {
+    if (lunr_index !== null && directory.length !== 0) {
       lunr_results = lunr_index.search(this.props.searchText);
-      list = directory.enterprises;
+      list = directory;
 
       lunr_results.forEach(function(result) {
         // Array indexes are zero-based, enterprise ids aren't
@@ -29,8 +29,8 @@ class SearchResultsComponent extends React.Component {
       {
         enterprises.map(function(enterprise, index) {
           return (
-            <li className='search-result'>
-              <Enterprise key={index} enterprise={enterprise} />
+            <li key={index} className='search-result'>
+              <Enterprise enterprise={enterprise} />
             </li>
           );
         })

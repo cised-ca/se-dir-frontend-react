@@ -14,7 +14,7 @@ class TemplateComponent extends React.Component {
     this.state = {
       searchText: '',
       index: null,
-      directory: {},
+      directory: [],
       config: {}  // FIXME: Should this really be a state?
     };
   }
@@ -75,7 +75,7 @@ class TemplateComponent extends React.Component {
    * @return A promise
    */
   get_enterprises() {
-    return this.http_get(this.state.config.api_root + '/enterprises');
+    return this.http_get(this.state.config.api_root + '/directory');
   }
 
   /**
@@ -116,7 +116,7 @@ class TemplateComponent extends React.Component {
     });
 
     // Index enterprises
-    directory.enterprises.forEach(function(enterprise, index) {
+    directory.forEach(function(enterprise, index) {
       lunr_index.add({
         title: enterprise.title,
         description: enterprise.description,

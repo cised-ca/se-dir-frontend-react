@@ -27,11 +27,11 @@ class EnterprisePageComponent extends React.Component {
 
     if (directory === null) { // The directory hasn't loaded yet
       jsx = 'Loading...';
-    } else if (!directory.enterprises[id]) { // Invalid enterprise id
+    } else if (!directory[id]) { // Invalid enterprise id
       jsx = 'Unknown Enterprise';
     } else { // Display enterprise details
       // Array indexes are zero-based, enterprise ids are not
-      enterprise = directory.enterprises[id - 1];
+      enterprise = directory[id - 1];
       jsx = <Enterprise enterprise={enterprise} />;
     }
 
