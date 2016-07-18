@@ -19,6 +19,10 @@ class TemplateComponent extends React.Component {
     };
   }
 
+  getChildContext() {
+    return {'locale': this.props.route.locale};
+  }
+
   /**
    * A wrapper around XMLHttpRequest that uses Promises
    * since they're nicer to work with than callbacks
@@ -55,7 +59,7 @@ class TemplateComponent extends React.Component {
    * @return A promise
    */
   get_config() {
-    return this.http_get('config.json');
+    return this.http_get('/config.json');
   }
 
   /**
@@ -148,6 +152,10 @@ class TemplateComponent extends React.Component {
 }
 
 TemplateComponent.displayName = 'TemplateComponent';
+
+TemplateComponent.childContextTypes = {
+  locale: React.PropTypes.string
+};
 
 // Uncomment properties you need
 // TemplateComponent.propTypes = {};

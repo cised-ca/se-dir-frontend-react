@@ -17,7 +17,7 @@ class EnterpriseComponent extends React.Component {
         </div>
         <div className="enterprise__details">
           <h2 className="enterprise__title">
-            <Link to={'/enterprise/' + enterprise.id}>{enterprise.name}</Link>
+            <Link to={'/' + this.context.locale + '/enterprise/' + enterprise.id}>{enterprise.name}</Link>
           </h2>
           <div className="enterprise__description">{enterprise.description}</div>
           <div className="enterprise__website">
@@ -30,6 +30,10 @@ class EnterpriseComponent extends React.Component {
 }
 
 EnterpriseComponent.displayName = 'EnterpriseComponent';
+
+EnterpriseComponent.contextTypes = {
+  locale: React.PropTypes.string
+};
 
 // Uncomment properties you need
 // EnterpriseComponent.propTypes = {};

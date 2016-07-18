@@ -42,7 +42,7 @@ class HomepageComponent extends React.Component {
     });
 
     this.props.router.push({
-      'pathname': '/',
+      'pathname': this.props.location.pathname,
       'query': {'q': searchText}
     });
   }
