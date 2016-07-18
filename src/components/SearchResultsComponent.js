@@ -7,20 +7,18 @@ require('styles/SearchResults.scss');
 
 class SearchResultsComponent extends React.Component {
   render() {
-    var directory = this.props.directory,
-      lunr_index = this.props.lunr_index,
-      list,
-      lunr_results,
+    var _this = this,
+      directory = _this.props.directory,
+      query = _this.props.searchText,
+      lunr_index = _this.props.lunr_index,
       enterprises = [];
 
     // Make sure the lunr index has been built
     if (lunr_index !== null && directory.length !== 0) {
-      lunr_results = lunr_index.search(this.props.searchText);
-      list = directory;
-
-      lunr_results.forEach(function(result) {
-        // Array indexes are zero-based, enterprise ids aren't
-        enterprises.push(list[result.ref - 1]);
+      enterprises = lunr_index.search(query).map(function(result) {
+        return directory.filter(function(enterprise) {
+          return enterprise.id === result.ref;
+        })[0];
       });
     }
 

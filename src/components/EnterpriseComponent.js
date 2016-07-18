@@ -5,6 +5,9 @@ import { Link } from 'react-router';
 
 require('styles/Enterprise.scss');
 
+var slug = require('slug');
+slug.defaults.mode = 'rfc3986';
+
 class EnterpriseComponent extends React.Component {
   render() {
     var enterprise = this.props.enterprise;
@@ -12,12 +15,12 @@ class EnterpriseComponent extends React.Component {
     return (
       <div className="enterprise">
         <div className="enterprise__logo">
-          <img src={'/images/logos/' + enterprise.logo} alt={enterprise.title + ' logo'}
-            title={enterprise.title + ' logo'} />
+          <img src={'/images/logos/' + enterprise.logo} alt={enterprise.name + ' logo'}
+            title={enterprise.name + ' logo'} />
         </div>
         <div className="enterprise__details">
           <h2 className="enterprise__title">
-            <Link to={'/enterprise/' + enterprise.id}>{enterprise.name}</Link>
+            <Link to={'/enterprise/' + slug(enterprise.name)}>{enterprise.name}</Link>
           </h2>
           <div className="enterprise__description">{enterprise.description}</div>
           <div className="enterprise__website">

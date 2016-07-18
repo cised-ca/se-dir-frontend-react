@@ -74,6 +74,7 @@
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
     "react-router": "^2.5.0",
+    "slug": "^0.9.1",
     "stylelint": "^6.8.0",
     "stylelint-config-standard": "^10.0.0"
   }

@@ -4,14 +4,21 @@ import React from 'react';
 
 import Enterprise from './EnterpriseComponent.js';
 
+var slug = require('slug');
+slug.defaults.mode = 'rfc3986';
+
 require('styles/EnterprisePage.scss');
 
 class EnterprisePageComponent extends React.Component {
   render() {
-    var id = this.props.params.id,
+    var curr_page_slug = this.props.params.slug,
       directory = this.props.directory,
       enterprise,
       jsx;
+
+    enterprise = directory.filter(function(enterprise) {
+      return slug(enterprise.name) === curr_page_slug;
+    })[0];
 
     // FIXME: Right now, we're just displaying title, desc, website
     //        exactly like the search results. I'm just using this for testing
@@ -27,11 +34,9 @@ class EnterprisePageComponent extends React.Component {
 
     if (directory === null) { // The directory hasn't loaded yet
       jsx = 'Loading...';
-    } else if (!directory[id]) { // Invalid enterprise id
+    } else if (enterprise === undefined) { // Invalid enterprise slug
       jsx = 'Unknown Enterprise';
     } else { // Display enterprise details
-      // Array indexes are zero-based, enterprise ids are not
-      enterprise = directory[id - 1];
       jsx = <Enterprise enterprise={enterprise} />;
     }
 

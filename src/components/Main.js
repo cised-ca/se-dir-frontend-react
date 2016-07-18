@@ -14,7 +14,7 @@ class AppComponent extends React.Component {
       <Router history={browserHistory}>
         <Route path='/' component={Template}>
           <IndexRoute component={Homepage} />
-          <Route name="enterprise" path='/enterprise/:id' component={EnterprisePage} />
+          <Route name="enterprise" path='/enterprise/:slug' component={EnterprisePage} />
         </Route>
       </Router>
     );
