@@ -55,7 +55,7 @@ class TemplateComponent extends React.Component {
    * @return A promise
    */
   get_config() {
-    return this.http_get('config.json');
+    return this.http_get('/config.json');
   }
 
   /**
@@ -116,11 +116,11 @@ class TemplateComponent extends React.Component {
     });
 
     // Index enterprises
-    directory.forEach(function(enterprise, index) {
+    directory.forEach(function(enterprise) {
       lunr_index.add({
-        title: enterprise.title,
+        name: enterprise.name,
         description: enterprise.description,
-        id: index + 1 // index starts at zero, enterprise ids start a one
+        id: enterprise.id
       });
     });
 
