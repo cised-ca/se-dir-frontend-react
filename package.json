@@ -10,7 +10,7 @@
     "dist": "npm run copy & webpack --env=dist",
     "lint": "npm run eslint && npm run stylelint",
     "eslint": "eslint ./src",
-    "stylelint": "stylelint --syntax scss --no-color \"./src/**/*.scss\" || true",
+    "stylelint": "stylelint --syntax scss --no-color \"./src/**/*.scss\"",
     "posttest": "npm run lint",
     "release:major": "npm version major && npm publish && git push --follow-tags",
     "release:minor": "npm version minor && npm publish && git push --follow-tags",

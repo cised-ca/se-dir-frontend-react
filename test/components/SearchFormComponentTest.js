@@ -17,6 +17,6 @@ describe('SearchFormComponent', () => {
   });
 
   it('should have its component name as default className', () => {
-    expect(component.props.className).to.equal('searchform-component');
+    expect(component.props.className.split(' ').indexOf('searchform-component')).not.to.equal(-1);
   });
 });

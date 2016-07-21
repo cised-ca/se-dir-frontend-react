@@ -13,7 +13,7 @@ class EnterpriseComponent extends React.Component {
     var enterprise = this.props.enterprise;
 
     return (
-      <div className="enterprise">
+      <div className="enterprise enterprise-component">
         <div className="enterprise__logo">
           <img src={'/images/logos/' + enterprise.logo} alt={enterprise.name + ' logo'}
             title={enterprise.name + ' logo'} />

@@ -49,7 +49,7 @@ class HomepageComponent extends React.Component {
 
   render() {
     return (
-      <main className="main-container">
+      <main className="main-container homepage-component">
         <div className="intro js-intro">
           <h1 className="title">Ottawa Social Enterprise Directory</h1>
 
@@ -71,4 +71,7 @@ HomepageComponent.displayName = 'HomepageComponent';
 // HomepageComponent.propTypes = {};
 // HomepageComponent.defaultProps = {};
 
+// This is used by the Homepage and Template tests at the moment.
+// They don't like wrapped components.
+export let HomepageComponentWithoutRouter = HomepageComponent;
 export default withRouter(HomepageComponent);

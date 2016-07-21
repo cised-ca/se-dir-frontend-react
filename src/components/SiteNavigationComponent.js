@@ -8,7 +8,7 @@ require('styles/SiteNavigation.scss');
 class SiteNavigationComponent extends React.Component {
   render() {
     return (
-      <header className="header">
+      <header className="header sitenavigation-component">
         <nav className="nav nav--top">
           <ul className="nav__items">
             <li className="nav__item">

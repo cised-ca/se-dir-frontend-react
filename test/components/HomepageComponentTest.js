@@ -7,16 +7,16 @@
 // import TestUtils from 'react-addons-test-utils';
 import createComponent from 'helpers/shallowRenderHelper';
 
-import HomepageComponent from 'components//HomepageComponent.js';
+import { HomepageComponentWithoutRouter } from 'components//HomepageComponent.js';
 
 describe('HomepageComponent', () => {
   let component;
 
   beforeEach(() => {
-    component = createComponent(HomepageComponent);
+    component = createComponent(HomepageComponentWithoutRouter);
   });
 
   it('should have its component name as default className', () => {
-    expect(component.props.className).to.equal('homepage-component');
+    expect(component.props.className.split(' ').indexOf('homepage-component')).not.to.equal(-1);
   });
 });
