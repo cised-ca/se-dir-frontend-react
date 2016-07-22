@@ -6,8 +6,6 @@ import SiteNavigation from './SiteNavigationComponent.js';
 
 var lunr = require('lunr');
 
-require('styles//Template.scss');
-
 class TemplateComponent extends React.Component {
   constructor() {
     super();
@@ -136,7 +134,7 @@ class TemplateComponent extends React.Component {
     var childWithProps = React.cloneElement(this.props.children, this.state);
 
     return (
-      <div>
+      <div className='template-component'>
         {/* Every page will have the navigation component */}
         <SiteNavigation />
 
