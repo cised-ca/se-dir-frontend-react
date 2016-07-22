@@ -12,10 +12,17 @@ class SearchResultsComponent extends React.Component {
       query = _this.props.searchText,
       lunr_index = _this.props.lunr_index,
       jsx = [],
-      enterprises = [];
+      enterprises = [],
+      searchIsReady = (lunr_index !== null && directory.length !== 0);
 
-    // Make sure the lunr index has been built
-    if (lunr_index !== null && directory.length !== 0) {
+    /*
+     * If we search for nothing, return everything.
+     * In this case we don't need to check "searchIsReady" since we just
+     * return the entire directory
+     */
+    if (query === '') {
+      enterprises = directory;
+    } else if (searchIsReady) {
       enterprises = lunr_index.search(query).map(function(result) {
         return directory.filter(function(enterprise) {
           return enterprise.id === result.ref;
