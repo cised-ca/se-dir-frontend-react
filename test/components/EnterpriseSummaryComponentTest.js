@@ -7,14 +7,14 @@
 // import TestUtils from 'react-addons-test-utils';
 import createComponent from 'helpers/shallowRenderHelper';
 
-import EnterpriseComponent from 'components//EnterpriseComponent.js';
+import EnterpriseSummaryComponent from 'components//EnterpriseSummaryComponent.js';
 
-describe('EnterpriseComponent', () => {
+describe('EnterpriseSummaryComponent', () => {
   let component;
 
   beforeEach(() => {
     component = createComponent(
-      EnterpriseComponent,
+      EnterpriseSummaryComponent,
       {
         enterprise: {
           'name': 'ReStore',
@@ -48,6 +48,6 @@ describe('EnterpriseComponent', () => {
   });
 
   it('should have its component name as default className', () => {
-    expect(component.props.className.split(' ').indexOf('enterprise-component')).not.to.equal(-1);
+    expect(component.props.className.split(' ').indexOf('enterprisesummary-component')).not.to.equal(-1);
   });
 });
