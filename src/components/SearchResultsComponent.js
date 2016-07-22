@@ -11,6 +11,7 @@ class SearchResultsComponent extends React.Component {
       directory = _this.props.directory,
       query = _this.props.searchText,
       lunr_index = _this.props.lunr_index,
+      jsx = [],
       enterprises = [];
 
     // Make sure the lunr index has been built
@@ -22,17 +23,23 @@ class SearchResultsComponent extends React.Component {
       });
     }
 
+    // If we have no results, show a "no results" message
+    if (enterprises.length === 0) {
+      // TODO: This string should be translatable
+      jsx.push(<li key='no-results' className='search-result'>No results.</li>);
+    }
+
+    enterprises.map(function(enterprise, index) {
+      jsx.push(
+        <li key={index} className='search-result'>
+          <Enterprise enterprise={enterprise} />
+        </li>
+      );
+    });
+
     return (
       <ol className='search-results js-search-results'>
-      {
-        enterprises.map(function(enterprise, index) {
-          return (
-            <li key={index} className='search-result'>
-              <Enterprise enterprise={enterprise} />
-            </li>
-          );
-        })
-      }
+        {jsx}
       </ol>
     );
   }
