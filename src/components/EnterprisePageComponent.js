@@ -16,16 +16,18 @@ class EnterprisePageComponent extends React.Component {
       enterprise,
       jsx;
 
-    enterprise = directory.filter(function(enterprise) {
-      return slug(enterprise.name) === curr_page_slug;
-    })[0];
-
     if (directory === null) { // The directory hasn't loaded yet
       jsx = 'Loading...';
-    } else if (enterprise === undefined) { // Invalid enterprise slug
-      jsx = 'Unknown Enterprise';
-    } else { // Display enterprise details
-      jsx = <Enterprise enterprise={enterprise} />;
+    } else {
+      enterprise = directory.filter(function(enterprise) {
+        return slug(enterprise.name) === curr_page_slug;
+      })[0];
+
+      if (enterprise === undefined) { // Invalid enterprise slug
+        jsx = 'Unknown Enterprise';
+      } else { // Display enterprise details
+        jsx = <Enterprise enterprise={enterprise} />;
+      }
     }
 
     return (

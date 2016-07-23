@@ -12,7 +12,7 @@ class TemplateComponent extends React.Component {
     this.state = {
       searchText: '',
       index: null,
-      directory: [],
+      directory: null,
       config: {}  // FIXME: Should this really be a state?
     };
   }
