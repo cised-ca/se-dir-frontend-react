@@ -13,7 +13,7 @@ describe('HomepageComponent', () => {
   let component;
 
   beforeEach(() => {
-    component = createComponent(HomepageComponentWithoutRouter);
+    component = createComponent(HomepageComponentWithoutRouter, {location: {query: ''}});
   });
 
   it('should have its component name as default className', () => {

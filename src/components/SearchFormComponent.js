@@ -12,11 +12,18 @@ class SearchFormComponent extends React.Component {
       this.refs.searchTextInput.value
     );
   }
+
   render() {
+    var searchText = '';
+
+    if (this.props.searchText) {
+      searchText = this.props.searchText;
+    }
+
     return (
       <form className="search-form js-search-form searchform-component" onSubmit={this.handleSubmit.bind(this)}>
         <div className="search__field-button">
-          <input className="search-field" name="q" placeholder="Find Social Enterprises" type="search" ref="searchTextInput" />
+          <input className="search-field" name="q" placeholder="Find Social Enterprises" type="search" ref="searchTextInput" defaultValue={searchText} />
           <input className="search-button" type="submit" value="Search" />
         </div>
       </form>

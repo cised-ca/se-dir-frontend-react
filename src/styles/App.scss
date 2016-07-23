@@ -31,6 +31,10 @@ body {
   overflow-y: scroll;
 }
 
+.main {
+  padding-top: 40px;
+}
+
 .tint {
   background-color: rgba(0, 0, 0, 0.7);
 }
@@ -59,7 +63,7 @@ body {
     background-size: auto auto;
   }
 
-  .main-container {
+  .main {
     margin: 0 20px;
   }
 }

@@ -6,6 +6,19 @@ import Enterprise from './EnterpriseComponent.js';
 require('styles/SearchResults.scss');
 
 class SearchResultsComponent extends React.Component {
+  componentDidMount() {
+    var search_results = document.querySelector('.js-search-results');
+
+    // If this is a direct link to a search, don't fade, just show
+    if (this.props.directSearch === true) {
+      search_results.style.opacity = '1';
+    } else {
+      window.setTimeout(function() {
+        search_results.classList.add('fade-in');
+      }, 1000);
+    }
+  }
+
   render() {
     var _this = this,
       directory = _this.props.directory,
