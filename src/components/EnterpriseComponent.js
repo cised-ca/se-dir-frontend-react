@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import Enterprise from './EnterpriseSummaryComponent.js';
+import EnterpriseSummary from './EnterpriseSummaryComponent.js';
 
 require('styles//Enterprise.scss');
 
@@ -172,12 +172,12 @@ class EnterpriseComponent extends React.Component {
       phones = this.build_phones(),
       purposes = this.build_purposes(),
       addresses = this.build_addresses(),
-      faxes = this.build_faxes;
+      faxes = this.build_faxes();
 
 
     return (
       <div className="enterprise-component">
-        <Enterprise enterprise={this.props.enterprise} />
+        <EnterpriseSummary enterprise={this.props.enterprise} />
 
         {purposes}
 
