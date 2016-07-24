@@ -20,6 +20,16 @@
   text-align: center;
 }
 
+.intro.slide-up {
+  padding-top: 0;
+  transition: padding-top 2s;
+}
+
+.intro.collapsed {
+  max-height: 0;
+  overflow: hidden;
+}
+
 /**
  * Mobile (smaller than iPad)
  */
