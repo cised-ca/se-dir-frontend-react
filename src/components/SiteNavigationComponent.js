@@ -18,7 +18,7 @@ class SiteNavigationComponent extends React.Component {
               <Link className="nav__link" to="/directory">Directory</Link>
             </li>
             <li className="nav__item">
-              <Link className="nav__link" to="/application">Be part of our Directory</Link>
+              <Link className="nav__link" to="/apply">Be part of our Directory</Link>
             </li>
           </ul>
         </nav>

@@ -8,6 +8,7 @@ import Homepage from './HomepageComponent.js';
 import EnterprisePage from './EnterprisePageComponent.js';
 import Template from './TemplateComponent.js';
 import Directory from './DirectoryComponent.js';
+import ApplicationForm from './ApplicationFormComponent.js';
 
 class AppComponent extends React.Component {
   render() {
@@ -17,6 +18,7 @@ class AppComponent extends React.Component {
           <IndexRoute component={Homepage} />
           <Route name="enterprise" path='/enterprise/:slug' component={EnterprisePage} />
           <Route name="directory" path='/directory' component={Directory} />
+          <Route name='application-form' path='/apply' component={ApplicationForm} />
         </Route>
       </Router>
     );
