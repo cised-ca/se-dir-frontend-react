@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import Enterprise from './EnterpriseComponent.js';
+import EnterpriseSummary from './EnterpriseSummaryComponent.js';
 
 require('styles/SearchResults.scss');
 
@@ -52,7 +52,7 @@ class SearchResultsComponent extends React.Component {
     enterprises.map(function(enterprise, index) {
       jsx.push(
         <li key={index} className='search-result'>
-          <Enterprise enterprise={enterprise} />
+          <EnterpriseSummary enterprise={enterprise} />
         </li>
       );
     });
