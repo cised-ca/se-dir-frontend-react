@@ -1,0 +1,18 @@
+/* FIXME: .search-results dupe */
+.directory-component {
+  background-color: #fff;
+  border-radius: 5px;
+  list-style-type: none;
+  margin: 20px auto;
+  padding: 15px 30px;
+  text-align: left;
+  width: 75%;
+
+  /* FIXME: .search-result dupe */
+  .directory-item {
+    border-bottom: 1px solid #ddd;
+    margin-top: 15px;
+    padding-bottom: 15px;
+  }
+}
+

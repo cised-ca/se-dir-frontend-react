@@ -7,6 +7,7 @@ import { browserHistory, Router, Route, IndexRoute } from 'react-router';
 import Homepage from './HomepageComponent.js';
 import EnterprisePage from './EnterprisePageComponent.js';
 import Template from './TemplateComponent.js';
+import Directory from './DirectoryComponent.js';
 
 class AppComponent extends React.Component {
   render() {
@@ -15,6 +16,7 @@ class AppComponent extends React.Component {
         <Route path='/' component={Template}>
           <IndexRoute component={Homepage} />
           <Route name="enterprise" path='/enterprise/:slug' component={EnterprisePage} />
+          <Route name="directory" path='/directory' component={Directory} />
         </Route>
       </Router>
     );
