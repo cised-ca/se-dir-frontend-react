@@ -4,7 +4,7 @@ import React from 'react';
 
 import Enterprise from './EnterpriseComponent.js';
 
-var slug = require('slug');
+var slug = require('slug/slug-browser');
 slug.defaults.mode = 'rfc3986';
 
 require('styles/EnterprisePage.scss');

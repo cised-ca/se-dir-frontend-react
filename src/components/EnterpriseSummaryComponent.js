@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 
 require('styles/EnterpriseSummary.scss');
 
-var slug = require('slug');
+var slug = require('slug/slug-browser');
 slug.defaults.mode = 'rfc3986';
 
 class EnterpriseSummaryComponent extends React.Component {
