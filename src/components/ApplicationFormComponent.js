@@ -2,15 +2,25 @@
 
 import React from 'react';
 
+import Banner from './BannerComponent.js';
+
 var serialize = require('form-serialize');
 
 require('styles/ApplicationForm.scss');
 
+// TODO: Client-side form validation
 class ApplicationFormComponent extends React.Component {
+  componentWillMount() {
+    this.setState({
+      'status': 'init'
+    });
+  }
+
   handleSubmit(e) {
     e.preventDefault();
 
-    var form = e.target,
+    var component = this,
+      form = e.target,
       url = form.getAttribute('action'),
       obj = serialize(form, {hash: true}),
       json;
@@ -18,16 +28,26 @@ class ApplicationFormComponent extends React.Component {
     try {
       json = JSON.stringify(obj);
     } catch(e) {
-      // TODO: user feedback (display error)
+      component.setState({
+        'status': 'error',
+        'error': 'Invalid response from server'
+      });
     }
 
-    this
+    component
       .http_post(url, json)
       .then(function() {
-        // TODO: user feedback (acknowledgment notice/page)
+        component.setState({
+          'status': 'success'
+        });
+
+        document.querySelector('.js-application-form').style.display = 'none';
       })
-      .catch(function(/*err*/) {
-        // TODO: user feedback (display error)
+      .catch(function(err) {
+        component.setState({
+          'status': 'error',
+          'error': err
+        });
       });
   }
 
@@ -39,7 +59,7 @@ class ApplicationFormComponent extends React.Component {
         if (this.status >= 200 && this.status < 300) {
           resolve(this.response);
         } else {
-          reject(this.statusText);
+          reject(this.statusText); // TODO: Better and translatable error messages.
         }
       };
 
@@ -56,12 +76,35 @@ class ApplicationFormComponent extends React.Component {
   }
 
   render() {
-    return (
-      <div className='applicationform-component'>
-        <h1>Application Form</h1>
+    var banner = null;
 
-        <form action={this.props.config.api_root + '/enterprise'} method='post'
-          onSubmit={this.handleSubmit.bind(this)}>
+    switch(this.state.status) {
+      case 'success':
+        banner = (
+          <Banner type='success' title='Success'>
+            Your application will be processed shortly
+          </Banner>
+        );
+        break;
+      case 'error':
+        banner = (
+          <Banner type='error' title='Error'>
+            <p>
+              {this.state.error}
+            </p>
+          </Banner>
+        );
+        break;
+    }
+
+    return (
+      <div className='applicationform-component page'>
+        <h1>Application</h1>
+
+        {banner}
+
+        <form action={this.props.api_root + '/enterprise'} className='js-application-form'
+          method='post' onSubmit={this.handleSubmit.bind(this)}>
 
           <label className='required' htmlFor='enterprise-name'>Enterprise Name</label>
           <input id='enterprise-name' name='name' required='required' />
