@@ -58,7 +58,7 @@ class SearchResultsComponent extends React.Component {
     });
 
     return (
-      <ol className='search-results js-search-results searchresults-component'>
+      <ol className='search-results js-search-results searchresults-component page'>
         {jsx}
       </ol>
     );
