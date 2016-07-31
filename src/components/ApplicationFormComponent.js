@@ -16,6 +16,18 @@ class ApplicationFormComponent extends React.Component {
     });
   }
 
+  /**
+   * After we re-render the component (due to form submission) focus/scroll on
+   * the banner to ensure people see the success/error status
+   */
+  componentDidUpdate() {
+    var banner = document.querySelector('.banner');
+
+    if (banner) {
+      banner.focus();
+    }
+  }
+
   handleSubmit(e) {
     e.preventDefault();
 
@@ -59,12 +71,18 @@ class ApplicationFormComponent extends React.Component {
         if (this.status >= 200 && this.status < 300) {
           resolve(this.response);
         } else {
-          reject(this.statusText); // TODO: Better and translatable error messages.
+          reject(this.status + ' ' + this.statusText); // TODO: Better and translatable error messages.
         }
       };
 
       xhr.onerror = function() {
-        reject(this.statusText);
+        var statusText = this.statusText;
+
+        if (this.status === 0 && statusText === '') {
+          statusText = 'Unsent.';
+        }
+
+        reject(this.status + ' ' + statusText); // TODO: Better and translatable error messages.
       };
 
       xhr.open('POST', url);
@@ -82,7 +100,7 @@ class ApplicationFormComponent extends React.Component {
       case 'success':
         banner = (
           <Banner type='success' title='Success'>
-            Your application will be processed shortly
+            Your application will be processed shortly.
           </Banner>
         );
         break;
@@ -90,7 +108,9 @@ class ApplicationFormComponent extends React.Component {
         banner = (
           <Banner type='error' title='Error'>
             <p>
-              {this.state.error}
+              We were unable to submit your application at this time.
+              Please let us know of the issue, and include this error code:&nbsp;
+              "{this.state.error}"
             </p>
           </Banner>
         );

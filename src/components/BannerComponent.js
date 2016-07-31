@@ -14,7 +14,8 @@ class BannerComponent extends React.Component {
     }
 
     return (
-      <section className={'banner banner-component banner--' + type}>
+      <section className={'banner banner-component banner--' + type}
+        tabIndex='-1'>
         {title}
         {this.props.children}
       </section>
