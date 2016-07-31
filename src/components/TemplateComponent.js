@@ -139,7 +139,9 @@ class TemplateComponent extends React.Component {
         <SiteNavigation />
 
         {/* The router will decide what to render here based on the URL we're at */}
-        {childWithProps}
+        <main className='main'>
+          {childWithProps}
+        </main>
       </div>
     );
   }

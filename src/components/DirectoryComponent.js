@@ -27,7 +27,7 @@ class DirectoryComponent extends React.Component {
     }
 
     return (
-      <ol className='directory-component'>
+      <ol className='directory-component page'>
         {jsx}
       </ol>
     );

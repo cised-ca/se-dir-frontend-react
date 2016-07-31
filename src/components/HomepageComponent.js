@@ -80,13 +80,13 @@ class HomepageComponent extends React.Component {
     }
 
     return (
-      <main className='main homepage-component'>
+      <div className='homepage-component'>
         {intro}
 
         <SearchForm onSearch={this.handleSearch.bind(this)} searchText={this.state.searchText} />
 
         {searchResults}
-      </main>
+      </div>
     );
   }
 }

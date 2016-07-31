@@ -31,7 +31,7 @@ class EnterprisePageComponent extends React.Component {
     }
 
     return (
-      <div className="enterprise-details enterprisepage-component">
+      <div className="enterprisepage-component page">
         {jsx}
       </div>
     );
