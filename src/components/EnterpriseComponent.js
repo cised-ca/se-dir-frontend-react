@@ -177,7 +177,7 @@ class EnterpriseComponent extends React.Component {
 
     return (
       <div className="enterprise-component">
-        <EnterpriseSummary enterprise={this.props.enterprise} />
+        <EnterpriseSummary enterprise={this.props.enterprise} linkto='external' />
 
         {purposes}
 

@@ -10,7 +10,12 @@ slug.defaults.mode = 'rfc3986';
 
 class EnterpriseSummaryComponent extends React.Component {
   render() {
-    var enterprise = this.props.enterprise;
+    var enterprise = this.props.enterprise,
+      enterprise_link = <Link to={'/enterprise/' + slug(enterprise.name)}>{enterprise.name}</Link>;
+
+    if (this.props.linkto === 'external') {
+      enterprise_link = <a href={enterprise.website}>{enterprise.name}</a>;
+    }
 
     return (
       <div className="enterprise-summary enterprisesummary-component">
@@ -20,7 +25,7 @@ class EnterpriseSummaryComponent extends React.Component {
         </div>
         <div className="enterprise__details">
           <h2 className="enterprise__title">
-            <Link to={'/enterprise/' + slug(enterprise.name)}>{enterprise.name}</Link>
+            {enterprise_link}
           </h2>
           <div className="enterprise__description">{enterprise.description}</div>
           <div className="enterprise__website">
