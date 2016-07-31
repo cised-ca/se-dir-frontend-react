@@ -54,6 +54,25 @@ class HomepageComponent extends React.Component {
     });
   }
 
+  /**
+   * When this component is about to receive new props, like when the URL changes,
+   * check if we still have a search query in the URL. If not, show the intro.
+   */
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.search === '') {
+      var intro = document.querySelector('.js-intro');
+
+      if (intro) {
+        intro.classList.remove('slide-up');
+      }
+
+      this.setState({
+        'directSearch': false,
+        'searchText': null
+      });
+    }
+  }
+
   render() {
     var intro = null,
       searchResults = null;
