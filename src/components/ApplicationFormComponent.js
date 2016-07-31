@@ -96,6 +96,16 @@ class ApplicationFormComponent extends React.Component {
   render() {
     var banner = null;
 
+    // Show "Loading..." and bail early if we don't have the configs yet
+    if (this.props.config === null) {
+      return (
+        <div className='applicationform-component page'>
+          Loading...
+        </div>
+
+      );
+    }
+
     switch(this.state.status) {
       case 'success':
         banner = (
