@@ -103,14 +103,14 @@ class ApplicationFormComponent extends React.Component {
 
         {banner}
 
-        <form action={this.props.api_root + '/enterprise'} className='js-application-form'
+        <form action={this.props.config.api_root + '/enterprise'} className='js-application-form'
           method='post' onSubmit={this.handleSubmit.bind(this)}>
 
           <label className='required' htmlFor='enterprise-name'>Enterprise Name</label>
-          <input id='enterprise-name' name='name' required='required' />
+          <input id='enterprise-name' name='name' required='required' type='text' />
 
           <label htmlFor='parent-organization'>Parent Organization (if applicable)</label>
-          <input id='parent-organization' name='parent-organization' />
+          <input id='parent-organization' name='parent-organization' type='text' />
 
           <label htmlFor='business-description'>Business Description</label>
           <textarea id='business-description' name='description'></textarea>
@@ -122,7 +122,7 @@ class ApplicationFormComponent extends React.Component {
           <input id='website' name='website' type='url' />
 
           <label className='required' htmlFor='main-contact'>Main Contact Person</label>
-          <input id='main-contact' name='main-contact' required='required' />
+          <input id='main-contact' name='main-contact' required='required' type='text' />
 
           <label htmlFor='phone-number'>Phone Number</label>
           <input id='phone-number' name='phone-number' type='tel' />
