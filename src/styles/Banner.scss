@@ -1,0 +1,20 @@
+.banner {
+  border-style: solid;
+  border-width: 0 0 0 4px;
+  padding: 15px;
+}
+
+.banner__heading {
+  margin-top: 0;
+}
+
+.banner--success {
+  background: #d8eeca;
+  border-color: #278400;
+}
+
+.banner--error {
+  background: #f3e9e8;
+  border-color: #d3080c;
+}
+
