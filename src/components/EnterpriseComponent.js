@@ -156,7 +156,7 @@ class EnterpriseComponent extends React.Component {
     if (jsx.length > 0) {
       jsx = (
         <div className="enterprise-extended__purposes">
-          <h2>Purposes</h2>
+          <h2>Purpose</h2>
           <ul className="enterprise-extended__purpose-list">
             {jsx}
           </ul>
@@ -178,16 +178,17 @@ class EnterpriseComponent extends React.Component {
     return (
       <div className="enterprise-component">
         <EnterpriseSummary enterprise={this.props.enterprise} linkto='external' />
+        <div className="enterprise-extended">
+          {purposes}
 
-        {purposes}
+          {addresses}
 
-        {addresses}
+          {phones}
 
-        {phones}
+          {emails}
 
-        {emails}
-
-        {faxes}
+          {faxes}
+        </div>
       </div>
     );
   }

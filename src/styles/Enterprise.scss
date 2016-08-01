@@ -1,3 +1,18 @@
 .enterprise-component {
 	margin-top: 20px;
 }
+
+.enterprise-extended h2 {
+	color: #693;
+}
+
+.enterprise-extended ul {
+	padding: 0;
+	list-style: none;
+}
+
+@media only screen and (min-device-width: 1024px) {
+	.enterprise-extended {
+		margin-left: 150px;
+	}
+}
