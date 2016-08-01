@@ -6,7 +6,7 @@
 .title {
   font-size: 60px;
   font-weight: bold;
-  margin: 0;
+  margin: 0 10px;
   text-transform: uppercase;
 }
 
@@ -16,7 +16,7 @@
 
 .intro {
   max-height: 360px;
-  padding-top: 180px;
+  padding-top: 150px;
   text-align: center;
 }
 
@@ -28,6 +28,10 @@
 .intro.collapsed {
   max-height: 0;
   overflow: hidden;
+}
+
+.search-form {
+  margin-top: 40px;
 }
 
 /**

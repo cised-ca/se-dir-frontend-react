@@ -5,12 +5,23 @@
 .enterprise__logo,
 .enterprise__details {
   display: table-cell;
-  vertical-align: middle;
+  vertical-align: top;
 }
 
 .enterprise__logo img {
-  margin-right: 10px;
+  margin-left: -10px;
+  margin-right: 20px;
+  margin-top: 10px;
   width: 140px;
+}
+
+.enterprise__title {
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+
+.enterprise__description {
+  margin-bottom: 10px;
 }
 
 /**
@@ -24,7 +35,11 @@
   }
 
   .enterprise__logo {
-    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .enterprise__logo img {
+    margin-left: 0;
   }
 
   .enterprise__details {
