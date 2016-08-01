@@ -40,8 +40,12 @@ class ApplicationFormComponent extends React.Component {
     } catch(e) {
       component.setState({
         'status': 'error',
-        'error': 'Invalid response from server'
+        'error': 'Unable to prepare data for submission'
       });
+
+      this.context.logger.notify(
+        'Unable to prepare data for submission (JSON.stringify failed: ' + e + ')'
+      );
     }
 
     component
@@ -58,18 +62,23 @@ class ApplicationFormComponent extends React.Component {
           'status': 'error',
           'error': err
         });
+
+        component.context.logger.notify(
+          'Unable to POST new enterprise: ' + err
+        );
       });
   }
 
   http_post(url, data) {
     var promise = new Promise(function(resolve, reject) {
-      var xhr = new XMLHttpRequest();
+      var xhr = new XMLHttpRequest(),
+        errmsg = 'xhr request to ' + url + ' failed: ';
 
       xhr.onload = function() {
         if (this.status >= 200 && this.status < 300) {
           resolve(this.response);
         } else {
-          reject(this.status + ' ' + this.statusText); // TODO: Better and translatable error messages.
+          reject(errmsg + this.status + ' ' + this.statusText);
         }
       };
 
@@ -80,7 +89,7 @@ class ApplicationFormComponent extends React.Component {
           statusText = 'Unsent.';
         }
 
-        reject(this.status + ' ' + statusText); // TODO: Better and translatable error messages.
+        reject(errmsg + this.status + ' ' + statusText);
       };
 
       xhr.open('POST', url);
@@ -166,6 +175,10 @@ class ApplicationFormComponent extends React.Component {
 }
 
 ApplicationFormComponent.displayName = 'ApplicationFormComponent';
+
+ApplicationFormComponent.contextTypes = {
+  'logger': React.PropTypes.object
+};
 
 // Uncomment properties you need
 // ApplicationFormComponent.propTypes = {};

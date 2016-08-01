@@ -1,4 +1,8 @@
 {
-  "api_root": "http://example.org/api"
+  "api_root": "https://example.org/api/",
+  "logger": {
+    "host": "https://example.org",
+    "api_key": "YOUR_API_KEY"
+  }
 }
 

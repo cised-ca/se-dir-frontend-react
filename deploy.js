@@ -17,11 +17,24 @@ if (process.env.TRAVIS_PULL_REQUEST !== 'false' || process.env.TRAVIS_BRANCH !==
   return 0;
 }
 
-// Overwrite config.json with travis-specific one
-fs.copySync(
-  path.join(__dirname, 'src/config.travis.json'),
-  path.join(__dirname, 'dist/config.json')
-);
+/**
+ * Overwrite config.json with travis-specific one
+ */
+
+console.log('Overwriting default config...');
+
+try {
+  fs.copySync(
+    path.join(__dirname, 'src/config.travis.json'),
+    path.join(__dirname, 'dist/config.json')
+  );
+} catch(err) {
+  console.log(err);
+}
+
+/**
+ * Publish pages
+ */
 
 options = {
   'repo': 'https://' + process.env.GH_TOKEN + '@github.com/cised-ca/cised-ca.github.io.git',
@@ -30,5 +43,12 @@ options = {
   'silent': true
 };
 
-ghpages.publish(basePath, options);
+console.log('Publishing pages...');
+ghpages.publish(basePath, options, function(err) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log('Done!');
+  }
+});
 
