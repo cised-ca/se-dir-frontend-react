@@ -2,6 +2,8 @@
 
 import React from 'react';
 
+import { Link } from 'react-router';
+
 require('styles//SearchForm.scss');
 
 class SearchFormComponent extends React.Component {
@@ -24,8 +26,9 @@ class SearchFormComponent extends React.Component {
       <form className="search-form js-search-form searchform-component" onSubmit={this.handleSubmit.bind(this)}>
         <div className="search__field-button">
           <input className="search-field" name="q" placeholder="Find Social Enterprises" type="search" ref="searchTextInput" defaultValue={searchText} />
-          <input className="search-button" type="submit" value="Search" />
+          <input className="search-button button button--search" type="submit" value="Search" />
         </div>
+        <Link className='button' to='/directory'>Browse</Link>
       </form>
     );
   }

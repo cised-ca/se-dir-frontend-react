@@ -63,6 +63,26 @@ body {
   width: 75%;
 }
 
+a.button {
+  color: #fff;
+}
+
+.button {
+  background-color: #693;
+  border: 1px solid #000;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 25px;
+  padding: 10px 12px;
+
+  &:hover {
+    background-color: #360;
+    text-decoration: none;
+  }
+}
+
 /**
  * Mobile (smaller than iPad)
  */
