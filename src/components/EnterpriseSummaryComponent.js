@@ -31,6 +31,8 @@ class EnterpriseSummaryComponent extends React.Component {
           <div className="enterprise__website">
             <a href={enterprise.website}>Website</a>
           </div>
+
+          {this.props.children}
         </div>
       </div>
     );
