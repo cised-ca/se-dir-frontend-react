@@ -4,25 +4,10 @@
   width: 50%;
 }
 
-.search__field-button {
-  border: 1px solid #000;
-  border-radius: 5px;
-  height: 55px;
-  margin-bottom: 15px;
-  overflow: hidden;
-  position: relative;
-
-  .button--search {
-    border-radius: 0 5px 5px 0;
-    border-width: 0 0 0 1px;
-    height: 100%;
-    padding-left: 6px;
-    padding-right: 6px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 98px;
-  }
+.button--search {
+  margin-right: 20px;
+  padding-left: 6px;
+  padding-right: 6px;
 }
 
 .search-field {
@@ -30,9 +15,8 @@
   border-radius: 5px;
   display: inline-block;
   font-size: 25px;
-  margin: 0;
+  margin: 0 0 20px;
   padding: 12px;
-  padding-right: 98px;
   width: 100%;
 }
 
