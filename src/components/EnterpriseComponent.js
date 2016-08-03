@@ -35,6 +35,28 @@ class EnterpriseComponent extends React.Component {
         </div>
       );
     }
+
+    return jsx;
+  }
+
+  /**
+   * Build JSX for offering
+   */
+  build_offering() {
+    var enterprise = this.props.enterprise,
+      offering = enterprise.offering,
+      jsx = null;
+
+    if (offering.length > 0) {
+      jsx = (
+        <div className="enterprise-extended__offering">
+          <h2>Offering</h2>
+          {offering}
+        </div>
+      );
+    }
+
+    return jsx;
   }
 
   /**
@@ -65,6 +87,8 @@ class EnterpriseComponent extends React.Component {
         </div>
       );
     }
+
+    return jsx;
   }
 
   /**
@@ -172,7 +196,8 @@ class EnterpriseComponent extends React.Component {
       phones = this.build_phones(),
       purposes = this.build_purposes(),
       addresses = this.build_addresses(),
-      faxes = this.build_faxes();
+      faxes = this.build_faxes(),
+      offering = this.build_offering();
 
 
     return (
@@ -180,6 +205,8 @@ class EnterpriseComponent extends React.Component {
         <EnterpriseSummary enterprise={this.props.enterprise} linkto='external'>
           <div className="enterprise-extended">
             {purposes}
+
+            {offering}
 
             {addresses}
 
