@@ -4,8 +4,6 @@ import React from 'react';
 
 import EnterpriseSummary from './EnterpriseSummaryComponent.js';
 
-require('styles//Enterprise.scss');
-
 class EnterpriseComponent extends React.Component {
   /**
    * Build JSX for fax information

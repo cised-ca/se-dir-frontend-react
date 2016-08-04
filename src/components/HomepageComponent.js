@@ -6,8 +6,6 @@ import { withRouter } from 'react-router';
 import SearchForm from './SearchFormComponent.js';
 import SearchResults from './SearchResultsComponent.js';
 
-require('styles/Homepage.scss');
-
 class HomepageComponent extends React.Component {
   constructor() {
     super();

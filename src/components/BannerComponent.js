@@ -2,8 +2,6 @@
 
 import React from 'react';
 
-require('styles//Banner.scss');
-
 class BannerComponent extends React.Component {
   render() {
     var type = this.props.type || 'info',

@@ -3,8 +3,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-require('styles/EnterpriseSummary.scss');
-
 var slug = require('slug/slug-browser');
 slug.defaults.mode = 'rfc3986';
 

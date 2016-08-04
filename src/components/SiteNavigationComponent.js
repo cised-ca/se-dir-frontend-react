@@ -3,8 +3,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-require('styles/SiteNavigation.scss');
-
 class SiteNavigationComponent extends React.Component {
   render() {
     return (

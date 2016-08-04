@@ -1,0 +1,14 @@
+/* Colors */
+$primary-color: $primary-color; // CISED green
+$primary-color-dark: $primary-color-dark; // Darker green for hover/active states
+
+/* Media query sizes */
+$tablet-width: 768px;
+
+/* Media queries */
+@mixin tablet {
+  @media only screen and (max-width: #{$tablet-width}) {
+    @content;
+  }
+}
+
