@@ -40,6 +40,10 @@ body {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
+.hidden {
+  opacity: 0;
+}
+
 .slide-up {
   max-height: 0;
   overflow: hidden;

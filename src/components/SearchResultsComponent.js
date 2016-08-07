@@ -9,10 +9,11 @@ class SearchResultsComponent extends React.Component {
 
     // If this is a direct link to a search, don't fade, just show
     if (this.props.directSearch === true) {
-      search_results.style.opacity = '1';
+      search_results.classList.remove('hidden');
     } else {
       window.setTimeout(function() {
         search_results.classList.add('fade-in');
+        search_results.classList.remove('hidden');
       }, 1000);
     }
   }
@@ -56,7 +57,7 @@ class SearchResultsComponent extends React.Component {
     });
 
     return (
-      <ol className='search-results js-search-results searchresults-component page'>
+      <ol className='search-results js-search-results searchresults-component page hidden'>
         {jsx}
       </ol>
     );
