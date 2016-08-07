@@ -21,13 +21,13 @@
 }
 
 .search-button:hover {
-  background-color: #360;
+  background-color: $primary-color-dark;
 }
 
 /**
  * Mobile (smaller than iPad)
  */
-@media only screen and (max-width: 768px) {
+@include tablet {
   .search-form {
     width: auto;
   }

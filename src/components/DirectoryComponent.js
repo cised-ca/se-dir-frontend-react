@@ -4,8 +4,6 @@ import React from 'react';
 
 import EnterpriseSummary from './EnterpriseSummaryComponent.js';
 
-require('styles/Directory.scss');
-
 class DirectoryComponent extends React.Component {
   render() {
     var directory = this.props.directory,

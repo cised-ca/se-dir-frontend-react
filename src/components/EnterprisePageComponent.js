@@ -7,8 +7,6 @@ import Enterprise from './EnterpriseComponent.js';
 var slug = require('slug/slug-browser');
 slug.defaults.mode = 'rfc3986';
 
-require('styles/EnterprisePage.scss');
-
 class EnterprisePageComponent extends React.Component {
   render() {
     var curr_page_slug = this.props.params.slug,

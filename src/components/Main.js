@@ -1,5 +1,5 @@
 require('normalize.css/normalize.css');
-require('styles/App.scss');
+require('styles/main.scss');
 
 import React from 'react';
 

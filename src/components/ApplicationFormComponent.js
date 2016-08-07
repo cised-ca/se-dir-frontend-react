@@ -6,8 +6,6 @@ import Banner from './BannerComponent.js';
 
 var serialize = require('form-serialize');
 
-require('styles/ApplicationForm.scss');
-
 // TODO: Client-side form validation
 class ApplicationFormComponent extends React.Component {
   componentWillMount() {

@@ -27,7 +27,7 @@
 /**
  * Mobile (smaller than iPad)
  */
-@media only screen and (max-width: 768px) {
+@include tablet {
   .enterprise,
   .enterprise__logo,
   .enterprise__details {

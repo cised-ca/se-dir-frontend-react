@@ -3,8 +3,6 @@
 import React from 'react';
 import EnterpriseSummary from './EnterpriseSummaryComponent.js';
 
-require('styles/SearchResults.scss');
-
 class SearchResultsComponent extends React.Component {
   componentDidMount() {
     var search_results = document.querySelector('.js-search-results');

@@ -4,8 +4,6 @@ import React from 'react';
 
 import { Link } from 'react-router';
 
-require('styles//SearchForm.scss');
-
 class SearchFormComponent extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
