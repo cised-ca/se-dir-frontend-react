@@ -3,20 +3,19 @@
 /* eslint no-console: 0 */
 'use strict';
 
-// Uncomment the following lines to use the react test utilities
-// import TestUtils from 'react-addons-test-utils';
-import createComponent from 'helpers/shallowRenderHelper';
+import React from 'react';
+import { shallow } from 'enzyme';
 
-import SiteNavigationComponent from 'components//SiteNavigationComponent.js';
+import SiteNavigationComponent from 'components/SiteNavigationComponent.js';
 
 describe('SiteNavigationComponent', () => {
   let component;
 
   beforeEach(() => {
-    component = createComponent(SiteNavigationComponent);
+    component = shallow(<SiteNavigationComponent />);
   });
 
   it('should have its component name as a className', () => {
-    expect(component.props.className.split(' ').indexOf('sitenavigation-component')).not.to.equal(-1);
+    expect(component.hasClass('sitenavigation-component')).to.equal(true);
   });
 });

@@ -3,27 +3,26 @@
 /* eslint no-console: 0 */
 'use strict';
 
-// Uncomment the following lines to use the react test utilities
-// import TestUtils from 'react-addons-test-utils';
-import createComponent from 'helpers/shallowRenderHelper';
+import React from 'react';
+import { shallow } from 'enzyme';
 
-import TemplateComponent from 'components//TemplateComponent.js';
-import { HomepageComponentWithoutRouter } from 'components//HomepageComponent.js';
+import TemplateComponent from 'components/TemplateComponent.js';
+import { HomepageComponentWithoutRouter } from 'components/HomepageComponent.js';
 
 describe('TemplateComponent', () => {
   let component;
 
+  var stateProp = {};
+
   beforeEach(() => {
-    component = createComponent(
-      TemplateComponent,
-      {
-        'state': {}
-      },
-      HomepageComponentWithoutRouter
+    component = shallow(
+      <TemplateComponent state={stateProp}>
+        <HomepageComponentWithoutRouter />
+      </TemplateComponent>
     );
   });
 
   it('should have its component name as default className', () => {
-    expect(component.props.className.split(' ').indexOf('template-component')).not.to.equal(-1);
+    expect(component.hasClass('template-component')).to.equal(true);
   });
 });

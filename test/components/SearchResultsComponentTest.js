@@ -3,24 +3,26 @@
 /* eslint no-console: 0 */
 'use strict';
 
-// Uncomment the following lines to use the react test utilities
-// import TestUtils from 'react-addons-test-utils';
-import createComponent from 'helpers/shallowRenderHelper';
+import React from 'react';
+import { shallow } from 'enzyme';
 
-import SearchResultsComponent from 'components//SearchResultsComponent.js';
+import SearchResultsComponent from 'components/SearchResultsComponent.js';
 
 describe('SearchResultsComponent', () => {
   let component;
 
+  var directoryProp = [],
+    searchTextProp = 'restore',
+    lunr_indexProp = null;
+
   beforeEach(() => {
-    component = createComponent(SearchResultsComponent, {
-      'directory': [],
-      'searchText': 'restore',
-      'lunr_index': null
-    });
+    component = shallow(
+      <SearchResultsComponent directory={directoryProp}
+        searchText={searchTextProp} lunr_index={lunr_indexProp} />
+    );
   });
 
   it('should have its component name as default className', () => {
-    expect(component.props.className.split(' ').indexOf('searchresults-component')).not.to.equal(-1);
+    expect(component.hasClass('searchresults-component')).to.equal(true);
   });
 });
