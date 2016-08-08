@@ -3,20 +3,30 @@
 /* eslint no-console: 0 */
 'use strict';
 
-// Uncomment the following lines to use the react test utilities
-// import TestUtils from 'react-addons-test-utils';
-import createComponent from 'helpers/shallowRenderHelper';
+import React from 'react';
+import { shallow } from 'enzyme';
 
-import { HomepageComponentWithoutRouter } from 'components//HomepageComponent.js';
+import { HomepageComponentWithoutRouter } from 'components/HomepageComponent.js';
+import SearchForm from 'components/SearchFormComponent.js';
 
 describe('HomepageComponent', () => {
   let component;
 
+  var locationProp = {
+    'query': ''
+  };
+
   beforeEach(() => {
-    component = createComponent(HomepageComponentWithoutRouter, {location: {query: ''}});
+    component = shallow(
+      <HomepageComponentWithoutRouter location={locationProp} />
+    );
+  });
+
+  it('should render one <SearchForm /> component', () => {
+    expect(component.find(SearchForm)).to.have.length(1);
   });
 
   it('should have its component name as default className', () => {
-    expect(component.props.className.split(' ').indexOf('homepage-component')).not.to.equal(-1);
+    expect(component.hasClass('homepage-component')).to.equal(true);
   });
 });

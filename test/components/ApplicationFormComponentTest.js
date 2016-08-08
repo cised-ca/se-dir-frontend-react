@@ -3,24 +3,25 @@
 /* eslint no-console: 0 */
 'use strict';
 
-// Uncomment the following lines to use the react test utilities
-// import TestUtils from 'react-addons-test-utils';
-import createComponent from 'helpers/shallowRenderHelper';
+import React from 'react';
+import { shallow } from 'enzyme';
 
-import ApplicationFormComponent from 'components//ApplicationFormComponent.js';
+import ApplicationFormComponent from 'components/ApplicationFormComponent.js';
 
 describe('ApplicationFormComponent', () => {
   let component;
 
   beforeEach(() => {
-    component = createComponent(ApplicationFormComponent, {
+    var configProp = {
       'config': {
         'api_root': 'http://example.org/api/v1'
       }
-    });
+    };
+
+    component = shallow(<ApplicationFormComponent config={configProp} />);
   });
 
   it('should have its component name as default className', () => {
-    expect(component.props.className.split(' ').indexOf('applicationform-component')).not.to.equal(-1);
+    expect(component.hasClass('applicationform-component')).to.equal(true);
   });
 });

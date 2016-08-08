@@ -3,11 +3,10 @@
 /* eslint no-console: 0 */
 'use strict';
 
-// Uncomment the following lines to use the react test utilities
-// import TestUtils from 'react-addons-test-utils';
-import createComponent from 'helpers/shallowRenderHelper';
+import React from 'react';
+import { shallow } from 'enzyme';
 
-import EnterprisePageComponent from 'components//EnterprisePageComponent.js';
+import EnterprisePageComponent from 'components/EnterprisePageComponent.js';
 
 var slug = require('slug');
 slug.defaults.mode = 'rfc3986';
@@ -15,16 +14,18 @@ slug.defaults.mode = 'rfc3986';
 describe('EnterprisePageComponent', () => {
   let component;
 
+  var directoryProp = [],
+    paramsProp = {
+      'slug': 'restore'
+    };
+
   beforeEach(() => {
-    component = createComponent(EnterprisePageComponent, {
-      'params': {
-        'slug': 'restore'
-      },
-      'directory': []
-    });
+    component = shallow(
+      <EnterprisePageComponent directory={directoryProp} params={paramsProp} />
+    );
   });
 
   it('should have its component name as default className', () => {
-    expect(component.props.className.split(' ').indexOf('enterprisepage-component')).not.to.equal(-1);
+    expect(component.hasClass('enterprisepage-component')).to.equal(true);
   });
 });

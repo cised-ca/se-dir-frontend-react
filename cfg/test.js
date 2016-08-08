@@ -7,6 +7,7 @@ let baseConfig = require('./base');
 
 // Add needed plugins here
 let BowerWebpackPlugin = require('bower-webpack-plugin');
+let webpack = require('webpack');
 
 module.exports = {
   devtool: 'eval',
@@ -35,8 +36,19 @@ module.exports = {
             path.join(__dirname, '/../test')
           ]
         )
+      },
+      // Enzyme: https://github.com/airbnb/enzyme/issues/47#issuecomment-171953666
+      {
+        test: /\.json$/,
+        loader: 'json'
       }
     ]
+  },
+  // Enzyme: https://github.com/airbnb/enzyme/blob/master/docs/guides/webpack.md#react-15-compatibility
+  externals: {
+    'react/addons': true,
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true
   },
   resolve: {
     extensions: [ '', '.js', '.jsx' ],
@@ -53,6 +65,12 @@ module.exports = {
   plugins: [
     new BowerWebpackPlugin({
       searchResolveModulesDirectories: false
+    }),
+    // Enzyme: https://github.com/airbnb/enzyme/issues/286#issuecomment-206695199
+    new webpack.NormalModuleReplacementPlugin(/^\.\/package$/, function(result) {
+      if(/cheerio/.test(result.context)) {
+        result.request = './package.json';
+      }
     })
   ]
 };

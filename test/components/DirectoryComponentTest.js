@@ -3,25 +3,21 @@
 /* eslint no-console: 0 */
 'use strict';
 
-// Uncomment the following lines to use the react test utilities
-// import TestUtils from 'react-addons-test-utils';
-import createComponent from 'helpers/shallowRenderHelper';
+import React from 'react';
+import { shallow } from 'enzyme';
 
-import DirectoryComponent from 'components//DirectoryComponent.js';
+import DirectoryComponent from 'components/DirectoryComponent.js';
 
 describe('DirectoryComponent', () => {
   let component;
 
+  var directoryProp = [];
+
   beforeEach(() => {
-    component = createComponent(
-      DirectoryComponent,
-      {
-        directory: []
-      }
-    );
+    component = shallow(<DirectoryComponent directory={directoryProp} />);
   });
 
   it('should have its component name as default className', () => {
-    expect(component.props.className.split(' ').indexOf('directory-component')).not.to.equal(-1);
+    expect(component.hasClass('directory-component')).to.equal(true);
   });
 });
