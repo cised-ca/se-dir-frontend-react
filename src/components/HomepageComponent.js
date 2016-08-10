@@ -2,20 +2,12 @@
 
 import React from 'react';
 import { withRouter } from 'react-router';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import SearchForm from './SearchFormComponent.js';
 import SearchResults from './SearchResultsComponent.js';
 
 class HomepageComponent extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      'directSearch': false,
-      'searchText': null
-    };
-  }
-
   /**
    * Before the Component is rendered, check if we have a query
    * in the URL (direct link to a search results) and set the
@@ -29,6 +21,11 @@ class HomepageComponent extends React.Component {
         'directSearch': true,
         'searchText': query.q
       });
+    } else {
+      this.setState({
+        'directSearch': false,
+        'searchText': null
+      });
     }
   }
 
@@ -38,10 +35,6 @@ class HomepageComponent extends React.Component {
    * @param {String} searchText The text in the search field input box
    */
   handleSearch(searchText) {
-    var intro = document.querySelector('.js-intro');
-
-    intro.classList.add('slide-up');
-
     this.setState({
       searchText: searchText
     });
@@ -58,12 +51,6 @@ class HomepageComponent extends React.Component {
    */
   componentWillReceiveProps(nextProps) {
     if (nextProps.location.search === '') {
-      var intro = document.querySelector('.js-intro');
-
-      if (intro) {
-        intro.classList.remove('slide-up');
-      }
-
       this.setState({
         'directSearch': false,
         'searchText': null
@@ -75,8 +62,7 @@ class HomepageComponent extends React.Component {
     var intro = null,
       searchResults = null;
 
-    // Show intro if this isn't a direct link to a search
-    if (this.state.directSearch === false) {
+    if (this.state.searchText === null) {
       intro = (
         <div className='intro js-intro'>
           <h1 className='title'>Ottawa Social Enterprise Directory</h1>
@@ -86,10 +72,7 @@ class HomepageComponent extends React.Component {
           </p>
         </div>
       );
-    }
-
-    // If we are performing a search (direct or not), display the results
-    if (this.state.searchText !== null) {
+    } else {
       searchResults = (
         <SearchResults searchText={this.state.searchText} directSearch={this.state.directSearch}
           directory={this.props.directory} lunr_index={this.props.index} />
@@ -98,7 +81,10 @@ class HomepageComponent extends React.Component {
 
     return (
       <div className='homepage-component'>
-        {intro}
+        <ReactCSSTransitionGroup transitionName={{leave: 'slide-up'}}
+          transitionEnter={false} transitionLeaveTimeout={2000}>
+          {intro}
+        </ReactCSSTransitionGroup>
 
         <SearchForm onSearch={this.handleSearch.bind(this)} searchText={this.state.searchText} />
 
