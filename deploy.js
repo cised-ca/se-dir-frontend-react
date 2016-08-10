@@ -1,3 +1,4 @@
+/*eslint no-console:0 */
 'use strict';
 
 var ghpages = require('gh-pages'),
@@ -6,9 +7,13 @@ var ghpages = require('gh-pages'),
   fs = require('fs-extra'),
   options;
 
+console.log('PR: ' + process.env.TRAVIS_PULL_REQUEST);
+console.log('Branch: ' + process.env.TRAVIS_BRANCH);
+
 // Bail if this is a pull request since we only want to deploy on pushes
 // Bail if this is a push on a branch other than master
 if (process.env.TRAVIS_PULL_REQUEST !== 'false' || process.env.TRAVIS_BRANCH !== 'master') {
+  console.log('Bailing...');
   return 0;
 }
 
