@@ -4,17 +4,33 @@ import React from 'react';
 
 import SiteNavigation from './SiteNavigationComponent.js';
 
-var lunr = require('lunr');
+var airbrakeJs = require('airbrake-js'),
+  lunr = require('lunr');
 
 class TemplateComponent extends React.Component {
-  constructor() {
-    super();
-    this.state = {
+  getChildContext() {
+    return {
+      'logger': this.state.logger
+    };
+  }
+
+   /**
+   * Set the initial state
+   *
+   * Called by React before the inital rendering
+   */
+  componentWillMount() {
+    this.setState({
       searchText: '',
       index: null,
       directory: null,
-      config: {}  // FIXME: Should this really be a state?
-    };
+      config: {},  // FIXME: Should this really be a state?
+      logger: {
+        /* eslint-disable no-console */
+        notify: function(msg) { console.error(msg); }
+        /* eslint-enable no-console */
+      }
+    });
   }
 
   /**
@@ -26,18 +42,25 @@ class TemplateComponent extends React.Component {
    */
   http_get(url) {
     var promise = new Promise(function(resolve, reject) {
-      var xhr = new XMLHttpRequest();
+      var xhr = new XMLHttpRequest(),
+        errmsg = 'xhr request to ' + url + ' failed: ';
 
       xhr.onload = function() {
         if (this.status >= 200 && this.status < 300) {
           resolve(this.response);
         } else {
-          reject(this.statusText);
+          reject(errmsg + this.status + ' ' + this.statusText);
         }
       };
 
       xhr.onerror = function() {
-        reject(this.statusText);
+        var statusText = this.statusText;
+
+        if (this.status === 0 && statusText === '') {
+          statusText = 'Unsent.';
+        }
+
+        reject(errmsg + this.status + ' ' + statusText);
       };
 
       xhr.open('GET', url);
@@ -58,13 +81,38 @@ class TemplateComponent extends React.Component {
 
   /**
    * Parse the configuration file
+   *
+   * @param {String} JSON response
    */
   parse_config(response) {
-    // TODO: Error handling
-    var config = JSON.parse(response);
+    var config;
 
-    // TODO: Sanity check / Error handling / Merge, overwrite default values
-    this.state.config = config;
+    try {
+      // TODO: Sanity check / Error handling / Merge, overwrite default values
+      config = JSON.parse(response);
+      this.state.config = config;
+    } catch(e) {
+      // Add some context to the default error message
+      e.message = 'Cannot parse configuration file: ' + e.message;
+      throw(e);
+    }
+  }
+
+  /**
+   * Send errors to a logging system
+   */
+  setup_error_logger() {
+    var config = this.state.config;
+
+    // Setup error logger if configured. Otherwise, we'll fallback to the console
+    if (config.logger) {
+      this.state.logger = new airbrakeJs({
+        projectId: config.logger.api_key,
+        projectKey: config.logger.api_key,
+        reporter: 'xhr',
+        host: config.logger.host
+      });
+    }
   }
 
   /**
@@ -77,27 +125,37 @@ class TemplateComponent extends React.Component {
   }
 
   /**
-   * This is called automatically by React. Immediately after the initial render.
-   * See: https://facebook.github.io/react/docs/component-specs.html#mounting-componentwillmount
+   * Get/parse config and directory data.
+   *
+   * Called by React after the initial render.
    */
   componentDidMount() {
     var app = this;
 
     this
       .get_config()
-      .then(function(response) {
-        app.parse_config(response);
+      .then(function(config_str) {
+        app.parse_config(config_str);
+        app.setup_error_logger();
 
         return app.get_enterprises();
       })
-      .then(function(response) {
-        // TODO: Error handling
-        var directory = JSON.parse(response);
+      .then(function(directory_str) {
+        var directory;
+
+        // Convert the JSON string into an object
+        try {
+          directory = JSON.parse(directory_str);
+        } catch(e) {
+          // Add context to the default error message
+          e.message = 'Unable to parse directory JSON: ' + e;
+          throw(e);
+        }
 
         app.initializeClientSideSearch(directory);
       })
-      .catch(function(/*reason*/) {
-        // TODO: Error handling
+      .catch(function(reason) {
+        app.state.logger.notify(reason);
       });
   }
 
@@ -148,6 +206,10 @@ class TemplateComponent extends React.Component {
 }
 
 TemplateComponent.displayName = 'TemplateComponent';
+
+TemplateComponent.childContextTypes = {
+  'logger': React.PropTypes.object
+};
 
 // Uncomment properties you need
 // TemplateComponent.propTypes = {};
