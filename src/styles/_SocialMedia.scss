@@ -1,0 +1,13 @@
+.socialmedia-component {
+  .socialmedia__account {
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  .socialmedia__accounts--mini {
+    .socialmedia__name {
+      display: none;
+    }
+  }
+}
+

@@ -3,6 +3,7 @@
 import React from 'react';
 
 import EnterpriseSummary from './EnterpriseSummaryComponent.js';
+import SocialMedia from './SocialMediaComponent.js';
 
 class EnterpriseComponent extends React.Component {
   /**
@@ -195,12 +196,12 @@ class EnterpriseComponent extends React.Component {
       purposes = this.build_purposes(),
       addresses = this.build_addresses(),
       faxes = this.build_faxes(),
-      offering = this.build_offering();
-
+      offering = this.build_offering(),
+      enterprise = this.props.enterprise;
 
     return (
       <div className="enterprise-component">
-        <EnterpriseSummary enterprise={this.props.enterprise} linkto='external'>
+        <EnterpriseSummary enterprise={enterprise} linkto='external'>
           <div className="enterprise-extended">
             {purposes}
 
@@ -213,6 +214,8 @@ class EnterpriseComponent extends React.Component {
             {emails}
 
             {faxes}
+
+            <SocialMedia enterprise={enterprise} />
           </div>
         </EnterpriseSummary>
       </div>
