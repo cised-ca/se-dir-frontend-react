@@ -172,12 +172,18 @@ class TemplateComponent extends React.Component {
     });
 
     // Index enterprises
-    directory.forEach(function(enterprise) {
+    directory.forEach(function(enterprise, index) {
       lunr_index.add({
         name: enterprise.name,
         description: enterprise.description,
         id: enterprise.id
       });
+
+      // Make sure enterprise.website starts with http(s)://
+      // otherwise the links are relative to the current url we're on
+      if (enterprise.website.search(/^https?:\/\//) === -1) {
+        directory[index].website = 'http://' + enterprise.website;
+      }
     });
 
     // Save the index and directory data
