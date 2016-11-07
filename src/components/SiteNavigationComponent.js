@@ -12,9 +12,6 @@ class SiteNavigationComponent extends React.Component {
             <li className="nav__item">
               <Link className="nav__link" to="/">Home</Link>
             </li>
-            <li className="nav__item">
-              <Link className="nav__link" to="/apply">Be part of our Directory</Link>
-            </li>
           </ul>
         </nav>
       </header>
