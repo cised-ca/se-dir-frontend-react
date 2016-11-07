@@ -190,6 +190,27 @@ class EnterpriseComponent extends React.Component {
     return jsx;
   }
 
+  /**
+   * Build JSX for year started
+   */
+  build_year() {
+    var year_started = this.props.enterprise.year_started,
+      jsx = null;
+
+    if (year_started) {
+      jsx = (
+        <div className="enterprise-extended__year-started">
+          <h2>Year Started</h2>
+          <p>
+            {year_started}
+          </p>
+        </div>
+      );
+    }
+
+    return jsx;
+  }
+
   render() {
     var emails = this.build_emails(),
       phones = this.build_phones(),
@@ -197,6 +218,7 @@ class EnterpriseComponent extends React.Component {
       addresses = this.build_addresses(),
       faxes = this.build_faxes(),
       offering = this.build_offering(),
+      year_started = this.build_year(),
       enterprise = this.props.enterprise;
 
     return (
@@ -214,6 +236,8 @@ class EnterpriseComponent extends React.Component {
             {emails}
 
             {faxes}
+
+            {year_started}
 
             <SocialMedia enterprise={enterprise} />
           </div>
