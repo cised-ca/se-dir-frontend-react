@@ -38,7 +38,8 @@ class SocialMediaComponent extends React.Component {
     if (jsx.length > 0) {
       jsx = (
         <div className="socialmedia">
-          <h2>Social Media</h2>
+          <h2>Contact</h2>
+          <a href={enterprise.website}>Website</a>
           <ul className="socialmedia__accounts socialmedia__accounts--mini">
             {jsx}
           </ul>
