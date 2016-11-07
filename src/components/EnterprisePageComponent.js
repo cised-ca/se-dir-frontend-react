@@ -24,7 +24,7 @@ class EnterprisePageComponent extends React.Component {
       if (enterprise === undefined) { // Invalid enterprise slug
         jsx = 'Unknown Enterprise';
       } else { // Display enterprise details
-        jsx = <Enterprise enterprise={enterprise} />;
+        jsx = <Enterprise enterprise={enterprise} api_root={this.props.config.api_root} />;
       }
     }
 

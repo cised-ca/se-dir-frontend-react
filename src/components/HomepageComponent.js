@@ -75,7 +75,7 @@ class HomepageComponent extends React.Component {
     } else {
       searchResults = (
         <SearchResults searchText={this.state.searchText} directSearch={this.state.directSearch}
-          directory={this.props.directory} lunr_index={this.props.index} />
+          directory={this.props.directory} lunr_index={this.props.index} api_root={this.props.config.api_root} />
       );
     }
 

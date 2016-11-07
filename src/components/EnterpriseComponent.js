@@ -201,7 +201,7 @@ class EnterpriseComponent extends React.Component {
 
     return (
       <div className="enterprise-component">
-        <EnterpriseSummary enterprise={enterprise} linkto='external'>
+        <EnterpriseSummary enterprise={enterprise} linkto='external' api_root={this.props.api_root}>
           <div className="enterprise-extended">
             {purposes}
 

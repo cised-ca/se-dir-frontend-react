@@ -48,10 +48,10 @@ class SearchResultsComponent extends React.Component {
       jsx.push(<li key='no-results' className='search-result'>No results.</li>);
     }
 
-    enterprises.map(function(enterprise, index) {
+    enterprises.map(function(enterprise) {
       jsx.push(
-        <li key={index} className='search-result'>
-          <EnterpriseSummary enterprise={enterprise} />
+        <li key={enterprise.id} className='search-result'>
+          <EnterpriseSummary enterprise={enterprise} api_root={_this.props.api_root}/>
         </li>
       );
     });
