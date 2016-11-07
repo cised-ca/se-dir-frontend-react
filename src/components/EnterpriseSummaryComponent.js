@@ -71,7 +71,7 @@ class EnterpriseSummaryComponent extends React.Component {
       enterprise_link = <Link to={'/enterprise/' + slug(enterprise.name)}>{enterprise.name}</Link>,
       more_info = (
           <div className="enterprise__website">
-            <a href={'/enterprise/' + slug(enterprise.name)}>More info</a>
+            <Link to={'/enterprise/' + slug(enterprise.name)}>More info</Link>
           </div>
       );
 
