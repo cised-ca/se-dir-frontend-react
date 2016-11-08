@@ -39,7 +39,7 @@ class SocialMediaComponent extends React.Component {
       jsx = (
         <div className="socialmedia">
           <h2>Contact</h2>
-          <a href={enterprise.website}>Website</a>
+          <a href={enterprise.website} target="_blank" rel="noopener">Website</a>
           <ul className="socialmedia__accounts socialmedia__accounts--mini">
             {jsx}
           </ul>
