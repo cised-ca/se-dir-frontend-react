@@ -1,6 +1,10 @@
 .directory-component {
-  list-style-type: none;
   text-align: left;
+
+  .directory__list {
+    list-style-type: none;
+    padding-left: 0;
+  }
 
   .directory-item {
     border-bottom: 1px solid #ddd;

@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import { browserHistory } from 'react-router';
 
 import EnterpriseSummary from './EnterpriseSummaryComponent.js';
 import SocialMedia from './SocialMediaComponent.js';
@@ -223,6 +224,8 @@ class EnterpriseComponent extends React.Component {
 
     return (
       <div className="enterprise-component">
+        <a className="back" onClick={browserHistory.goBack}>Back</a>
+
         <EnterpriseSummary enterprise={enterprise} linkto='external' api_root={this.props.api_root}>
           <div className="enterprise-extended">
             {purposes}

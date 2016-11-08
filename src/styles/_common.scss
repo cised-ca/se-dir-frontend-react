@@ -12,3 +12,15 @@ $tablet-width: 768px;
   }
 }
 
+/* 'Back' link with left arrow icon */
+.back {
+  background: url("/images/arrow-left.png") no-repeat center left;
+  color: $primary-color;
+  cursor: pointer;
+  padding-left: 30px;
+}
+
+.back:hover {
+  color: $primary-color-dark;
+}
+

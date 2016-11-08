@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import { browserHistory } from 'react-router';
 
 import EnterpriseSummary from './EnterpriseSummaryComponent.js';
 
@@ -25,9 +26,13 @@ class DirectoryComponent extends React.Component {
     }
 
     return (
-      <ol className='directory-component page'>
-        {jsx}
-      </ol>
+      <div className="directory-component page">
+        <a className="back" onClick={browserHistory.goBack}>Back</a>
+
+        <ol className="directory__list">
+          {jsx}
+        </ol>
+      </div>
     );
   }
 }
