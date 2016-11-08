@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import { withRouter } from 'react-router';
+import { Link, withRouter } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import SearchForm from './SearchFormComponent.js';
@@ -60,7 +60,8 @@ class HomepageComponent extends React.Component {
 
   render() {
     var intro = null,
-      searchResults = null;
+      searchResults = null,
+      powered_by = null;
 
     if (this.state.searchText === null) {
       intro = (
@@ -71,6 +72,13 @@ class HomepageComponent extends React.Component {
             Find goods and services from Ottawa's vibrant social enterprise sector.
           </p>
         </div>
+      );
+
+      powered_by = (
+        <p className="powered-by">
+          Powered by <a href="http://cised.ca">CISED</a>. If you are a social<br />
+          enterprise that would like to be added click <Link to="/apply">here</Link>.
+        </p>
       );
     } else {
       searchResults = (
@@ -87,6 +95,8 @@ class HomepageComponent extends React.Component {
         </ReactCSSTransitionGroup>
 
         <SearchForm onSearch={this.handleSearch.bind(this)} searchText={this.state.searchText} />
+
+        {powered_by}
 
         {searchResults}
       </div>

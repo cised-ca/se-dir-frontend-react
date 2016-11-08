@@ -1,3 +1,4 @@
+.powered-by,
 .title,
 .tagline {
   color: #fff;
@@ -28,6 +29,11 @@
 .intro.collapsed {
   max-height: 0;
   overflow: hidden;
+}
+
+.powered-by {
+  padding-top: 16px;
+  text-align: center;
 }
 
 /**
