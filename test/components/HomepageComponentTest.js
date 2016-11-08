@@ -17,14 +17,19 @@ describe('HomepageComponent', () => {
 
   it('should render one <SearchForm /> component', () => {
     var locationProp,
+      configProp,
       component;
 
     locationProp = {
       'query': ''
     };
 
+    configProp = {
+      'api_root': 'http://example.org/api/v1/'
+    };
+
     component = shallow(
-      <HomepageComponentWithoutRouter location={locationProp} />
+      <HomepageComponentWithoutRouter location={locationProp} config={configProp} />
     );
 
     expect(component.find(SearchForm)).to.have.length(1);
@@ -37,14 +42,19 @@ describe('HomepageComponent', () => {
 
   it('should not render <SearchResults /> on query-less pageloads', () => {
     var locationProp,
+      configProp,
       component;
 
     locationProp = {
       'query': ''
     };
 
+    configProp = {
+      'api_root': 'http://example.org/api/v1/'
+    };
+
     component = shallow(
-      <HomepageComponentWithoutRouter location={locationProp} />
+      <HomepageComponentWithoutRouter location={locationProp} config={configProp} />
     );
 
     expect(component.find(SearchResults)).to.have.length(0);
@@ -53,14 +63,19 @@ describe('HomepageComponent', () => {
 
   it('should show the intro title/tagline on query-less pageloads', () => {
     var locationProp,
+      configProp,
       component;
 
     locationProp = {
       'query': ''
     };
 
+    configProp = {
+      'api_root': 'http://example.org/api/v1/'
+    };
+
     component = shallow(
-      <HomepageComponentWithoutRouter location={locationProp} />
+      <HomepageComponentWithoutRouter location={locationProp} config={configProp} />
     );
 
     expect(component.find('.intro')).to.have.length(1);
@@ -73,6 +88,7 @@ describe('HomepageComponent', () => {
 
   it('should render one <SearchResults /> component on pageloads with search-query', () => {
     var locationProp,
+      configProp,
       component;
 
     locationProp  = {
@@ -81,8 +97,12 @@ describe('HomepageComponent', () => {
       }
     };
 
+    configProp = {
+      'api_root': 'http://example.org/api/v1/'
+    };
+
     component = shallow(
-      <HomepageComponentWithoutRouter location={locationProp} />
+      <HomepageComponentWithoutRouter location={locationProp} config={configProp} />
     );
 
     expect(component.find(SearchResults)).to.have.length(1);
@@ -91,6 +111,7 @@ describe('HomepageComponent', () => {
 
   it('should not show the intro title/tagline on pageloads with search-query', () => {
     var locationProp,
+      configProp,
       component;
 
     locationProp  = {
@@ -99,8 +120,12 @@ describe('HomepageComponent', () => {
       }
     };
 
+    configProp = {
+      'api_root': 'http://example.org/api/v1/'
+    };
+
     component = shallow(
-      <HomepageComponentWithoutRouter location={locationProp} />
+      <HomepageComponentWithoutRouter location={locationProp} config={configProp} />
     );
 
     expect(component.find('.intro')).to.have.length(0);
@@ -113,13 +138,18 @@ describe('HomepageComponent', () => {
 
   it('should have its component name as default className', () => {
     var locationProp,
+      configProp,
       component;
 
     locationProp = {
       'query': ''
     };
 
-    component = shallow(<HomepageComponentWithoutRouter location={locationProp} />);
+    configProp = {
+      'api_root': 'http://example.org/api/v1/'
+    };
+
+    component = shallow(<HomepageComponentWithoutRouter location={locationProp} config={configProp} />);
 
     expect(component.hasClass('homepage-component')).to.equal(true);
   });
@@ -131,6 +161,7 @@ describe('HomepageComponent', () => {
 
   it('should display search results on form submit', () => {
     var locationProp,
+      configProp,
       directoryProp = [],
       routerProp,
       homepage;
@@ -143,7 +174,11 @@ describe('HomepageComponent', () => {
       'query': ''
     };
 
-    homepage = mount(<HomepageComponentWithoutRouter location={locationProp}
+    configProp = {
+      'api_root': 'http://example.org/api/v1/'
+    };
+
+    homepage = mount(<HomepageComponentWithoutRouter location={locationProp} config={configProp}
       directory={directoryProp} router={routerProp} />);
 
     homepage.find('.search-form').simulate('submit');
@@ -158,6 +193,7 @@ describe('HomepageComponent', () => {
 
   it('should hide the intro on form submit', () => {
     var locationProp,
+      configProp,
       directoryProp = [],
       routerProp,
       homepage;
@@ -170,7 +206,11 @@ describe('HomepageComponent', () => {
       'query': ''
     };
 
-    homepage = mount(<HomepageComponentWithoutRouter location={locationProp}
+    configProp = {
+      'api_root': 'http://example.org/api/v1/'
+    };
+
+    homepage = mount(<HomepageComponentWithoutRouter location={locationProp} config={configProp}
       directory={directoryProp} router={routerProp} />);
 
     homepage.find('.search-form').simulate('submit');
