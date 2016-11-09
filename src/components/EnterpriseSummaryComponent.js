@@ -7,61 +7,18 @@ var slug = require('slug/slug-browser');
 slug.defaults.mode = 'rfc3986';
 
 class EnterpriseSummaryComponent extends React.Component {
-  // FIXME: Dupe (component/TemplateComponent.js)
-  /**
-   * A wrapper around XMLHttpRequest that uses Promises
-   * since they're nicer to work with than callbacks
-   *
-   * @param {String} url The url to request
-   * @return A promise
-   */
-  http_get(url) {
-    var promise = new Promise(function(resolve, reject) {
-      var xhr = new XMLHttpRequest(),
-        errmsg = 'xhr request to ' + url + ' failed: ';
+  constructor(props) {
+    super(props);
 
-      xhr.overrideMimeType('text/plain; charset=x-user-defined');
-      xhr.responseType = 'text';
-
-      xhr.onload = function() {
-        if (this.status >= 200 && this.status < 300) {
-          for (var responseText = xhr.responseText, responseTextLen = responseText.length, binary = '', i = 0; i < responseTextLen; ++i) {
-            binary += String.fromCharCode(responseText.charCodeAt(i) & 255);
-          }
-
-          resolve(window.btoa(binary));
-        } else {
-          reject(errmsg + this.status + ' ' + this.statusText);
-        }
-      };
-
-      xhr.onerror = function() {
-        var statusText = this.statusText;
-
-        if (this.status === 0 && statusText === '') {
-          statusText = 'Unsent.';
-        }
-
-        reject(errmsg + this.status + ' ' + statusText);
-      };
-
-      xhr.open('GET', url);
-      xhr.send();
-    });
-
-    return promise;
+    this.state = {
+      logo_error: false
+    };
   }
 
-  componentDidMount() {
-    var app = this;
-
-    app
-      .http_get(app.props.api_root + '/enterprise/' + app.props.enterprise.id + '/logo')
-      .then(function(logo) {
-        app.setState({
-          logo: logo
-        });
-      });
+  onError() {
+    this.setState({
+      logo_error: true
+    });
   }
 
   render() {
@@ -81,10 +38,11 @@ class EnterpriseSummaryComponent extends React.Component {
       more_info = null;
     }
 
-    if (this.state != null && this.state.logo) {
+    if (!this.state.logo_error) {
       enterprise_logo = (
-          <img src={'data:image/jpeg;base64,' + this.state.logo} alt={enterprise.name + ' logo'}
-            title={enterprise.name + ' logo'} />
+        <img onError={this.onError.bind(this)}
+          src={this.props.api_root + '/enterprise/' + enterprise.id + '/logo'}
+          alt={enterprise.name + ' logo'} title={enterprise.name + ' logo'} />
       );
     }
 
