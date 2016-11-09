@@ -181,7 +181,7 @@ class TemplateComponent extends React.Component {
 
       // Make sure enterprise.website starts with http(s)://
       // otherwise the links are relative to the current url we're on
-      if (enterprise.website.search(/^https?:\/\//) === -1) {
+      if (enterprise.website && enterprise.website.search(/^https?:\/\//) === -1) {
         directory[index].website = 'http://' + enterprise.website;
       }
     });

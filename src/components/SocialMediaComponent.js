@@ -9,6 +9,7 @@ import Twitter from './socialMedia/TwitterComponent.js';
 class SocialMediaComponent extends React.Component {
   render() {
     var jsx = [],
+      website = null,
       enterprise = this.props.enterprise;
 
     if (enterprise.facebook) {
@@ -35,11 +36,17 @@ class SocialMediaComponent extends React.Component {
       );
     }
 
+    if (enterprise.website) {
+      website = (
+        <a href={enterprise.website} target="_blank" rel="noopener">Website</a>
+      );
+    }
+
     if (jsx.length > 0) {
       jsx = (
         <div className="socialmedia">
           <h2>Contact</h2>
-          <a href={enterprise.website} target="_blank" rel="noopener">Website</a>
+          {website}
           <ul className="socialmedia__accounts socialmedia__accounts--mini">
             {jsx}
           </ul>
