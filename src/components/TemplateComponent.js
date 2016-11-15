@@ -4,6 +4,8 @@ import React from 'react';
 
 import SiteNavigation from './SiteNavigationComponent.js';
 
+require('es6-promise/auto');
+
 var airbrakeJs = require('airbrake-js'),
   lunr = require('lunr');
 

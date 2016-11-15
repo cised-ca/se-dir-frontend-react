@@ -75,6 +75,7 @@
   "dependencies": {
     "airbrake-js": "^0.5.9",
     "core-js": "^2.0.0",
+    "es6-promise": "^4.0.5",
     "form-serialize": "^0.7.1",
     "lunr": "^0.7.0",
     "normalize.css": "^4.0.0",
