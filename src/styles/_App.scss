@@ -27,17 +27,13 @@ body,
 }
 
 body {
-  background: #4c4c4c;
+  background: rgba(0, 0, 0, 0.97) url("/images/background.jpg") no-repeat scroll 0% 0% / 100% auto;
   font-family: "Open Sans", sans-serif;
   overflow-y: scroll;
 }
 
 .main {
   padding-top: 40px;
-}
-
-.tint {
-  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .hidden {
