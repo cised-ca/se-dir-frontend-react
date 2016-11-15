@@ -163,7 +163,7 @@ class TemplateComponent extends React.Component {
 
   /**
    * Initialize the Lunr search
-   * @param {Object} directory The CISED directory data
+   * @param {Object} directory The CSED directory data
    */
   initializeClientSideSearch(directory) {
     // Init lunr

@@ -77,7 +77,7 @@ class HomepageComponent extends React.Component {
 
       powered_by = (
         <p className="powered-by">
-          Powered by <a href="http://cised.ca">CISED</a>. If you are a social<br />
+          Powered by <a href="http://cised.ca">CSED</a>. If you are a social<br />
           enterprise that would like to be added click <Link to="/apply">here</Link>.
         </p>
       );
