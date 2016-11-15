@@ -60,6 +60,7 @@ class HomepageComponent extends React.Component {
 
   render() {
     var intro = null,
+      chat = null,
       searchResults = null,
       powered_by = null;
 
@@ -80,6 +81,12 @@ class HomepageComponent extends React.Component {
           enterprise that would like to be added click <Link to="/apply">here</Link>.
         </p>
       );
+
+      chat = (
+        <p className='chat'>
+          <a href='mailto:team@cised.ca'>Click here to chat with CSED</a> about buying questions or to get more information
+        </p>
+      );
     } else {
       searchResults = (
         <SearchResults searchText={this.state.searchText} directSearch={this.state.directSearch}
@@ -97,6 +104,8 @@ class HomepageComponent extends React.Component {
         <SearchForm onSearch={this.handleSearch.bind(this)} searchText={this.state.searchText} />
 
         {powered_by}
+
+        {chat}
 
         {searchResults}
       </div>
