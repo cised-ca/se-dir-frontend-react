@@ -1,10 +1,11 @@
 'use strict';
 
 import React from 'react';
+import { browserHistory } from 'react-router';
 
 import Banner from './BannerComponent.js';
 
-var serialize = require('form-serialize');
+var submitGoogleForm = require('google-form');
 
 // TODO: Client-side form validation
 class ApplicationFormComponent extends React.Component {
@@ -26,83 +27,22 @@ class ApplicationFormComponent extends React.Component {
     }
   }
 
+  // TODO: Error handling
   handleSubmit(e) {
     e.preventDefault();
 
-    var component = this,
-      form = e.target,
-      url = form.getAttribute('action'),
-      obj = serialize(form, {hash: true}),
-      json;
+    var applicationForm = this.refs.applicationForm;
 
-    try {
-      json = JSON.stringify(obj);
-    } catch(e) {
-      component.setState({
-        'status': 'error',
-        'error': 'Unable to prepare data for submission'
-      });
+    // Submit the form
+    submitGoogleForm.submitGoogleForm(applicationForm);
 
-      this.context.logger.notify(
-        'Unable to prepare data for submission (JSON.stringify failed: ' + e + ')'
-      );
-    }
-
-    component
-      .http_post(url, json)
-      .then(function() {
-        component.setState({
-          'status': 'success'
-        });
-
-        document.querySelector('.js-application-form').style.display = 'none';
-      })
-      .catch(function(err) {
-        component.setState({
-          'status': 'error',
-          'error': err
-        });
-
-        component.context.logger.notify(
-          'Unable to POST new enterprise: ' + err
-        );
-      });
-  }
-
-  http_post(url, data) {
-    var promise = new Promise(function(resolve, reject) {
-      var xhr = new XMLHttpRequest(),
-        errmsg = 'xhr request to ' + url + ' failed: ';
-
-      xhr.onload = function() {
-        if (this.status >= 200 && this.status < 300) {
-          resolve(this.response);
-        } else {
-          reject(errmsg + this.status + ' ' + this.statusText);
-        }
-      };
-
-      xhr.onerror = function() {
-        var statusText = this.statusText;
-
-        if (this.status === 0 && statusText === '') {
-          statusText = 'Unsent.';
-        }
-
-        reject(errmsg + this.status + ' ' + statusText);
-      };
-
-      xhr.open('POST', url);
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.send(data);
+    // Acknowledgement message
+    this.setState({
+      'status': 'success'
     });
-
-    return promise;
   }
 
   render() {
-    var banner = null;
-
     // Show "Loading..." and bail early if we don't have the configs yet
     if (this.props.config === null) {
       return (
@@ -113,59 +53,50 @@ class ApplicationFormComponent extends React.Component {
       );
     }
 
-    switch(this.state.status) {
-      case 'success':
-        banner = (
+    if (this.state.status === 'success') {
+      return (
+        <div className='applicationform-component page'>
+          <a className="back" onClick={browserHistory.goBack}>Back</a>
+
           <Banner type='success' title='Success'>
             Your application will be processed shortly.
           </Banner>
-        );
-        break;
-      case 'error':
-        banner = (
-          <Banner type='error' title='Error'>
-            <p>
-              We were unable to submit your application at this time.
-              Please let us know of the issue, and include this error code:&nbsp;
-              "{this.state.error}"
-            </p>
-          </Banner>
-        );
-        break;
+        </div>
+      );
     }
 
     return (
       <div className='applicationform-component page'>
+        <a className="back" onClick={browserHistory.goBack}>Back</a>
+
         <h1>Application</h1>
 
-        {banner}
-
-        <form action={this.props.config.api_root + '/enterprise'} className='js-application-form'
-          method='post' onSubmit={this.handleSubmit.bind(this)}>
+        <form action='https://docs.google.com/forms/d/1pq5VthlSmoC9xxOUUZ9LBEGsa-OVHgkKZg0AgD1x-Dk'
+          className='js-application-form' method='post' onSubmit={this.handleSubmit.bind(this)} ref='applicationForm' >
 
           <label className='required' htmlFor='enterprise-name'>Enterprise Name</label>
-          <input id='enterprise-name' name='name' required='required' type='text' />
+          <input id='enterprise-name' name='entry.2005620554' required='required' type='text' />
 
           <label htmlFor='parent-organization'>Parent Organization (if applicable)</label>
-          <input id='parent-organization' name='parent-organization' type='text' />
+          <input id='parent-organization' name='entry.1045781291' type='text' />
 
           <label htmlFor='business-description'>Business Description</label>
-          <textarea id='business-description' name='description'></textarea>
+          <textarea id='business-description' name='entry.1065046570'></textarea>
 
           <label htmlFor='offering'>Product/Service Offering</label>
-          <textarea id='offering' name='offering'></textarea>
+          <textarea id='offering' name='entry.1166974658'></textarea>
 
           <label htmlFor='website'>Website</label>
-          <input id='website' name='website' type='url' />
+          <input id='website' name='entry.839337160' type='url' />
 
           <label className='required' htmlFor='main-contact'>Main Contact Person</label>
-          <input id='main-contact' name='main-contact' required='required' type='text' />
+          <input id='main-contact' name='entry.1217363806' required='required' type='text' />
 
           <label htmlFor='phone-number'>Phone Number</label>
-          <input id='phone-number' name='phone-number' type='tel' />
+          <input id='phone-number' name='entry.1930753223' type='tel' />
 
           <label htmlFor='email-address'>Email Address</label>
-          <input id='email-address' name='email-address' type='email' />
+          <input id='email-address' name='entry.1617852215' type='email' />
 
           <input type='submit' value='Submit' />
         </form>
