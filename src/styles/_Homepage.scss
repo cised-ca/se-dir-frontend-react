@@ -17,13 +17,18 @@
   margin: 15px 0;
 }
 
+.homepage-component > span {
+  display: block;
+  min-height: 60px;
+}
+
 .intro {
   padding-top: 150px;
   text-align: center;
 }
 
 .intro.slide-up {
-  padding-top: 0;
+  padding-top: 82px;
   transition: padding-top 2s;
 }
 
