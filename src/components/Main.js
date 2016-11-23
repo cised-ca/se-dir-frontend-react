@@ -14,7 +14,15 @@ class AppComponent extends React.Component {
   render() {
     return (
       <Router history={browserHistory}>
-        <Route path='/' component={Template}>
+        <Route
+          component={Template}
+          path='/'
+          onChange={(prevState, nextState) => {
+            if (nextState.location.action !== 'POP') {
+              window.scrollTo(0, 0);
+            }
+          }}
+        >
           <IndexRoute component={Homepage} />
           <Route name="enterprise" path='/enterprise/:slug' component={EnterprisePage} />
           <Route name="directory" path='/directory' component={Directory} />
@@ -29,3 +37,4 @@ AppComponent.defaultProps = {
 };
 
 export default AppComponent;
+
