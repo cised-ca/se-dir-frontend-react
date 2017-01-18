@@ -24,7 +24,7 @@ See [the README in the se-dir-ansible repository](https://github.com/cised-ca/se
 
 1. `npm install -g yo generator-react-webpack` # Install yeoman and the generator
 2. `git clone https://github.com/cised-ca/se-dir-frontend-react.git` # Clone this repo
-3. `cd cised-web-directory && npm install` # Install dependencies
+3. `cd se-dir-frontend-react && npm install` # Install dependencies
 4. `cp src/config.dist.json src/config.json` # Copy the default configs
 5. Edit `src/config.json` to match your configuration
 
