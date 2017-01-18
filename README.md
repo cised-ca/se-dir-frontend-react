@@ -26,7 +26,7 @@ See [the README in the se-dir-ansible repository](https://github.com/cised-ca/se
 2. `git clone https://github.com/cised-ca/se-dir-frontend-react.git` # Clone this repo
 3. `cd se-dir-frontend-react && npm install` # Install dependencies
 4. `cp src/config.dist.json src/config.json` # Copy the default configs
-5. Edit `src/config.json` to match your configuration
+5. Edit `src/config.json` to match your configuration. (Note: logger element is optional) 
 
 You can then generate react components [as documented](https://github.com/newtriks/generator-react-webpack#generating-new-components).
 
