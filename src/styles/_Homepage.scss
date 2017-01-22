@@ -1,3 +1,8 @@
+.rhok {
+  @extend .chat;
+  font-size: 11px;
+}
+
 .chat,
 .powered-by,
 .title,
@@ -59,4 +64,3 @@
     padding-top: 30px;
   }
 }
-
