@@ -52,7 +52,7 @@ body {
 }
 
 .slide-up {
-  max-height: 0;
+  max-height: 0 !important;
   overflow: hidden;
   transition: max-height 2s;
 }
@@ -63,8 +63,18 @@ body {
 }
 
 .fade-in {
+  animation: fadein 2s;
   opacity: 1;
-  transition: opacity 2s;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .page {

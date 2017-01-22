@@ -227,7 +227,7 @@ class EnterpriseComponent extends React.Component {
       <div className="enterprise-component">
         <a className="back" onClick={browserHistory.goBack}>Back</a>
 
-        <EnterpriseSummary enterprise={enterprise} linkto='external' api_root={this.props.api_root}>
+        <EnterpriseSummary enterprise={enterprise} linkto='external'>
           <div className="enterprise-extended">
             {purposes}
 
@@ -254,9 +254,5 @@ class EnterpriseComponent extends React.Component {
 }
 
 EnterpriseComponent.displayName = 'EnterpriseComponent';
-
-// Uncomment properties you need
-// EnterpriseComponent.propTypes = {};
-// EnterpriseComponent.defaultProps = {};
 
 export default EnterpriseComponent;

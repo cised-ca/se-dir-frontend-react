@@ -24,7 +24,7 @@ class EnterprisePageComponent extends React.Component {
       if (enterprise === undefined) { // Invalid enterprise slug
         jsx = 'Unknown Enterprise';
       } else { // Display enterprise details
-        jsx = <Enterprise enterprise={enterprise} api_root={this.props.config.api_root} />;
+        jsx = <Enterprise enterprise={enterprise} />;
       }
     }
 
@@ -37,9 +37,5 @@ class EnterprisePageComponent extends React.Component {
 }
 
 EnterprisePageComponent.displayName = 'EnterprisePageComponent';
-
-// Uncomment properties you need
-// EnterprisePageComponent.propTypes = {};
-// EnterprisePageComponent.defaultProps = {};
 
 export default EnterprisePageComponent;

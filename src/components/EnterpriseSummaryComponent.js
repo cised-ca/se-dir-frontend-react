@@ -41,7 +41,7 @@ class EnterpriseSummaryComponent extends React.Component {
     if (!this.state.logo_error) {
       enterprise_logo = (
         <img onError={this.onError.bind(this)}
-          src={this.props.api_root + '/enterprise/' + enterprise.id + '/logo'}
+          src={this.context.config.api_root + '/enterprise/' + enterprise.id + '/logo'}
           alt={enterprise.name + ' logo'} title={enterprise.name + ' logo'} />
       );
     }
@@ -67,8 +67,8 @@ class EnterpriseSummaryComponent extends React.Component {
 
 EnterpriseSummaryComponent.displayName = 'EnterpriseSummaryComponent';
 
-// Uncomment properties you need
-// EnterpriseSummaryComponent.propTypes = {};
-// EnterpriseSummaryComponent.defaultProps = {};
+EnterpriseSummaryComponent.contextTypes = {
+  'config': React.PropTypes.object
+};
 
 export default EnterpriseSummaryComponent;

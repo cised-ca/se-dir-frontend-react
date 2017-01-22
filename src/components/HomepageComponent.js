@@ -18,12 +18,10 @@ class HomepageComponent extends React.Component {
 
     if (query.q) {
       this.setState({
-        'directSearch': true,
         'searchText': query.q
       });
     } else {
       this.setState({
-        'directSearch': false,
         'searchText': null
       });
     }
@@ -52,7 +50,6 @@ class HomepageComponent extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.location.search === '') {
       this.setState({
-        'directSearch': false,
         'searchText': null
       });
     }
@@ -106,10 +103,12 @@ class HomepageComponent extends React.Component {
           <Link to='/privacy'>Privacy policy</Link>
         </p>
       );
-    } else {
+    } else if (this.props.config.api_root && this.state.searchText !== null) {
+      // Don't try to get search results if we haven't parsed the config file yet
       searchResults = (
-        <SearchResults searchText={this.state.searchText} directSearch={this.state.directSearch}
-          directory={this.props.directory} lunr_index={this.props.index} api_root={this.props.config.api_root} />
+        <div className='page'>
+          <SearchResults searchText={this.state.searchText} />
+        </div>
       );
     }
 
@@ -137,10 +136,6 @@ class HomepageComponent extends React.Component {
 }
 
 HomepageComponent.displayName = 'HomepageComponent';
-
-// Uncomment properties you need
-// HomepageComponent.propTypes = {};
-// HomepageComponent.defaultProps = {};
 
 // This is used by the Homepage and Template tests at the moment.
 // They don't like wrapped components.
