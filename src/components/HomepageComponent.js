@@ -61,6 +61,7 @@ class HomepageComponent extends React.Component {
   render() {
     var intro = null,
       chat = null,
+      rhok = null,
       searchResults = null,
       powered_by = null;
 
@@ -87,6 +88,12 @@ class HomepageComponent extends React.Component {
           <a href='mailto:team@cised.ca'>Click here to chat with CSED</a> about buying questions or to get more information
         </p>
       );
+
+      rhok = (
+        <p className="rhok">
+          This site is a project created at <a href='https://rhok.ca/projects/ottawa-social-enterprise-marketplace'>Random Hacks of Kindness</a>
+        </p>
+      );
     } else {
       searchResults = (
         <SearchResults searchText={this.state.searchText} directSearch={this.state.directSearch}
@@ -106,6 +113,8 @@ class HomepageComponent extends React.Component {
         {powered_by}
 
         {chat}
+
+        {rhok}
 
         {searchResults}
       </div>
