@@ -5,6 +5,7 @@ import { browserHistory } from 'react-router';
 
 import EnterpriseSummary from './EnterpriseSummaryComponent.js';
 import SocialMedia from './SocialMediaComponent.js';
+import EnterpriseMap from './EnterpriseMapComponent.js';
 
 class EnterpriseComponent extends React.Component {
   /**
@@ -243,6 +244,8 @@ class EnterpriseComponent extends React.Component {
             {year_started}
 
             <SocialMedia enterprise={enterprise} />
+
+            <EnterpriseMap enterprise={enterprise} />
           </div>
         </EnterpriseSummary>
       </div>

@@ -6,9 +6,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import EnterpriseComponent from 'components/EnterpriseComponent.js';
+import EnterpriseMapComponent from 'components/EnterpriseMapComponent.js';
 
-describe('EnterpriseComponent', () => {
+describe('EnterpriseMapComponent', () => {
   let component;
 
   var enterpriseProp = {
@@ -22,8 +22,7 @@ describe('EnterpriseComponent', () => {
     'locations': {
       'type': 'MultiPoint',
       'coordinates': [
-        [45.425, -75.692],
-        [45.425, -75.192]
+        [45.425, -75.692]
       ]
     },
     'addresses': [],
@@ -46,10 +45,12 @@ describe('EnterpriseComponent', () => {
   };
 
   beforeEach(() => {
-    component = shallow(<EnterpriseComponent enterprise={enterpriseProp} />);
+    component = shallow(
+      <EnterpriseMapComponent enterprise={enterpriseProp} />
+    );
   });
 
   it('should have its component name as default className', () => {
-    expect(component.hasClass('enterprise-component')).to.equal(true);
+    expect(component.hasClass('enterprisemap-component')).to.equal(true);
   });
 });
