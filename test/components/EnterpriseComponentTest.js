@@ -19,7 +19,13 @@ describe('EnterpriseComponent', () => {
     'logo': 'restore.png',
     'offering': 'Bob Smith',
     'website': 'http://google.com',
-    'locations': [],
+    'locations': {
+      'type': 'MultiPoint',
+      'coordinates': [
+        [45.425, -75.692],
+        [45.425, -75.192]
+      ]
+    },
     'addresses': [],
     'faxes': [],
     'phones': [
