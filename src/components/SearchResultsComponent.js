@@ -3,6 +3,8 @@
 import React from 'react';
 import EnterpriseSummary from './EnterpriseSummaryComponent.js';
 
+import ReactPaginate from 'react-paginate';
+
 class SearchResultsComponent extends React.Component {
   /**
    * Set the default state
@@ -44,6 +46,18 @@ class SearchResultsComponent extends React.Component {
   }
 
   /**
+   * Triggered when changing pages
+   */
+  handlePageClick(data) {
+    // react-paginate uses zero-based index for the pages (starts at page 0)
+    // We use 1-based index (start at page 1). Add "1" to whatever the library gives us
+    var selected = data.selected + 1;
+
+    // Trigger the search with the current query and the newly selected page
+    this.search(this.state.search_text, this.context.config.api_root, selected);
+  }
+
+  /**
    * Fetch the search results from backend
    */
   search(query, api_root, page) {
@@ -66,15 +80,16 @@ class SearchResultsComponent extends React.Component {
         if (response.ok) {
           return response.json().then(function(json) {
             component.setState({
-              search_results: json
+              search_results: json,
+              search_text: query
             });
           });
         }
 
-        throw new Error('Network respsonse was not ok'); // TODO: better err msg.
+        throw new Error('Network error while performing search');
       })
       .catch(function(error) {
-        context.logger.notify(error);
+        component.context.logger.notify(error);
       });
   }
 
@@ -82,13 +97,16 @@ class SearchResultsComponent extends React.Component {
     var component = this,
       jsx = [],
       results = component.state.search_results,
-      enterprises = [];
+      enterprises = [],
+      pagination = null,
+      initial_page;
 
     // We haven't received results from the backend yet
     if (!results) {
       return (<p>Loading...</p>);
     }
 
+    initial_page = this.state.search_results.page - 1;
     enterprises = results.enterprises;
 
     // If we have no results, show a "no results" message
@@ -105,11 +123,29 @@ class SearchResultsComponent extends React.Component {
       );
     });
 
+    // Don't show pagination if we only have 1 page
+    if (this.state.search_results.pages > 1) {
+      pagination = (
+        <ReactPaginate breakClassName={'break-me'}
+                       pageCount={this.state.search_results.pages}
+                       initialPage={initial_page}
+                       forcePage={initial_page}
+                       disableInitialCallback={true}
+                       marginPagesDisplayed={2}
+                       pageRangeDisplayed={5}
+                       onPageChange={this.handlePageClick.bind(this)}
+                       containerClassName={'pagination'}
+                       subContainerClassName={'pages pagination'} />
+      );
+    }
+
     return (
       <div className='searchresults-component'>
         <ol key='search-results' className='search-results fade-in'>
           {jsx}
         </ol>
+
+        {pagination}
       </div>
     );
   }

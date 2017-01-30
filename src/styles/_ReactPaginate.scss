@@ -1,0 +1,42 @@
+.pagination {
+  list-style-type: none;
+  text-align: center;
+
+  li {
+    display: inline-block;
+
+    &.next a {
+      border-radius: 0 3px 3px 0;
+      border-right: 0;
+    }
+
+    &.previous a {
+      border-radius: 3px 0 0 3px;
+    }
+
+    &.disabled a {
+      background-color: #ddd;
+      color: #aaa;
+      cursor: not-allowed;
+    }
+
+    &.selected a {
+      background-color: $primary-color-dark;
+    }
+  }
+
+  a {
+    background-color: $primary-color;
+    border-right: 1px solid $primary-color-dark;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    padding: 10px 15px;
+
+    &:hover {
+      background-color: $primary-color-dark;
+      text-decoration: underline;
+    }
+  }
+}
+

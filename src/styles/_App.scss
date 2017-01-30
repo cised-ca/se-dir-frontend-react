@@ -51,8 +51,8 @@ body {
   opacity: 0;
 }
 
-.slide-up {
-  max-height: 0 !important;
+.tint .slide-up {
+  max-height: 0;
   overflow: hidden;
   transition: max-height 2s;
 }

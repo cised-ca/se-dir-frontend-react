@@ -8,24 +8,45 @@ var slug = require('slug/slug-browser');
 slug.defaults.mode = 'rfc3986';
 
 class EnterprisePageComponent extends React.Component {
-  render() {
-    var curr_page_slug = this.props.params.slug,
-      directory = this.props.directory,
-      enterprise,
-      jsx;
+  /**
+   * Set the default state
+   */
+  constructor(props) {
+    super(props);
 
-    if (directory === null) { // The directory hasn't loaded yet
+    this.state = {
+      enterprise: null
+    };
+  }
+
+  componentDidMount() {
+    this.fetchEnterprise();
+  }
+
+  fetchEnterprise() {
+    var component = this,
+      url  = this.context.config.api_root + '/enterprise/' + this.props.params.id;
+
+    fetch(url)
+      .then(function(response) {
+        if (response.ok) {
+          return response.json().then(function(json) {
+            component.setState({
+              enterprise: json
+            });
+          });
+        }
+      });
+  }
+
+  render() {
+    var enterprise = this.state.enterprise,
+      jsx = null;
+
+    if (!this.state.enterprise) {
       jsx = 'Loading...';
     } else {
-      enterprise = directory.filter(function(enterprise) {
-        return slug(enterprise.name) === curr_page_slug;
-      })[0];
-
-      if (enterprise === undefined) { // Invalid enterprise slug
-        jsx = 'Unknown Enterprise';
-      } else { // Display enterprise details
-        jsx = <Enterprise enterprise={enterprise} />;
-      }
+      jsx = <Enterprise enterprise={enterprise} />;
     }
 
     return (
@@ -37,5 +58,10 @@ class EnterprisePageComponent extends React.Component {
 }
 
 EnterprisePageComponent.displayName = 'EnterprisePageComponent';
+
+EnterprisePageComponent.contextTypes = {
+  'config': React.PropTypes.object,
+  'logger': React.PropTypes.object
+};
 
 export default EnterprisePageComponent;
