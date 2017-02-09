@@ -16,17 +16,19 @@ class HomepageComponent extends React.Component {
   componentWillMount() {
     var query = this.props.location.query;
 
-    if (query.q) {
-      this.setState({
-        'directSearch': true,
-        'searchText': query.q
-      });
-    } else {
-      this.setState({
-        'directSearch': false,
-        'searchText': null
-      });
+    let state = {
+      'directSearch': false,
+      'searchText': null,
+      'searchLocation': null
+    };
+
+    if (query.q || query.location) {
+      state.directSearch = true;
+      state.searchText = query.q || '';
+      state.searchLocation = query.location || '';
     }
+
+    this.setState(state);
   }
 
   /**
@@ -34,14 +36,22 @@ class HomepageComponent extends React.Component {
    *
    * @param {String} searchText The text in the search field input box
    */
-  handleSearch(searchText) {
+  handleSearch(searchText, searchLocation) {
     this.setState({
-      searchText: searchText
+      searchText: searchText,
+      searchLocation: searchLocation
     });
 
+    let query = {};
+    if (searchText) {
+      query.q = searchText;
+    }
+    if (searchLocation) {
+      query.location = searchLocation;
+    }
     this.props.router.push({
       'pathname': '/',
-      'query': {'q': searchText}
+      'query': query
     });
   }
 
@@ -50,7 +60,7 @@ class HomepageComponent extends React.Component {
    * check if we still have a search query in the URL. If not, show the intro.
    */
   componentWillReceiveProps(nextProps) {
-    if (nextProps.location.search === '') {
+    if (nextProps.location.search === '' && nextProps.location.searchLocation === '') {
       this.setState({
         'directSearch': false,
         'searchText': null
@@ -65,7 +75,7 @@ class HomepageComponent extends React.Component {
       searchResults = null,
       powered_by = null;
 
-    if (this.state.searchText === null) {
+    if (this.state.searchText === null && this.state.searchLocation === null) {
       intro = (
         <div className='intro js-intro'>
           <h1 className='title'>Ottawa Social Enterprise Directory</h1>
@@ -97,6 +107,7 @@ class HomepageComponent extends React.Component {
     } else {
       searchResults = (
         <SearchResults searchText={this.state.searchText} directSearch={this.state.directSearch}
+          searchLocation={this.state.searchLocation}
           directory={this.props.directory} lunr_index={this.props.index} api_root={this.props.config.api_root} />
       );
     }
@@ -108,7 +119,8 @@ class HomepageComponent extends React.Component {
           {intro}
         </ReactCSSTransitionGroup>
 
-        <SearchForm onSearch={this.handleSearch.bind(this)} searchText={this.state.searchText} />
+        <SearchForm onSearch={this.handleSearch.bind(this)} searchText={this.state.searchText}
+          searchLocation={this.state.searchLocation} />
 
         {powered_by}
 

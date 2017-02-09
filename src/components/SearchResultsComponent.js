@@ -22,6 +22,7 @@ class SearchResultsComponent extends React.Component {
     var _this = this,
       directory = _this.props.directory,
       query = _this.props.searchText,
+      queryLocation = _this.props.searchLocation,
       lunr_index = _this.props.lunr_index,
       jsx = [],
       enterprises = [],
@@ -32,8 +33,11 @@ class SearchResultsComponent extends React.Component {
      * In this case we don't need to check "searchIsReady" since we just
      * return the entire directory
      */
-    if (query === '') {
+    let returnAll = !query && !queryLocation;
+    if (returnAll) {
       enterprises = directory;
+    } else if (queryLocation) {
+      jsx.push(<li key='no-results' className='search-result'>LocationSearch!</li>);
     } else if (searchIsReady) {
       enterprises = lunr_index.search(query).map(function(result) {
         return directory.filter(function(enterprise) {
