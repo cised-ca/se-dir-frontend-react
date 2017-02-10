@@ -2,6 +2,7 @@
 
 import React from 'react';
 import EnterpriseSummary from './EnterpriseSummaryComponent.js';
+import SearchResultsMap from './SearchResultsMapComponent.js';
 
 class SearchResultsComponent extends React.Component {
   componentDidMount() {
@@ -37,7 +38,10 @@ class SearchResultsComponent extends React.Component {
     if (returnAll) {
       enterprises = directory;
     } else if (queryLocation) {
-      jsx.push(<li key='no-results' className='search-result'>LocationSearch!</li>);
+      enterprises = directory;
+      if (enterprises.length > 0) {
+        jsx.push(<SearchResultsMap enterprises={enterprises}/>);
+      }
     } else if (searchIsReady) {
       enterprises = lunr_index.search(query).map(function(result) {
         return directory.filter(function(enterprise) {
