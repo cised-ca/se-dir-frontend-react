@@ -61,6 +61,7 @@ class HomepageComponent extends React.Component {
   render() {
     var intro = null,
       chat = null,
+      privacy_policy = null,
       rhok = null,
       searchResults = null,
       powered_by = null;
@@ -94,6 +95,12 @@ class HomepageComponent extends React.Component {
           This site is a project created at <a href='https://rhok.ca/projects/ottawa-social-enterprise-marketplace'>Random Hacks of Kindness</a>
         </p>
       );
+
+      privacy_policy = (
+        <p className='privacy-policy'>
+          <Link to='/privacy'>Privacy policy</Link>
+        </p>
+      );
     } else {
       searchResults = (
         <SearchResults searchText={this.state.searchText} directSearch={this.state.directSearch}
@@ -115,6 +122,8 @@ class HomepageComponent extends React.Component {
         {chat}
 
         {rhok}
+
+        {privacy_policy}
 
         {searchResults}
       </div>
