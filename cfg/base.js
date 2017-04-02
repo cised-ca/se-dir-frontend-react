@@ -25,6 +25,12 @@ module.exports = {
     hot: true,
     port: defaultSettings.port,
     publicPath: defaultSettings.publicPath,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:10010',
+        secure: false
+      }
+    },
     noInfo: false
   },
   resolve: {
