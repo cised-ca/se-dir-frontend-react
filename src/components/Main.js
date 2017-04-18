@@ -12,10 +12,18 @@ import Directory from './DirectoryComponent.js';
 import ApplicationForm from './ApplicationFormComponent.js';
 import PrivacyPolicy from './PrivacyPolicyComponent.js';
 
+import ReactGA from 'react-ga';
+ReactGA.initialize('UA-97087495-1');
+
 class AppComponent extends React.Component {
+  logPageView() {
+    ReactGA.set({ page: window.location.pathname });
+    ReactGA.pageview(window.location.pathname);
+  }
+
   render() {
     return (
-      <Router history={browserHistory}>
+      <Router history={browserHistory} onUpdate={this.logPageView}>
         <Route
           component={Template}
           path='/'
