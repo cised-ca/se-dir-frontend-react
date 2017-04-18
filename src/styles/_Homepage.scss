@@ -1,25 +1,45 @@
-.privacy-policy,
-.rhok {
+.privacy-policy {
   @extend .chat;
   font-size: 11px;
 }
 
+.rhok {
+  color: #fff;
+  font-size: 13px;
+  margin: 0;
+  padding-top: 16px;
+  text-align: center;
+}
+
+.powered_by {
+  color: #fff;
+  font-size: 13px;
+  margin-top: 0;
+  padding-top: 0;
+  text-align: center;
+}
+
 .chat,
-.powered-by,
+.apply,
 .title,
 .tagline {
   color: #fff;
 }
 
+.apply {
+  padding-top: 16px;
+  text-align: center;
+}
+
 .title {
   font-size: 60px;
-  font-weight: bold;
+  font-weight: 400;
   margin: 0 10px;
   text-transform: uppercase;
 }
 
 .tagline {
-  font-size: 32px;
+  font-size: 16px;
   margin: 15px 0;
 }
 
@@ -31,6 +51,10 @@
 .intro {
   padding-top: 150px;
   text-align: center;
+
+  .title {
+    font-family: "helvetica-black";
+  }
 }
 
 .intro.slide-up {
@@ -43,8 +67,7 @@
   overflow: hidden;
 }
 
-.chat,
-.powered-by {
+.chat {
   padding-top: 16px;
   text-align: center;
 }
