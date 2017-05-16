@@ -43,8 +43,16 @@ describe('EnterpriseSummaryComponent', () => {
     'purposes': ['Helping disadvantaged peoples', 'Raising money for parent company']
   };
 
+  var componentOptions = {
+    context: {
+      config: {
+        api_root: ""
+      }
+    }
+  };
+
   beforeEach(() => {
-    component = shallow(<EnterpriseSummaryComponent enterprise={enterpriseProp} />);
+    component = shallow(<EnterpriseSummaryComponent enterprise={enterpriseProp} />, componentOptions);
   });
 
   it('should have its component name as default className', () => {

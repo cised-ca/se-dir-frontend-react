@@ -164,7 +164,8 @@ describe('HomepageComponent', () => {
       configProp,
       directoryProp = [],
       routerProp,
-      homepage;
+      homepage,
+      componentOptions;
 
     routerProp = {
       'push': function() {} // no-op
@@ -178,8 +179,22 @@ describe('HomepageComponent', () => {
       'api_root': 'http://example.org/api/v1/'
     };
 
-    homepage = mount(<HomepageComponentWithoutRouter location={locationProp} config={configProp}
-      directory={directoryProp} router={routerProp} />);
+    componentOptions = {
+      context: {
+        config: {
+          api_root: ""
+        }
+      },
+      childContextTypes: {
+        'config': React.PropTypes.object
+      }
+    };
+
+    homepage = mount(
+      <HomepageComponentWithoutRouter location={locationProp} config={configProp}
+        directory={directoryProp} router={routerProp} />,
+      componentOptions
+    );
 
     homepage.find('.search-form').simulate('submit');
 
@@ -196,7 +211,8 @@ describe('HomepageComponent', () => {
       configProp,
       directoryProp = [],
       routerProp,
-      homepage;
+      homepage,
+      componentOptions;
 
     routerProp = {
       'push': function() {} // no-op
@@ -210,8 +226,22 @@ describe('HomepageComponent', () => {
       'api_root': 'http://example.org/api/v1/'
     };
 
-    homepage = mount(<HomepageComponentWithoutRouter location={locationProp} config={configProp}
-      directory={directoryProp} router={routerProp} />);
+    componentOptions = {
+      context: {
+        config: {
+          api_root: ""
+        }
+      },
+      childContextTypes: {
+        'config': React.PropTypes.object
+      }
+    };
+
+    homepage = mount(
+      <HomepageComponentWithoutRouter location={locationProp} config={configProp}
+        directory={directoryProp} router={routerProp} />,
+      componentOptions
+    );
 
     homepage.find('.search-form').simulate('submit');
 
