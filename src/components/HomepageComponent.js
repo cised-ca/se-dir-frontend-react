@@ -17,15 +17,15 @@ class HomepageComponent extends React.Component {
     var query = this.props.location.query;
 
     let state = {
-      'directSearch': false,
       'searchText': null,
       'searchLocation': null
     };
 
-    if (query.q || query.location) {
-      state.directSearch = true;
-      state.searchText = query.q || '';
-      state.searchLocation = query.location || '';
+    if (query.q) {
+      state.searchText = query.q;
+    }
+    if (query.location) {
+      state.searchLocation = query.location;
     }
 
     this.setState(state);
@@ -47,7 +47,7 @@ class HomepageComponent extends React.Component {
       query.q = searchText;
     }
     if (searchLocation) {
-      query.location = searchLocation;
+      query.at = searchLocation;
     }
     this.props.router.push({
       'pathname': '/',
@@ -62,7 +62,6 @@ class HomepageComponent extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.location.search === '' && nextProps.location.searchLocation === '') {
       this.setState({
-        'directSearch': false,
         'searchText': null
       });
     }
@@ -70,45 +69,58 @@ class HomepageComponent extends React.Component {
 
   render() {
     var intro = null,
-      chat = null,
+      privacy_policy = null,
       rhok = null,
       searchResults = null,
-      powered_by = null;
+      powered_by = null,
+      apply = null;
 
     if (this.state.searchText === null && this.state.searchLocation === null) {
       intro = (
         <div className='intro js-intro'>
-          <h1 className='title'>Ottawa Social Enterprise Directory</h1>
+          <h1 className='title'>Ottawa's Social Enterprise Directory</h1>
 
           <p className='tagline'>
-            Find goods and services from Ottawa's vibrant social enterprise sector.
+            Find goods and services from the city's vibrant social enterprises.
           </p>
         </div>
       );
 
-      powered_by = (
-        <p className="powered-by">
-          Powered by <a href="http://cised.ca">CSED</a>. If you are a social<br />
-          enterprise that would like to be added click <Link to="/apply">here</Link>.
-        </p>
-      );
-
-      chat = (
-        <p className='chat'>
-          <a href='mailto:team@cised.ca'>Click here to chat with CSED</a> about buying questions or to get more information
+      apply = (
+        <p className="apply">
+          If you are a social enterprise that would like to be added to our directory click&nbsp;
+          <Link to="/apply">here</Link>.
         </p>
       );
 
       rhok = (
         <p className="rhok">
-          This site is a project created at <a href='https://rhok.ca/projects/ottawa-social-enterprise-marketplace'>Random Hacks of Kindness</a>
+          This site is a project created at&nbsp;
+          <a href='https://rhok.ca/projects/ottawa-social-enterprise-marketplace'>
+            Random Hacks of Kindness
+          </a>
         </p>
       );
-    } else {
+
+      powered_by = (
+        <p className="powered_by">
+          Powered by&nbsp;
+          <a href="http://csedottawa.ca/">CSED</a> |&nbsp;
+          <a href="http://csedottawa.ca/">Connect</a> with us for more info on social purchasing.
+        </p>
+      );
+
+      privacy_policy = (
+        <p className='privacy-policy'>
+          <Link to='/privacy'>Privacy policy</Link>
+        </p>
+      );
+    } else if (this.props.config.api_root && this.state.searchText !== null) {
+      // Don't try to get search results if we haven't parsed the config file yet
       searchResults = (
-        <SearchResults searchText={this.state.searchText} directSearch={this.state.directSearch}
-          searchLocation={this.state.searchLocation}
-          directory={this.props.directory} lunr_index={this.props.index} api_root={this.props.config.api_root} />
+        <div className='page'>
+          <SearchResults searchText={this.state.searchText} searchLocation={this.state.searchLocation}/>
+        </div>
       );
     }
 
@@ -122,11 +134,13 @@ class HomepageComponent extends React.Component {
         <SearchForm onSearch={this.handleSearch.bind(this)} searchText={this.state.searchText}
           searchLocation={this.state.searchLocation} />
 
-        {powered_by}
-
-        {chat}
+        {apply}
 
         {rhok}
+
+        {powered_by}
+
+        {privacy_policy}
 
         {searchResults}
       </div>
@@ -135,10 +149,6 @@ class HomepageComponent extends React.Component {
 }
 
 HomepageComponent.displayName = 'HomepageComponent';
-
-// Uncomment properties you need
-// HomepageComponent.propTypes = {};
-// HomepageComponent.defaultProps = {};
 
 // This is used by the Homepage and Template tests at the moment.
 // They don't like wrapped components.

@@ -1,10 +1,13 @@
 .search-form {
-  margin: 40px auto 0;
+  margin: 60px auto 0;
   text-align: center;
   width: 50%;
 
   .button {
+    font-family: "helvetica-black";
+    font-weight: 400;
     min-width: 115px;
+    text-transform: uppercase;
   }
 }
 
@@ -14,7 +17,6 @@
 
 .search-field {
   border: 0;
-  border-radius: 5px;
   display: inline-block;
   font-size: 25px;
   margin: 0 0 20px;
@@ -64,8 +66,6 @@
     width: auto;
 
     .button--search {
-      border: 1px solid #000;
-      border-radius: 5px;
       display: block;
       margin: 20px auto 0;
       padding: 10px 12px;

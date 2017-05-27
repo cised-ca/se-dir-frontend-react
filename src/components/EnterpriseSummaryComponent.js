@@ -3,9 +3,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-var slug = require('slug/slug-browser');
-slug.defaults.mode = 'rfc3986';
-
 class EnterpriseSummaryComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -25,10 +22,10 @@ class EnterpriseSummaryComponent extends React.Component {
     var enterprise = this.props.enterprise,
       enterprise_description = enterprise.short_description,
       enterprise_logo = null,
-      enterprise_link = <Link to={'/enterprise/' + slug(enterprise.name)}>{enterprise.name}</Link>,
+      enterprise_link = <Link to={'/enterprise/' + enterprise.id}>{enterprise.name}</Link>,
       more_info = (
           <div className="enterprise__website">
-            <Link to={'/enterprise/' + slug(enterprise.name)}>More info</Link>
+            <Link to={'/enterprise/' + enterprise.id}>More info</Link>
           </div>
       );
 
@@ -41,7 +38,7 @@ class EnterpriseSummaryComponent extends React.Component {
     if (!this.state.logo_error) {
       enterprise_logo = (
         <img onError={this.onError.bind(this)}
-          src={this.props.api_root + '/enterprise/' + enterprise.id + '/logo'}
+          src={this.context.config.api_root + '/enterprise/' + enterprise.id + '/logo'}
           alt={enterprise.name + ' logo'} title={enterprise.name + ' logo'} />
       );
     }
@@ -67,8 +64,8 @@ class EnterpriseSummaryComponent extends React.Component {
 
 EnterpriseSummaryComponent.displayName = 'EnterpriseSummaryComponent';
 
-// Uncomment properties you need
-// EnterpriseSummaryComponent.propTypes = {};
-// EnterpriseSummaryComponent.defaultProps = {};
+EnterpriseSummaryComponent.contextTypes = {
+  'config': React.PropTypes.object
+};
 
 export default EnterpriseSummaryComponent;

@@ -7,7 +7,7 @@ rules:
   declaration-block-properties-order: alphabetical
   declaration-block-semicolon-newline-after: always
   declaration-block-semicolon-newline-before: never-multi-line
-  declaration-colon-space-after: always
+  declaration-colon-space-after: always-single-line
   declaration-no-important: true
   font-family-name-quotes: always-unless-keyword
   function-comma-space-after: always

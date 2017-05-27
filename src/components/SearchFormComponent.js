@@ -25,7 +25,7 @@ class SearchFormComponent extends React.Component {
     return (
       <form className="search-form js-search-form searchform-component" onSubmit={this.handleSubmit.bind(this)}>
         <div className="search-bar">
-          <input className="search-field" name="q" placeholder="Find Social Enterprises" type="search" ref="searchTextInput" defaultValue={searchText} />
+          <input className="search-field" name="q" placeholder="Start Purchasing" type="search" ref="searchTextInput" defaultValue={searchText} />
           <span className="search-near-label">Near:</span>
           <input className="search-location-field" name="at" placeholder="Postal code" type="search" ref="searchLocationInput" defaultValue={searchLocation} />
         </div>

@@ -17,9 +17,28 @@ a:hover {
   text-decoration: underline;
 }
 
+@font-face {
+  font-family: "Conv_helvetica-normal-58a368459c773";
+  font-style: normal;
+  font-weight: normal;
+  src: url("/fonts/helvetica-normal-58a368459c773.eot");
+  src:
+    local("☺"),
+    url("/fonts/helvetica-normal-58a368459c773.woff") format("woff"),
+    url("/fonts/helvetica-normal-58a368459c773.ttf") format("truetype"),
+    url("/fonts/helvetica-normal-58a368459c773.svg") format("svg");
+}
+
+@font-face {
+  font-family: "helvetica-black";
+  font-weight: 400;
+  padding-top: 120px;
+  src: url("/fonts/helvetica-neue-lt-std-95-black-58a3671d40c1b.otf");
+}
+
 body {
-  background: rgba(0, 0, 0, 0.97) url("/images/background.jpg") no-repeat scroll 0% 0% / 100% auto;
-  font-family: "Open Sans", sans-serif;
+  background: rgba(0, 0, 0, 0.97) url("/images/background.jpg") repeat-y scroll 0% 0% / 100% auto;
+  font-family: "Conv_helvetica-normal-58a368459c773", sans-serif;
   overflow-y: scroll;
 }
 
@@ -32,7 +51,7 @@ body {
   opacity: 0;
 }
 
-.slide-up {
+.tint .slide-up {
   max-height: 0;
   overflow: hidden;
   transition: max-height 2s;
@@ -44,8 +63,18 @@ body {
 }
 
 .fade-in {
+  animation: fadein 2s;
   opacity: 1;
-  transition: opacity 2s;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .page {
@@ -62,13 +91,12 @@ a.button {
 
 .button {
   background-color: $primary-color;
-  border: 1px solid #000;
-  border-radius: 5px;
+  border: 0;
   color: #fff;
   cursor: pointer;
   display: inline-block;
   font-size: 25px;
-  padding: 10px 12px;
+  padding: 17px 12px 10px;
 
   &:hover {
     background-color: $primary-color-dark;

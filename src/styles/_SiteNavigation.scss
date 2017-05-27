@@ -10,11 +10,12 @@
 
 .nav__link {
   background-color: $primary-color;
-  border-radius: 0 0 5px 5px;
   display: inline-block;
+  font-family: "helvetica-black";
+  font-weight: 400;
   margin-right: 10px;
-  padding: 8px;
-  text-decoration: none;
+  padding: 13px 8px 8px;
+  text-transform: uppercase;
 }
 
 .nav__link:hover {
