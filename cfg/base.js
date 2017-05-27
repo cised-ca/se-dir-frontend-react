@@ -29,6 +29,11 @@ module.exports = {
       '/api': {
         target: 'http://localhost:10010',
         secure: false
+      },
+      '/geo-api': {
+        target: 'http://localhost:10011',
+        pathRewrite: {'^/geo-api' : ''},
+        secure: false
       }
     },
     noInfo: false

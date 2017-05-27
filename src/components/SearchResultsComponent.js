@@ -22,7 +22,7 @@ class SearchResultsComponent extends React.Component {
    * Called by React after the initial render.
    */
   componentDidMount() {
-    this.search(this.props.searchText, this.context.config.api_root);
+    this.search(this.context.config.api_root, this.props.searchText);
   }
 
   /**
@@ -31,19 +31,11 @@ class SearchResultsComponent extends React.Component {
    * Ex: when the user performs a new search
    */
   componentWillReceiveProps(nextProps, nextContext) {
-    var current_search_text = this.props.searchText,
-      current_api_root = this.context.config.api_root,
-      new_search_text = nextProps.searchText,
-      new_api_root = nextContext.config.api_root,
-      do_search;
+    let new_search_text = nextProps.searchText,
+      new_search_coords = nextProps.searchCoords,
+      new_api_root = nextContext.config.api_root;
 
-    do_search = (new_search_text !== current_search_text || current_api_root !== new_api_root);
-
-    // If the search term or the api root are different than the previous
-    // time we received props/context, trigger a new search
-    if (do_search) {
-      this.search(new_search_text, new_api_root);
-    }
+    this.search(new_api_root, new_search_text, new_search_coords);
   }
 
   /**
@@ -55,13 +47,13 @@ class SearchResultsComponent extends React.Component {
     var selected = data.selected + 1;
 
     // Trigger the search with the current query and the newly selected page
-    this.search(this.state.search_text, this.context.config.api_root, selected);
+    this.search(this.context.config.api_root, this.state.search_text, this.state.search_coords, selected);
   }
 
   /**
    * Fetch the search results from backend
    */
-  search(query, api_root, page) {
+  search(api_root, searchText, coords, page) {
     var component = this,
       endpoint;
 
@@ -74,7 +66,10 @@ class SearchResultsComponent extends React.Component {
       page = 1;
     }
 
-    endpoint = api_root + '/directory?page=' + page + '&offset=0&q=' + query;
+    endpoint = api_root + '/directory?page=' + page + '&offset=0&q=' + searchText;
+    if (coords) {
+      endpoint += '&at=' + coords;
+    }
 
     fetch(endpoint)
       .then(function(response) {
@@ -82,7 +77,8 @@ class SearchResultsComponent extends React.Component {
           return response.json().then(function(json) {
             component.setState({
               search_results: json,
-              search_text: query
+              search_text: searchText,
+              search_coords: coords
             });
           });
         }
@@ -114,7 +110,7 @@ class SearchResultsComponent extends React.Component {
     if (enterprises.length === 0) {
       jsx.push(<li key='no-results' className='search-result'>No results.</li>);
     } else {
-      jsx.push(<SearchResultsMap enterprises={enterprises}/>);
+      jsx.push(<SearchResultsMap key='mapComponent' enterprises={enterprises}/>);
     }
 
     // Build list of enterprises

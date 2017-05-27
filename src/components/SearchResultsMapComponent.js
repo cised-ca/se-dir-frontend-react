@@ -74,7 +74,7 @@ class SearchResultsMapComponent extends React.Component {
       }
       enterprise.locations.coordinates.map(coordinates => {
         jsx.push(
-          <Marker position={coordinates}>
+          <Marker key={coordinates.toString()} position={coordinates}>
             <Popup>
               <span>{enterprise.name}</span>
             </Popup>

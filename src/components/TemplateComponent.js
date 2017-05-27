@@ -40,11 +40,15 @@ class TemplateComponent extends React.Component {
   get_config() {
     return fetch('/config.json')
       .then(function(response) {
-        return response
-                .json()
-                .then(function(json) {
-                  return json;
-                });
+        if (!response.ok) {
+          return Promise.reject(response.statusCode);
+        }
+        return response.json();
+      })
+      .catch(err => {
+        // TODO: Handle error
+        // eslint-disable-next-line no-console
+        console.log('GOT ERR loading config' + err);
       });
   }
 

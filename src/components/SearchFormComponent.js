@@ -3,18 +3,133 @@
 import React from 'react';
 
 import { Link } from 'react-router';
+import LocationDisambiguation from './LocationDisambiguationComponent.js';
 
 class SearchFormComponent extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      locationDisambiguation: null,
+      searchText: null,
+      searchLocationText: null
+    };
+  }
+
+  componentDidMount() {
+    this.reset();
+  }
+
+  componentWillReceiveProps() {
+    this.reset();
+  }
+
+  reset() {
+    this.setState({
+      locationDisambiguation: null,
+      searchText: null,
+      searchLocationText: null
+    });
+  }
+
   handleSubmit(e) {
     e.preventDefault();
 
+    this.setState({
+      searchText: this.refs.searchTextInput.value,
+      searchLocationText: this.refs.searchLocationInput.value
+    }, this.handleSearch);
+  }
+
+  handleSearch() {
+    if (!this.state.searchLocationText) {
+      this.props.onSearch(this.state.searchText);
+      return;
+    }
+
+    this.performLocationSearch();
+  }
+
+  handleLocationSelection(location) {
+    this.setState({
+      searchLocationText: location.placeName
+    });
     this.props.onSearch(
-      this.refs.searchTextInput.value,
-      this.refs.searchLocationInput.value
+      this.state.searchText,
+      location.placeName,
+      [location.latitude, location.longitude]
     );
   }
 
+  handleNoLocationFound() {
+    this.props.onSearch(
+      this.state.searchText,
+      this.state.searchLocationText
+    );
+  }
+
+  /*
+    Returns a location if there is one match found.
+    Returns null and starts location disambiguation process if multiple matches found
+    Returns null if there was no match found
+  */
+  performLocationSearch() {
+    let url  = this.context.config.geo_api_root +
+            '/api/placeNameSearch?placeName=' + this.state.searchLocationText;
+
+    fetch(url)
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      return Promise.reject(response.statusCode);
+    })
+    .then(results => {
+      this.handleLocationQueryResponse(results);
+    })
+    .catch(err => {
+      // TODO: Handle error
+      // eslint-disable-next-line no-console
+      console.log(err);
+    });
+  }
+
+  handleLocationQueryResponse(results) {
+    let locationTextString = this.state.searchLocationText;
+    if (results.length == 0) {
+      this.handleNoLocationFound();
+      return;
+    }
+
+    if (results.length == 1) {
+      this.handleLocationSelection(results[0]);
+      return;
+    }
+
+    let exactPlaceMatch = results.filter(location => {
+      return location.placeName.toLowerCase() === locationTextString.toLowerCase();
+    });
+    if (exactPlaceMatch.length > 0) {
+      this.handleLocationSelection(exactPlaceMatch[0]);
+      return;
+    }
+
+    // Otherwise, we need to enter location disambiguation phase
+    this.setState({locationDisambiguation: results});
+  }
+
   render() {
+    if (!this.context.config.api_root) {
+      return (<p>Loading...</p>);
+    }
+
+    if (this.state.locationDisambiguation && this.state.locationDisambiguation.length > 1) {
+      return (
+        <LocationDisambiguation locations={this.state.locationDisambiguation}
+              handleLocationSelection={this.handleLocationSelection.bind(this)}/>
+      );
+    }
+
     var searchText = '';
 
     if (this.props.searchText) {
@@ -27,7 +142,7 @@ class SearchFormComponent extends React.Component {
         <div className="search-bar">
           <input className="search-field" name="q" placeholder="Start Purchasing" type="search" ref="searchTextInput" defaultValue={searchText} />
           <span className="search-near-label">Near:</span>
-          <input className="search-location-field" name="at" placeholder="Postal code" type="search" ref="searchLocationInput" defaultValue={searchLocation} />
+          <input className="search-location-field" name="at" placeholder="Town / Postal code" type="search" ref="searchLocationInput" defaultValue={searchLocation} />
         </div>
 
         <input className="search-button button button--search" type="submit" value="Search" />
@@ -38,6 +153,11 @@ class SearchFormComponent extends React.Component {
 }
 
 SearchFormComponent.displayName = 'SearchFormComponent';
+
+SearchFormComponent.contextTypes = {
+  'config': React.PropTypes.object,
+  'logger': React.PropTypes.object
+};
 
 // Uncomment properties you need
 // SearchFormComponent.propTypes = {};
