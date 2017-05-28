@@ -57,6 +57,13 @@ class HomepageComponent extends React.Component {
     if (searchCoords) {
       state.searchCoords = searchCoords[0] + ',' + searchCoords[1];
     }
+
+    if (!searchText && !searchLocationText && !searchCoords) {
+      // There is no form data entered but they clicked search anyway.
+      // Let's search for empty string.
+      state.searchText = ' ';
+    }
+
     this.setState(state, () => {
       this.finishSearch();
     });
@@ -73,6 +80,7 @@ class HomepageComponent extends React.Component {
     if (this.state.searchLocationText) {
       query.near = this.state.searchLocationText;
     }
+
     this.props.router.push({
       'pathname': '/',
       'query': query
@@ -84,9 +92,11 @@ class HomepageComponent extends React.Component {
    * check if we still have a search query in the URL. If not, show the intro.
    */
   componentWillReceiveProps(nextProps) {
-    if (nextProps.location.search === '' && nextProps.location.searchLocationText === '') {
+    if (this.props.location.search && !nextProps.location.search) {
       this.setState({
-        'searchText': null
+        'searchText': null,
+        'searchLocationText': null,
+        'searchCoords': null
       });
     }
   }
@@ -159,13 +169,15 @@ class HomepageComponent extends React.Component {
       privacy_policy = (
         <p className='privacy-policy'>
           <Link to='/privacy'>Privacy policy</Link>
+          | Location data by
+          <Link to='http://www.geonames.org/'>geonames.org</Link>
         </p>
       );
     } else if (this.shouldShowSearchResults()) {
       searchResults = (
         <div className='page'>
           <SearchResults searchText={this.state.searchText}
-                         searchLocation={this.state.searchLocationText}
+                         searchLocationText={this.state.searchLocationText}
                          searchCoords={this.state.searchCoords}/>
         </div>
       );

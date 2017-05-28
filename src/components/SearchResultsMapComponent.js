@@ -14,6 +14,20 @@ class SearchResultsMapComponent extends React.Component {
     return true;
   }
 
+  renderSearchNearCoords(tileLayer, popupMarkers) {
+    // get search coords in lat/long order
+    let coords = this.props.searchCoords.split(',').map(parseFloat);
+    coords = [coords[1], coords[0]];
+    return (
+      <div className="searchresultsmap-component">
+        <Map center={coords} zoom={11}>
+          {tileLayer}
+          {popupMarkers}
+        </Map>
+      </div>
+    );
+  }
+
   render() {
     let enterprises = this.props.enterprises;
     let allCoords = this.generateCoords(enterprises);
@@ -23,6 +37,11 @@ class SearchResultsMapComponent extends React.Component {
     if (allCoords == null || allCoords.length == 0) {
       return null;
     }
+
+    if (this.props.searchCoords) {
+      return this.renderSearchNearCoords(tileLayer, popupMarkers);
+    }
+
     if (allCoords.length === 1) {
       return (
         <div className="searchresultsmap-component">

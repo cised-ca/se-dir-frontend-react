@@ -5,6 +5,8 @@ import React from 'react';
 import { Link } from 'react-router';
 import LocationDisambiguation from './LocationDisambiguationComponent.js';
 
+const POSTAL_CODE_REGEX = /^[A-Za-z]\d[A-Za-z]/;
+
 class SearchFormComponent extends React.Component {
 
   constructor(props) {
@@ -57,7 +59,7 @@ class SearchFormComponent extends React.Component {
     this.props.onSearch(
       this.state.searchText,
       location.placeName,
-      [location.latitude, location.longitude]
+      [location.longitude, location.latitude]
     );
   }
 
@@ -68,14 +70,21 @@ class SearchFormComponent extends React.Component {
     );
   }
 
-  /*
-    Returns a location if there is one match found.
-    Returns null and starts location disambiguation process if multiple matches found
-    Returns null if there was no match found
-  */
+  isPostalCode(text) {
+    return POSTAL_CODE_REGEX.exec(text);
+  }
+
   performLocationSearch() {
+    let locationText = this.state.searchLocationText;
     let url  = this.context.config.geo_api_root +
-            '/api/placeNameSearch?placeName=' + this.state.searchLocationText;
+            '/api/placeNameSearch?placeName=' + locationText;
+    if (this.isPostalCode(locationText)) {
+      // strip to first 3 characters because Geonames dataset only contains
+      // first half of canadian postal codes
+      let postalCode = locationText.slice(0, 3).toUpperCase();
+      url  = this.context.config.geo_api_root +
+              '/api/postalCodeLookup?postalCode=' + postalCode;
+    }
 
     fetch(url)
     .then(response => {
@@ -85,6 +94,9 @@ class SearchFormComponent extends React.Component {
       return Promise.reject(response.statusCode);
     })
     .then(results => {
+      if (!Array.isArray(results)) {
+        results = [results];
+      }
       this.handleLocationQueryResponse(results);
     })
     .catch(err => {
@@ -119,7 +131,7 @@ class SearchFormComponent extends React.Component {
   }
 
   render() {
-    if (!this.context.config.api_root) {
+    if (!this.context.config.geo_api_root) {
       return (<p>Loading...</p>);
     }
 

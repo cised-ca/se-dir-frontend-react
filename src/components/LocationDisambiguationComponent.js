@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import { browserHistory } from 'react-router';
 
 class LocationDisambiguationComponent extends React.Component {
 
@@ -23,6 +24,7 @@ class LocationDisambiguationComponent extends React.Component {
         <ul key='location-results' className='location-results fade-in'>
           {jsx}
         </ul>
+        <a className="back" onClick={browserHistory.goBack}>Back to search</a>
       </div>
     );
   }
