@@ -118,10 +118,23 @@ class SearchFormComponent extends React.Component {
       return;
     }
 
-    let exactPlaceMatch = results.filter(location => {
-      return location.placeName.toLowerCase() === locationTextString.toLowerCase();
-    });
-    if (exactPlaceMatch.length > 0) {
+    // If the form's value exactly matches a place name, let's use that place
+    // even if there may be other matches.
+    // But need to look at brackets too, because there is
+    // "Kingston" (from New Brunswick) vs "Kingston (Downtown)" (from Ontario)
+    // and that is a case we would want to disambiguate on.
+    // But if they search "Kingston (Downtown)" don't disambiguate.
+    let exactPlaceMatch = [];
+    if (locationTextString.includes('(')) {
+      exactPlaceMatch = results.filter(location => {
+        return location.placeName.toLowerCase().trim() === locationTextString.toLowerCase().trim();
+      });
+    } else {
+      exactPlaceMatch = results.filter(location => {
+        return location.placeName.split('(')[0].toLowerCase().trim() === locationTextString.toLowerCase().trim();
+      });
+    }
+    if (exactPlaceMatch.length === 1) {
       this.handleLocationSelection(exactPlaceMatch[0]);
       return;
     }

@@ -12,7 +12,7 @@ class LocationDisambiguationComponent extends React.Component {
       jsx.push(
         <li key={location.placeName} className='location-name'>
           <a href="#" onClick={() => {this.props.handleLocationSelection(location);}}>
-            {location.placeName}
+            {location.placeName}, {location.adminCode1}
           </a>
         </li>
       );
