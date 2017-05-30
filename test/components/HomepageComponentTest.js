@@ -182,7 +182,8 @@ describe('HomepageComponent', () => {
     componentOptions = {
       context: {
         config: {
-          api_root: ""
+          api_root: '',
+          geo_api_root: 'test'
         }
       },
       childContextTypes: {
@@ -229,7 +230,8 @@ describe('HomepageComponent', () => {
     componentOptions = {
       context: {
         config: {
-          api_root: ""
+          api_root: '',
+          geo_api_root: 'test'
         }
       },
       childContextTypes: {
@@ -251,4 +253,3 @@ describe('HomepageComponent', () => {
     expect(homepage.find('.intro').hasClass('slide-up')).to.equal(true);
   });
 });
-

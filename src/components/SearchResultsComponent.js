@@ -2,6 +2,7 @@
 
 import React from 'react';
 import EnterpriseSummary from './EnterpriseSummaryComponent.js';
+import SearchResultsMap from './SearchResultsMapComponent.js';
 
 import ReactPaginate from 'react-paginate';
 
@@ -13,7 +14,7 @@ class SearchResultsComponent extends React.Component {
     super(props);
 
     this.state = {
-      search_results: null
+      searchResults: null
     };
   }
 
@@ -21,7 +22,10 @@ class SearchResultsComponent extends React.Component {
    * Called by React after the initial render.
    */
   componentDidMount() {
-    this.search(this.props.searchText, this.context.config.api_root);
+    this.search(this.context.config.api_root,
+                this.props.searchText,
+                this.props.searchLocationText,
+                this.props.searchCoords);
   }
 
   /**
@@ -30,18 +34,20 @@ class SearchResultsComponent extends React.Component {
    * Ex: when the user performs a new search
    */
   componentWillReceiveProps(nextProps, nextContext) {
-    var current_search_text = this.props.searchText,
-      current_api_root = this.context.config.api_root,
-      new_search_text = nextProps.searchText,
+    let newSearchText = nextProps.searchText,
+      newLocationText = nextProps.searchLocationText,
+      newSearchCoords = nextProps.searchCoords,
+      currentSearchText = this.props.searchText,
+      currentSearchCoords = this.props.searchCoords,
       new_api_root = nextContext.config.api_root,
-      do_search;
+      current_api_root = this.context.config.api_root;
 
-    do_search = (new_search_text !== current_search_text || current_api_root !== new_api_root);
-
-    // If the search term or the api root are different than the previous
-    // time we received props/context, trigger a new search
-    if (do_search) {
-      this.search(new_search_text, new_api_root);
+    if (newSearchText || newSearchCoords) {
+      if (newSearchText !== currentSearchText
+          || newSearchCoords !== currentSearchCoords
+          || new_api_root !== current_api_root) {
+        this.search(new_api_root, newSearchText, newLocationText, newSearchCoords);
+      }
     }
   }
 
@@ -54,13 +60,14 @@ class SearchResultsComponent extends React.Component {
     var selected = data.selected + 1;
 
     // Trigger the search with the current query and the newly selected page
-    this.search(this.state.search_text, this.context.config.api_root, selected);
+    this.search(this.context.config.api_root, this.state.searchText,
+      this.state.searchLocationText, this.state.searchCoords, selected);
   }
 
   /**
    * Fetch the search results from backend
    */
-  search(query, api_root, page) {
+  search(api_root, searchText, searchLocationText, coords, page) {
     var component = this,
       endpoint;
 
@@ -73,15 +80,23 @@ class SearchResultsComponent extends React.Component {
       page = 1;
     }
 
-    endpoint = api_root + '/directory?page=' + page + '&q=' + query;
+    endpoint = api_root + '/directory?page=' + page + '&offset=0';
+    if (searchText) {
+      endpoint += '&q=' + searchText;
+    }
+    if (coords) {
+      endpoint += '&at=' + coords;
+    }
 
     fetch(endpoint)
       .then(function(response) {
         if (response.ok) {
           return response.json().then(function(json) {
             component.setState({
-              search_results: json,
-              search_text: query
+              searchResults: json,
+              searchText: searchText,
+              searchCoords: coords,
+              searchLocationText: searchLocationText
             });
           });
         }
@@ -96,7 +111,7 @@ class SearchResultsComponent extends React.Component {
   render() {
     var component = this,
       jsx = [],
-      results = component.state.search_results,
+      results = component.state.searchResults,
       enterprises = [],
       pagination = null,
       initial_page;
@@ -106,12 +121,19 @@ class SearchResultsComponent extends React.Component {
       return (<p>Loading...</p>);
     }
 
-    initial_page = this.state.search_results.page - 1;
+    initial_page = this.state.searchResults.page - 1;
     enterprises = results.enterprises;
 
     // If we have no results, show a "no results" message
     if (enterprises.length === 0) {
       jsx.push(<li key='no-results' className='search-result'>No results.</li>);
+    } else {
+      if (this.state.searchLocationText) {
+        jsx.push(<p key='results near label'>Showing results near "{this.state.searchLocationText}":</p>);
+      }
+      jsx.push(<SearchResultsMap key='mapComponent'
+                searchCoords={component.state.searchCoords}
+                enterprises={enterprises}/>);
     }
 
     // Build list of enterprises
@@ -124,10 +146,10 @@ class SearchResultsComponent extends React.Component {
     });
 
     // Don't show pagination if we only have 1 page
-    if (this.state.search_results.pages > 1) {
+    if (this.state.searchResults.pages > 1) {
       pagination = (
         <ReactPaginate breakClassName={'break-me'}
-                       pageCount={this.state.search_results.pages}
+                       pageCount={this.state.searchResults.pages}
                        initialPage={initial_page}
                        forcePage={initial_page}
                        disableInitialCallback={true}

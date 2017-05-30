@@ -19,7 +19,7 @@ describe('SearchResultsComponent', () => {
     );
 
     component.setState({
-      search_results: {
+      searchResults: {
         enterprises: [
           {
             id: '1'

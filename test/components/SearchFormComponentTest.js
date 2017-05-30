@@ -4,7 +4,7 @@
 'use strict';
 
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
 import SearchFormComponent from 'components/SearchFormComponent.js';
 
@@ -12,7 +12,21 @@ describe('SearchFormComponent', () => {
   let component;
 
   beforeEach(() => {
-    component = shallow(<SearchFormComponent />);
+    let componentOptions = {
+      context: {
+        config: {
+          api_root: '',
+          geo_api_root: 'test'
+        }
+      },
+      childContextTypes: {
+        'config': React.PropTypes.object
+      }
+    };
+    component = mount(
+      <SearchFormComponent />,
+      componentOptions
+    );
   });
 
   it('should have its component name as default className', () => {

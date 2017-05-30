@@ -16,30 +16,74 @@ class HomepageComponent extends React.Component {
   componentWillMount() {
     var query = this.props.location.query;
 
+    let state = {
+      'searchText': null,
+      'searchLocationText': null,
+      'searchCoords': null
+    };
+
     if (query.q) {
-      this.setState({
-        'searchText': query.q
-      });
-    } else {
-      this.setState({
-        'searchText': null
-      });
+      state.searchText = query.q;
     }
+    if (query.at) {
+      state.searchCoords = query.at;
+    }
+    if (query.near) {
+      state.searchLocationText = query.near;
+    }
+
+    this.setState(state);
   }
 
   /**
    * Triggered when the search form is submitted
    *
    * @param {String} searchText The text in the search field input box
+   * @param {String} searchLocationText The text in the search location input box
    */
-  handleSearch(searchText) {
-    this.setState({
-      searchText: searchText
+  handleSearch(searchText, searchLocationText, searchCoords) {
+    let state = {
+      'searchText': null,
+      'searchLocationText': null,
+      'searchCoords': null
+    };
+
+    if (searchText) {
+      state.searchText = searchText;
+    }
+    if (searchLocationText) {
+      state.searchLocationText = searchLocationText;
+    }
+    if (searchCoords) {
+      state.searchCoords = searchCoords[0] + ',' + searchCoords[1];
+    }
+
+    if (!searchText && !searchLocationText && !searchCoords) {
+      // There is no form data entered but they clicked search anyway.
+      // Let's search for empty string.
+      state.searchText = ' ';
+    }
+
+    this.setState(state, () => {
+      this.finishSearch();
     });
+  }
+
+  finishSearch() {
+    let query = {};
+    if (this.state.searchText) {
+      query.q = this.state.searchText;
+    }
+    if (this.state.searchCoords) {
+      query.at = this.state.searchCoords;
+    }
+    if (this.state.searchLocationText) {
+      query.near = this.state.searchLocationText;
+    }
 
     this.props.router.push({
       'pathname': '/',
-      'query': {'q': searchText}
+      'query': query
     });
   }
 
@@ -48,11 +92,35 @@ class HomepageComponent extends React.Component {
    * check if we still have a search query in the URL. If not, show the intro.
    */
   componentWillReceiveProps(nextProps) {
-    if (nextProps.location.search === '') {
+    if (this.props.location.search && !nextProps.location.search) {
       this.setState({
-        'searchText': null
+        'searchText': null,
+        'searchLocationText': null,
+        'searchCoords': null
       });
     }
+  }
+
+  isLocationNotFound() {
+    // If we have a location but no coords, it means the location was not found.
+    return this.state.searchLocationText && !this.state.searchCoords;
+  }
+
+  shouldShowSearchResults() {
+    if (!this.props.config.api_root) {
+      // Don't try to get search results if we haven't parsed the config file yet
+      return false;
+    }
+
+    if (this.isLocationNotFound()) {
+      return false;
+    }
+
+    if (this.state.searchText || this.state.searchLocationText) {
+      return true;
+    }
+
+    return false;
   }
 
   render() {
@@ -63,7 +131,7 @@ class HomepageComponent extends React.Component {
       powered_by = null,
       apply = null;
 
-    if (this.state.searchText === null) {
+    if (this.state.searchText === null && this.state.searchLocationText === null) {
       intro = (
         <div className='intro js-intro'>
           <h1 className='title'>Ottawa's Social Enterprise Directory</h1>
@@ -101,16 +169,27 @@ class HomepageComponent extends React.Component {
       privacy_policy = (
         <p className='privacy-policy'>
           <Link to='/privacy'>Privacy policy</Link>
+          | Location data by
+          <Link to='http://www.geonames.org/'>geonames.org</Link>
         </p>
       );
-    } else if (this.props.config.api_root && this.state.searchText !== null) {
-      // Don't try to get search results if we haven't parsed the config file yet
+    } else if (this.shouldShowSearchResults()) {
       searchResults = (
         <div className='page'>
-          <SearchResults searchText={this.state.searchText} />
+          <SearchResults searchText={this.state.searchText}
+                         searchLocationText={this.state.searchLocationText}
+                         searchCoords={this.state.searchCoords}/>
+        </div>
+      );
+    } else if (this.isLocationNotFound()) {
+      searchResults = (
+        <div className="page">
+          <p>Could not find a match for location or postal code "{this.state.searchLocationText}"</p>
+          <p>Please try searching again.</p>
         </div>
       );
     }
+
 
     return (
       <div className='homepage-component'>
@@ -119,7 +198,8 @@ class HomepageComponent extends React.Component {
           {intro}
         </ReactCSSTransitionGroup>
 
-        <SearchForm onSearch={this.handleSearch.bind(this)} searchText={this.state.searchText} />
+        <SearchForm onSearch={this.handleSearch.bind(this)} searchText={this.state.searchText}
+          searchLocation={this.state.searchLocationText} />
 
         {apply}
 
