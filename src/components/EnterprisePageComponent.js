@@ -20,22 +20,46 @@ class EnterprisePageComponent extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchEnterprise();
+    if (this.context.config.api_root) {
+      this.fetchEnterprise(this.context.config.api_root);
+    }
   }
 
-  fetchEnterprise() {
-    var component = this,
-      url  = this.context.config.api_root + '/enterprise/' + this.props.params.id;
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    let new_api_root = nextContext.config.api_root,
+      current_api_root = this.context.config.api_root;
+
+    if (new_api_root !== current_api_root) {
+      this.fetchEnterprise(new_api_root);
+    }
+  }
+
+  fetchEnterprise(apiRoot) {
+    if (!apiRoot) {
+      return;
+    }
+
+    let component = this,
+      url  = apiRoot + '/enterprise/' + this.props.params.id;
 
     fetch(url)
-      .then(function(response) {
+      .then(response => {
         if (response.ok) {
-          return response.json().then(function(json) {
-            component.setState({
-              enterprise: json
-            });
-          });
+          return response.json();
+        } else {
+          Promise.reject(response.statusCode);
         }
+      })
+      .then(json => {
+        component.setState({
+          enterprise: json
+        });
+      })
+      .catch(err => {
+        // TODO: Handle error
+        // eslint-disable-next-line no-console
+        console.log('GOT ERROR fetching url ' + url + ' : ' + err);
       });
   }
 

@@ -14,7 +14,7 @@ class SocialMediaComponent extends React.Component {
 
     if (enterprise.facebook) {
       jsx.push(
-        <li className="socialmedia__account">
+        <li key="facebook" className="socialmedia__account">
           <Facebook key="facebook" account={enterprise.facebook} />
         </li>
       );
@@ -22,7 +22,7 @@ class SocialMediaComponent extends React.Component {
 
     if (enterprise.instagram) {
       jsx.push(
-        <li className="socialmedia__account">
+        <li key="instagram" className="socialmedia__account">
           <Instagram key="instagram" account={enterprise.instagram} />
         </li>
       );
@@ -30,7 +30,7 @@ class SocialMediaComponent extends React.Component {
 
     if (enterprise.twitter) {
       jsx.push(
-        <li className="socialmedia__account">
+        <li key="twitter" className="socialmedia__account">
           <Twitter key="twitter" account={enterprise.twitter} />
         </li>
       );

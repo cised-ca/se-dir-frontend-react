@@ -3,6 +3,9 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+var slug = require('slug/slug-browser');
+slug.defaults.mode = 'rfc3986';
+
 class EnterpriseSummaryComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -22,7 +25,7 @@ class EnterpriseSummaryComponent extends React.Component {
     var enterprise = this.props.enterprise,
       enterprise_description = enterprise.short_description,
       enterprise_logo = null,
-      enterprise_link = <Link to={'/enterprise/' + enterprise.id}>{enterprise.name}</Link>,
+      enterprise_link = <Link to={'/enterprise/' + enterprise.id + '/' + slug(enterprise.name)}>{enterprise.name}</Link>,
       more_info = (
           <div className="enterprise__website">
             <Link to={'/enterprise/' + enterprise.id}>More info</Link>
