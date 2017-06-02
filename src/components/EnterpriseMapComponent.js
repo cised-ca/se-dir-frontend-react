@@ -49,8 +49,9 @@ class EnterpriseMapComponent extends React.Component {
   generatePopupMarkers(enterprise) {
     let jsx = [];
     enterprise.locations.coordinates.map(coordinates => {
+      let coordsStr = coordinates[0] + ',' + coordinates[1];
       jsx.push(
-        <Marker position={coordinates}>
+        <Marker key={coordsStr} position={coordinates}>
           <Popup>
             <span>{enterprise.name}</span>
           </Popup>

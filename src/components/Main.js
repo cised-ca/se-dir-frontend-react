@@ -34,7 +34,7 @@ class AppComponent extends React.Component {
           }}
         >
           <IndexRoute component={Homepage} />
-          <Route name="enterprise" path='/enterprise/:id' component={EnterprisePage} />
+          <Route name="enterprise" path='/enterprise/:id/:slug' component={EnterprisePage} />
           <Route name="directory" path='/directory' component={Directory} />
           <Route name='application-form' path='/apply' component={ApplicationForm} />
           <Route name='privacy-policy' path='/privacy' component={PrivacyPolicy} />
@@ -49,4 +49,3 @@ AppComponent.defaultProps = {
 };
 
 export default AppComponent;
-
