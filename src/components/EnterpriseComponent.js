@@ -271,4 +271,5 @@ class EnterpriseComponent extends React.Component {
 
 EnterpriseComponent.displayName = 'EnterpriseComponent';
 
+export { EnterpriseComponent };
 export default translate('enterprise')(EnterpriseComponent);

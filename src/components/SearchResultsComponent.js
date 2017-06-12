@@ -193,4 +193,5 @@ SearchResultsComponent.contextTypes = {
   'logger': React.PropTypes.object
 };
 
+export { SearchResultsComponent };
 export default translate('searchResults')(SearchResultsComponent);

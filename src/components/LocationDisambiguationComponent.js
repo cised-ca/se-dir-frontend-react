@@ -42,4 +42,5 @@ LocationDisambiguationComponent.displayName = 'LocationDisambiguationComponent';
 // LocationDisambiguationComponent.propTypes = {};
 // LocationDisambiguationComponent.defaultProps = {};
 
+export { LocationDisambiguationComponent };
 export default translate('locationDisambiguation')(LocationDisambiguationComponent);

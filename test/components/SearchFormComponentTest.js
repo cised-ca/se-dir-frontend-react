@@ -6,7 +6,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import SearchFormComponent from 'components/SearchFormComponent.js';
+import { SearchFormComponent } from 'components/SearchFormComponent.js';
 
 describe('SearchFormComponent', () => {
   let component;
@@ -24,7 +24,7 @@ describe('SearchFormComponent', () => {
       }
     };
     component = mount(
-      <SearchFormComponent />,
+      <SearchFormComponent t={key => key} />,
       componentOptions
     );
   });

@@ -23,4 +23,5 @@ BackComponent.displayName = 'BackComponent';
 // BannerComponent.propTypes = {};
 // BannerComponent.defaultProps = {};
 
+export { BackComponent };
 export default translate('back')(BackComponent);

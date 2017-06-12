@@ -222,8 +222,5 @@ class HomepageComponent extends React.Component {
 
 HomepageComponent.displayName = 'HomepageComponent';
 
-// This is used by the Homepage and Template tests at the moment.
-// They don't like wrapped components.
-export let HomepageComponentWithoutRouter = HomepageComponent;
-
+export { HomepageComponent };
 export default translate('homepage')(withRouter(HomepageComponent));

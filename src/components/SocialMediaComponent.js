@@ -76,4 +76,5 @@ SocialMediaComponent.displayName = 'SocialMediaComponent';
 // SocialMediaComponent.propTypes = {};
 // SocialMediaComponent.defaultProps = {};
 
+export { SocialMediaComponent };
 export default translate('socialMedia')(SocialMediaComponent);

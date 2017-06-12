@@ -30,4 +30,5 @@ PrivacyPolicyComponent.displayName = 'PrivacyPolicyComponent';
 // PrivacyPolicyComponent.propTypes = {};
 // PrivacyPolicyComponent.defaultProps = {};
 
+export { PrivacyPolicyComponent };
 export default translate('privacyPolicy')(PrivacyPolicyComponent);

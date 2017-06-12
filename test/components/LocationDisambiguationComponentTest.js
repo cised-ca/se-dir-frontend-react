@@ -6,7 +6,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import LocationDisambiguationComponent from 'components/LocationDisambiguationComponent.js';
+import { LocationDisambiguationComponent } from 'components/LocationDisambiguationComponent.js';
 
 describe('LocationDisambiguationComponent', () => {
   let component;
@@ -24,7 +24,7 @@ describe('LocationDisambiguationComponent', () => {
     }];
 
   beforeEach(() => {
-    component = shallow(<LocationDisambiguationComponent locations={locations} />);
+    component = shallow(<LocationDisambiguationComponent t={key => key} locations={locations} />);
   });
 
   it('should have its component name as default className', () => {

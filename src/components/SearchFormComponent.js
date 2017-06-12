@@ -193,4 +193,5 @@ SearchFormComponent.contextTypes = {
 // SearchFormComponent.propTypes = {};
 // SearchFormComponent.defaultProps = {};
 
+export { SearchFormComponent };
 export default translate('searchForm')(SearchFormComponent);

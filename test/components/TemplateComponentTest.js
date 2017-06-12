@@ -7,7 +7,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import TemplateComponent from 'components/TemplateComponent.js';
-import { HomepageComponentWithoutRouter } from 'components/HomepageComponent.js';
+import { HomepageComponent } from 'components/HomepageComponent.js';
 
 describe('TemplateComponent', () => {
   let component;
@@ -17,7 +17,7 @@ describe('TemplateComponent', () => {
   beforeEach(() => {
     component = shallow(
       <TemplateComponent state={stateProp}>
-        <HomepageComponentWithoutRouter />
+        <HomepageComponent />
       </TemplateComponent>
     );
   });

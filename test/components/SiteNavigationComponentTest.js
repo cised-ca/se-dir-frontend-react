@@ -6,13 +6,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import SiteNavigationComponent from 'components/SiteNavigationComponent.js';
+import { SiteNavigationComponent } from 'components/SiteNavigationComponent.js';
 
 describe('SiteNavigationComponent', () => {
   let component;
 
   beforeEach(() => {
-    component = shallow(<SiteNavigationComponent />);
+    component = shallow(<SiteNavigationComponent t={key => key} />);
   });
 
   it('should have its component name as a className', () => {

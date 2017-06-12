@@ -6,9 +6,23 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 
-import { HomepageComponentWithoutRouter } from 'components/HomepageComponent.js';
+import { HomepageComponent } from 'components/HomepageComponent.js';
 import SearchForm from 'components/SearchFormComponent.js';
 import SearchResults from 'components/SearchResultsComponent.js';
+
+import i18n from '../../src/i18n';
+import { translate } from 'react-i18next';
+
+const newI18n = i18n.createInstance();
+newI18n
+  .init({
+    lng: 'en',
+    fallbackLng: 'en',
+
+    interpolation: {
+      escapeValue: false, // not needed for react!!
+    }
+  });
 
 describe('HomepageComponent', () => {
   /**
@@ -29,7 +43,7 @@ describe('HomepageComponent', () => {
     };
 
     component = shallow(
-      <HomepageComponentWithoutRouter location={locationProp} config={configProp} />
+      <HomepageComponent t={key => key} location={locationProp} config={configProp} />
     );
 
     expect(component.find(SearchForm)).to.have.length(1);
@@ -54,7 +68,7 @@ describe('HomepageComponent', () => {
     };
 
     component = shallow(
-      <HomepageComponentWithoutRouter location={locationProp} config={configProp} />
+      <HomepageComponent t={key => key} location={locationProp} config={configProp} />
     );
 
     expect(component.find(SearchResults)).to.have.length(0);
@@ -75,7 +89,7 @@ describe('HomepageComponent', () => {
     };
 
     component = shallow(
-      <HomepageComponentWithoutRouter location={locationProp} config={configProp} />
+      <HomepageComponent t={key => key} location={locationProp} config={configProp} />
     );
 
     expect(component.find('.intro')).to.have.length(1);
@@ -102,12 +116,11 @@ describe('HomepageComponent', () => {
     };
 
     component = shallow(
-      <HomepageComponentWithoutRouter location={locationProp} config={configProp} />
+      <HomepageComponent t={key => key} location={locationProp} config={configProp} />
     );
 
     expect(component.find(SearchResults)).to.have.length(1);
   });
-
 
   it('should not show the intro title/tagline on pageloads with search-query', () => {
     var locationProp,
@@ -125,7 +138,7 @@ describe('HomepageComponent', () => {
     };
 
     component = shallow(
-      <HomepageComponentWithoutRouter location={locationProp} config={configProp} />
+      <HomepageComponent t={key => key} location={locationProp} config={configProp} />
     );
 
     expect(component.find('.intro')).to.have.length(0);
@@ -149,7 +162,7 @@ describe('HomepageComponent', () => {
       'api_root': 'http://example.org/api/v1/'
     };
 
-    component = shallow(<HomepageComponentWithoutRouter location={locationProp} config={configProp} />);
+    component = shallow(<HomepageComponent t={key => key} location={locationProp} config={configProp} />);
 
     expect(component.hasClass('homepage-component')).to.equal(true);
   });
@@ -179,20 +192,25 @@ describe('HomepageComponent', () => {
       'api_root': 'http://example.org/api/v1/'
     };
 
-    componentOptions = {
+		newI18n.init({ react: { nsMode: 'fallback' }});
+
+		componentOptions = {
       context: {
         config: {
           api_root: '',
           geo_api_root: 'test'
-        }
+        },
+				i18n: newI18n
       },
       childContextTypes: {
         'config': React.PropTypes.object
       }
     };
 
+		const HocElement = translate('homepage')(HomepageComponent);
+
     homepage = mount(
-      <HomepageComponentWithoutRouter location={locationProp} config={configProp}
+      <HocElement location={locationProp} config={configProp}
         directory={directoryProp} router={routerProp} />,
       componentOptions
     );
@@ -227,20 +245,25 @@ describe('HomepageComponent', () => {
       'api_root': 'http://example.org/api/v1/'
     };
 
+		newI18n.init({ react: { nsMode: 'fallback' }});
+
     componentOptions = {
       context: {
         config: {
           api_root: '',
           geo_api_root: 'test'
-        }
+        },
+				i18n: newI18n
       },
       childContextTypes: {
         'config': React.PropTypes.object
       }
     };
 
+		const HocElement = translate('homepage')(HomepageComponent);
+
     homepage = mount(
-      <HomepageComponentWithoutRouter location={locationProp} config={configProp}
+      <HocElement location={locationProp} config={configProp}
         directory={directoryProp} router={routerProp} />,
       componentOptions
     );

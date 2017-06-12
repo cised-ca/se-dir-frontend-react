@@ -29,4 +29,5 @@ SiteNavigationComponent.displayName = 'SiteNavigationComponent';
 // SiteNavigationComponent.propTypes = {};
 // SiteNavigationComponent.defaultProps = {};
 
+export { SiteNavigationComponent };
 export default translate('siteNavigation')(SiteNavigationComponent);

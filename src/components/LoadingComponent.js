@@ -22,4 +22,5 @@ LoadingComponent.displayName = 'LoadingComponent';
 // BannerComponent.propTypes = {};
 // BannerComponent.defaultProps = {};
 
+export { LoadingComponent };
 export default translate('loading')(LoadingComponent);

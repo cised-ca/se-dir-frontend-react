@@ -6,7 +6,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import SearchResultsComponent from 'components/SearchResultsComponent.js';
+import { SearchResultsComponent } from 'components/SearchResultsComponent.js';
 
 describe('SearchResultsComponent', () => {
   let component;
@@ -15,7 +15,7 @@ describe('SearchResultsComponent', () => {
 
   beforeEach(() => {
     component = shallow(
-      <SearchResultsComponent searchText={searchTextProp} />
+      <SearchResultsComponent t={key => key} searchText={searchTextProp} />
     );
 
     component.setState({

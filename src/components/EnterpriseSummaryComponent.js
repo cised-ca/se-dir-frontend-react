@@ -75,4 +75,5 @@ EnterpriseSummaryComponent.contextTypes = {
   'config': React.PropTypes.object
 };
 
+export { EnterpriseSummaryComponent };
 export default translate('enterpriseSummary')(EnterpriseSummaryComponent);

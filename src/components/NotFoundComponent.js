@@ -22,4 +22,5 @@ class NotFoundComponent extends React.Component {
 
 NotFoundComponent.displayName = 'NotFoundComponent';
 
+export { NotFoundComponent };
 export default translate('notFound')(NotFoundComponent);

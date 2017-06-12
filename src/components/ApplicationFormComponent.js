@@ -120,4 +120,5 @@ ApplicationFormComponent.contextTypes = {
 // ApplicationFormComponent.propTypes = {};
 // ApplicationFormComponent.defaultProps = {};
 
+export { ApplicationFormComponent };
 export default translate('applicationForm')(ApplicationFormComponent);

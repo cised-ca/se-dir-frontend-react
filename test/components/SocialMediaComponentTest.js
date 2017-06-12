@@ -6,7 +6,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import SocialMedia from 'components/SocialMediaComponent.js';
+import { SocialMediaComponent } from 'components/SocialMediaComponent.js';
 
 describe('SocialMediaComponent', () => {
   let component;
@@ -19,7 +19,7 @@ describe('SocialMediaComponent', () => {
 
   beforeEach(() => {
     component = shallow(
-      <SocialMedia enterprise={enterpriseProp} />
+      <SocialMediaComponent enterprise={enterpriseProp} t={key => key} />
     );
   });
 

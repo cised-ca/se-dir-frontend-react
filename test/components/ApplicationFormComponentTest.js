@@ -6,7 +6,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import ApplicationFormComponent from 'components/ApplicationFormComponent.js';
+import { ApplicationFormComponent } from 'components/ApplicationFormComponent.js';
 
 describe('ApplicationFormComponent', () => {
   let component;
@@ -18,7 +18,7 @@ describe('ApplicationFormComponent', () => {
       }
     };
 
-    component = shallow(<ApplicationFormComponent config={configProp} />);
+    component = shallow(<ApplicationFormComponent t={key => key} config={configProp} />);
   });
 
   it('should have its component name as default className', () => {
