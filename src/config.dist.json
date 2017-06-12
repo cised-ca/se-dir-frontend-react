@@ -1,6 +1,17 @@
 {
   "api_root": "https://example.org/api/",
   "geo_api_root": "https://example.org/api/",
+  "defaultLocale": "en",
+  "locales": [
+    {
+      "locale": "en",
+      "prefix": "http://example.org"
+    },
+    {
+      "locale": "fr",
+      "prefix": "http://exemple.org"
+    }
+  ],
   "logger": {
     "host": "https://example.org",
     "api_key": "YOUR_API_KEY"

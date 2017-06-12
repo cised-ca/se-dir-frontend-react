@@ -2,20 +2,22 @@
 
 import React from 'react';
 
-import { browserHistory } from 'react-router';
+import { translate } from 'react-i18next';
+
+import Back from './BackComponent';
 
 class PrivacyPolicyComponent extends React.Component {
   render() {
+    const { t } = this.props;
+
     return (
       <div className="privacypolicy-component page">
-        <a className="back" onClick={browserHistory.goBack}>Back</a>
+        <Back />
 
-        <h1>Privacy Policy</h1>
+        <h1>{t('privacyPolicy:title')}</h1>
 
         <p>
-          Any information obtained during login process through 3rd party
-          providers (such as Facebook, Instagram) is not stored, and is not
-          shared with any other parties.
+          {t('privacyPolicy:policy')}
         </p>
       </div>
     );
@@ -28,4 +30,4 @@ PrivacyPolicyComponent.displayName = 'PrivacyPolicyComponent';
 // PrivacyPolicyComponent.propTypes = {};
 // PrivacyPolicyComponent.defaultProps = {};
 
-export default PrivacyPolicyComponent;
+export default translate('privacyPolicy')(PrivacyPolicyComponent);

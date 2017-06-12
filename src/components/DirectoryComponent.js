@@ -2,14 +2,14 @@
 
 import React from 'react';
 
-import { browserHistory } from 'react-router';
-import SearchResults from './SearchResultsComponent.js';
+import SearchResults from './SearchResultsComponent';
+import Back from './BackComponent';
 
 class DirectoryComponent extends React.Component {
   render() {
     return (
       <div className="directory-component page">
-        <a className="back" onClick={browserHistory.goBack}>Back</a>
+        <Back />
 
         <SearchResults searchText="" />
       </div>

@@ -1,10 +1,13 @@
 'use strict';
 
 import React from 'react';
-import EnterpriseSummary from './EnterpriseSummaryComponent.js';
-import SearchResultsMap from './SearchResultsMapComponent.js';
+import EnterpriseSummary from './EnterpriseSummaryComponent';
+import SearchResultsMap from './SearchResultsMapComponent';
+import Loading from './LoadingComponent';
 
 import ReactPaginate from 'react-paginate';
+
+import { translate } from 'react-i18next';
 
 class SearchResultsComponent extends React.Component {
   /**
@@ -72,7 +75,7 @@ class SearchResultsComponent extends React.Component {
       endpoint;
 
     if (!api_root) {
-      return (<p>Loading...</p>);
+      return (<Loading />);
     }
 
     // If pagination is undefined, return the first page of results
@@ -109,6 +112,8 @@ class SearchResultsComponent extends React.Component {
   }
 
   render() {
+    const { t } = this.props;
+
     var component = this,
       jsx = [],
       results = component.state.searchResults,
@@ -118,7 +123,7 @@ class SearchResultsComponent extends React.Component {
 
     // We haven't received results from the backend yet
     if (!results) {
-      return (<p>Loading...</p>);
+      return (<Loading />);
     }
 
     initial_page = this.state.searchResults.page - 1;
@@ -126,10 +131,18 @@ class SearchResultsComponent extends React.Component {
 
     // If we have no results, show a "no results" message
     if (enterprises.length === 0) {
-      jsx.push(<li key='no-results' className='search-result'>No results.</li>);
+      jsx.push(
+        <li key='no-results' className='search-result'>
+          {t('searchResults:noResults')}
+        </li>
+      );
     } else {
       if (this.state.searchLocationText) {
-        jsx.push(<p key='results near label'>Showing results near "{this.state.searchLocationText}":</p>);
+        jsx.push(
+          <p key='results near label'>
+            {t('searchResults:resultsNear')} "{this.state.searchLocationText}":
+          </p>
+        );
       }
       jsx.push(<SearchResultsMap key='mapComponent'
                 searchCoords={component.state.searchCoords}
@@ -180,4 +193,4 @@ SearchResultsComponent.contextTypes = {
   'logger': React.PropTypes.object
 };
 
-export default SearchResultsComponent;
+export default translate('searchResults')(SearchResultsComponent);
