@@ -15,6 +15,8 @@ import PrivacyPolicy from './PrivacyPolicyComponent.js';
 import ReactGA from 'react-ga';
 ReactGA.initialize('UA-97087495-1');
 
+import 'whatwg-fetch';
+
 class AppComponent extends React.Component {
   logPageView() {
     ReactGA.set({ page: window.location.pathname });
