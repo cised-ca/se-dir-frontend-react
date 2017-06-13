@@ -6,13 +6,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import PrivacyPolicyComponent from 'components/PrivacyPolicyComponent.js';
+import { PrivacyPolicyComponent } from 'components/PrivacyPolicyComponent.js';
 
 describe('PrivacyPolicyComponent', () => {
   let component;
 
   beforeEach(() => {
-    component = shallow(<PrivacyPolicyComponent />);
+    component = shallow(<PrivacyPolicyComponent t={key => key} />);
   });
 
   it('should have its component name as default className', () => {

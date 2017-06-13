@@ -1,11 +1,16 @@
 'use strict';
 
 import React from 'react';
-import { browserHistory } from 'react-router';
+
+import { translate } from 'react-i18next';
+
+import Back from './BackComponent';
 
 class LocationDisambiguationComponent extends React.Component {
 
   render() {
+    const { t } = this.props;
+
     let locations = this.props.locations;
     let jsx = [];
     locations.map(function(location) {
@@ -20,11 +25,12 @@ class LocationDisambiguationComponent extends React.Component {
 
     return (
       <div className="locationdisambiguation-component page">
-        <p>Please select a location from the list:</p>
+        <p>{t('locationDisambiguation:selectFromList')}</p>
         <ul key='location-results' className='location-results fade-in'>
           {jsx}
         </ul>
-        <a className="back" onClick={browserHistory.goBack}>Back to search</a>
+
+        <Back />
       </div>
     );
   }
@@ -36,4 +42,5 @@ LocationDisambiguationComponent.displayName = 'LocationDisambiguationComponent';
 // LocationDisambiguationComponent.propTypes = {};
 // LocationDisambiguationComponent.defaultProps = {};
 
-export default LocationDisambiguationComponent;
+export { LocationDisambiguationComponent };
+export default translate('locationDisambiguation')(LocationDisambiguationComponent);

@@ -6,7 +6,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import EnterpriseComponent from 'components/EnterpriseComponent.js';
+import { EnterpriseComponent } from 'components/EnterpriseComponent.js';
 
 describe('EnterpriseComponent', () => {
   let component;
@@ -46,7 +46,7 @@ describe('EnterpriseComponent', () => {
   };
 
   beforeEach(() => {
-    component = shallow(<EnterpriseComponent enterprise={enterpriseProp} />);
+    component = shallow(<EnterpriseComponent t={key => key} enterprise={enterpriseProp} />);
   });
 
   it('should have its component name as default className', () => {

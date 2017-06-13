@@ -1,15 +1,20 @@
 'use strict';
 
 import React from 'react';
-import { browserHistory } from 'react-router';
+
+import { translate } from 'react-i18next';
+
+import Back from './BackComponent';
 
 class NotFoundComponent extends React.Component {
   render() {
+    const { t } = this.props;
+
     return (
       <div className="page notfound-component">
-        <a className="back" onClick={browserHistory.goBack}>Back</a>
+        <Back />
 
-        <p>Page not found.</p>
+        <p>{t('notFound:pageNotFound')}</p>
       </div>
     );
   }
@@ -17,4 +22,5 @@ class NotFoundComponent extends React.Component {
 
 NotFoundComponent.displayName = 'NotFoundComponent';
 
-export default NotFoundComponent;
+export { NotFoundComponent };
+export default translate('notFound')(NotFoundComponent);

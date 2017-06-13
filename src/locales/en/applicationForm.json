@@ -1,0 +1,12 @@
+{
+  "title": "Application",
+  "processed": "Your application will be processed shortly.",
+  "enterpriseName": "Enterprise Name",
+  "parentOrganization": "Parent Organization (if applicable)",
+  "businessDescription":  "Business Description",
+  "serviceOffering": "Product/Service Offering",
+  "website": "Website",
+  "mainContact": "Main Contact Person",
+  "phoneNumber": "Phone Number",
+  "emailAddress": "Email Address"
+}

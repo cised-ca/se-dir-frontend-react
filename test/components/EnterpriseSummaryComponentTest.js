@@ -10,7 +10,7 @@ import { shallow } from 'enzyme';
 // import TestUtils from 'react-addons-test-utils';
 // import createComponent from 'helpers/shallowRenderHelper';
 
-import EnterpriseSummaryComponent from 'components//EnterpriseSummaryComponent.js';
+import { EnterpriseSummaryComponent } from 'components//EnterpriseSummaryComponent.js';
 
 describe('EnterpriseSummaryComponent', () => {
   let component;
@@ -46,13 +46,16 @@ describe('EnterpriseSummaryComponent', () => {
   var componentOptions = {
     context: {
       config: {
-        api_root: ""
+        api_root: ''
       }
     }
   };
 
   beforeEach(() => {
-    component = shallow(<EnterpriseSummaryComponent enterprise={enterpriseProp} />, componentOptions);
+    component = shallow(
+      <EnterpriseSummaryComponent t={key => key} enterprise={enterpriseProp} />,
+      componentOptions
+    );
   });
 
   it('should have its component name as default className', () => {

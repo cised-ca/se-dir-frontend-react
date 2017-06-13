@@ -23,6 +23,7 @@ module.exports = {
     contentBase: './src/',
     historyApiFallback: true,
     hot: true,
+    disableHostCheck: true,
     port: defaultSettings.port,
     publicPath: defaultSettings.publicPath,
     proxy: {

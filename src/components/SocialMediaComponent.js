@@ -6,8 +6,12 @@ import Facebook from './socialMedia/FacebookComponent.js';
 import Instagram from './socialMedia/InstagramComponent.js';
 import Twitter from './socialMedia/TwitterComponent.js';
 
+import { translate } from 'react-i18next';
+
 class SocialMediaComponent extends React.Component {
   render() {
+    const { t } = this.props;
+
     var jsx = [],
       website = null,
       enterprise = this.props.enterprise;
@@ -38,14 +42,16 @@ class SocialMediaComponent extends React.Component {
 
     if (enterprise.website) {
       website = (
-        <a href={enterprise.website} target="_blank" rel="noopener">Website</a>
+        <a href={enterprise.website} target="_blank" rel="noopener">
+          {t('socialMedia:website')}
+        </a>
       );
     }
 
     if (jsx.length > 0) {
       jsx = (
         <div className="socialmedia">
-          <h2>Contact</h2>
+          <h2>{t('socialMedia:contact')}</h2>
           {website}
           <ul className="socialmedia__accounts socialmedia__accounts--mini">
             {jsx}
@@ -70,4 +76,5 @@ SocialMediaComponent.displayName = 'SocialMediaComponent';
 // SocialMediaComponent.propTypes = {};
 // SocialMediaComponent.defaultProps = {};
 
-export default SocialMediaComponent;
+export { SocialMediaComponent };
+export default translate('socialMedia')(SocialMediaComponent);

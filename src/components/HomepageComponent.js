@@ -7,6 +7,8 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import SearchForm from './SearchFormComponent.js';
 import SearchResults from './SearchResultsComponent.js';
 
+import { translate } from 'react-i18next';
+
 class HomepageComponent extends React.Component {
   /**
    * Before the Component is rendered, check if we have a query
@@ -131,45 +133,48 @@ class HomepageComponent extends React.Component {
       powered_by = null,
       apply = null;
 
+    const { t } = this.props;
+
     if (this.state.searchText === null && this.state.searchLocationText === null) {
       intro = (
         <div className='intro js-intro'>
-          <h1 className='title'>Ottawa's Social Enterprise Directory</h1>
+          <h1 className='title'>{t('homepage:title')}</h1>
 
           <p className='tagline'>
-            Find goods and services from the city's vibrant social enterprises.
+            {t('homepage:tagline')}
           </p>
         </div>
       );
 
       apply = (
         <p className="apply">
-          If you are a social enterprise that would like to be added to our directory click&nbsp;
-          <Link to="/apply">here</Link>.
+          {t('homepage:apply')}&nbsp;
+          <Link to="/apply">{t('homepage:applyLinkText')}</Link>.
         </p>
       );
 
       rhok = (
         <p className="rhok">
-          This site is a project created at&nbsp;
+          {t('homepage:created')}&nbsp;
+
           <a href='https://rhok.ca/projects/ottawa-social-enterprise-marketplace'>
-            Random Hacks of Kindness
+            {t('homepage:rhok')}
           </a>
         </p>
       );
 
       powered_by = (
         <p className="powered_by">
-          Powered by&nbsp;
+          {t('homepage:poweredBy')}&nbsp;
           <a href="http://csedottawa.ca/">CSED</a> |&nbsp;
-          <a href="http://csedottawa.ca/">Connect</a> with us for more info on social purchasing.
+          <a href="http://csedottawa.ca/">{t('homepage:connectLinkText')}</a> {t('homepage:connect')}
         </p>
       );
 
       privacy_policy = (
         <p className='privacy-policy'>
-          <Link to='/privacy'>Privacy policy</Link>
-          | Location data by
+          <Link to='/privacy'>{t('homepage:privacyPolicy')}</Link>
+          | {t('homepage:locationData')}
           <Link to='http://www.geonames.org/'>geonames.org</Link>
         </p>
       );
@@ -184,8 +189,8 @@ class HomepageComponent extends React.Component {
     } else if (this.isLocationNotFound()) {
       searchResults = (
         <div className="page">
-          <p>Could not find a match for location or postal code "{this.state.searchLocationText}"</p>
-          <p>Please try searching again.</p>
+          <p>{t('homepage:locationNotFound')} "{this.state.searchLocationText}"</p>
+          <p>{t('homepage:trySearchAgain')}</p>
         </div>
       );
     }
@@ -217,8 +222,5 @@ class HomepageComponent extends React.Component {
 
 HomepageComponent.displayName = 'HomepageComponent';
 
-// This is used by the Homepage and Template tests at the moment.
-// They don't like wrapped components.
-export let HomepageComponentWithoutRouter = HomepageComponent;
-
-export default withRouter(HomepageComponent);
+export { HomepageComponent };
+export default translate('homepage')(withRouter(HomepageComponent));

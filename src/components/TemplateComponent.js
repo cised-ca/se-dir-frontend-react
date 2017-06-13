@@ -2,7 +2,8 @@
 
 import React from 'react';
 
-import SiteNavigation from './SiteNavigationComponent.js';
+import SiteNavigation from './SiteNavigationComponent';
+import i18n from '../i18n';
 
 require('es6-promise/auto');
 
@@ -55,22 +56,17 @@ class TemplateComponent extends React.Component {
   /**
    * Send errors to a logging system
    */
-  setup_error_logger() {
-    var config = this.state.config,
-      logger;
+  setup_error_logger(config) {
+    var logger;
 
-    if (config.logger) {
-      logger = new airbrakeJs({
-        projectId: config.logger.api_key,
-        projectKey: config.logger.api_key,
-        reporter: 'xhr',
-        host: config.logger.host
-      });
+    logger = new airbrakeJs({
+      projectId: config.logger.api_key,
+      projectKey: config.logger.api_key,
+      reporter: 'xhr',
+      host: config.logger.host
+    });
 
-      this.setState({
-        logger: logger
-      });
-    }
+    return logger;
   }
 
   /**
@@ -84,11 +80,39 @@ class TemplateComponent extends React.Component {
     app
       .get_config()
       .then(function(config) {
+        let logger = app.state.logger;
+
+        // If we have a logger in the configs, set it up
+        // otherwise it will default to the browser's console.error()
+        if (config.logger) {
+          logger = app.setup_error_logger(config);
+        }
+
+        let currentLocale = config.defaultLocale || 'en';
+
+        // If we have locales in the config, figure out which language to
+        // display to the user based on the current url
+        if (config.locales) {
+          let currentUrl = window.location.href;
+
+          for (let i = 0; i < config.locales.length; i += 1) {
+            let locale = config.locales[i];
+            let pattern = new RegExp('^' + locale.prefix, 'i');
+
+            if (currentUrl.search(pattern) !== -1) {
+              currentLocale = locale.locale;
+              break;
+            }
+          }
+        }
+
+        i18n.changeLanguage(currentLocale);
+
         app.setState(
           {
-            config: config
-          },
-          app.setup_error_logger
+            config: config,
+            logger: logger
+          }
         );
       })
       .catch(function(reason) {

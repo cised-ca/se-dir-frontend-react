@@ -1,17 +1,21 @@
 'use strict';
 
 import React from 'react';
-import { browserHistory } from 'react-router';
 
-import EnterpriseSummary from './EnterpriseSummaryComponent.js';
-import SocialMedia from './SocialMediaComponent.js';
-import EnterpriseMap from './EnterpriseMapComponent.js';
+import EnterpriseSummary from './EnterpriseSummaryComponent';
+import SocialMedia from './SocialMediaComponent';
+import EnterpriseMap from './EnterpriseMapComponent';
+import Back from './BackComponent';
+
+import { translate } from 'react-i18next';
 
 class EnterpriseComponent extends React.Component {
   /**
    * Build JSX for fax information
    */
   build_faxes() {
+    const { t } = this.props;
+
     var enterprise = this.props.enterprise,
       faxes = enterprise.faxes,
       jsx = [];
@@ -29,7 +33,7 @@ class EnterpriseComponent extends React.Component {
     if (jsx.length > 0) {
       jsx = (
         <div className="enterprise-extended__faxes">
-          <h2>Faxes</h2>
+          <h2>{t('enterprise:faxes')}</h2>
           <ul>
             {jsx}
           </ul>
@@ -44,6 +48,8 @@ class EnterpriseComponent extends React.Component {
    * Build JSX for offering
    */
   build_offering() {
+    const { t } = this.props;
+
     var enterprise = this.props.enterprise,
       offering = enterprise.offering,
       jsx = null;
@@ -51,7 +57,7 @@ class EnterpriseComponent extends React.Component {
     if (offering.length > 0) {
       jsx = (
         <div className="enterprise-extended__offering">
-          <h2>Offering</h2>
+          <h2>{t('enterprise:offering')}</h2>
           {offering}
         </div>
       );
@@ -64,6 +70,8 @@ class EnterpriseComponent extends React.Component {
    * Build JSX for address information
    */
   build_addresses() {
+    const { t } = this.props;
+
     var enterprise = this.props.enterprise,
       addresses = enterprise.addresses,
       jsx = [];
@@ -81,7 +89,7 @@ class EnterpriseComponent extends React.Component {
     if (jsx.length > 0) {
       jsx = (
         <div className="enterprise-extended__addresses">
-          <h2>Address</h2>
+          <h2>{t('enterprise:address')}</h2>
           <ul>
             {jsx}
           </ul>
@@ -96,6 +104,8 @@ class EnterpriseComponent extends React.Component {
    * Build JSX for phone information
    */
   build_phones() {
+    const { t } = this.props;
+
     var enterprise = this.props.enterprise,
       phones = enterprise.phones,
       jsx = [];
@@ -115,7 +125,7 @@ class EnterpriseComponent extends React.Component {
     if (jsx.length > 0) {
       jsx = (
         <div className="enterprise-extended__phones">
-          <h2>Phone</h2>
+          <h2>{t('enterprise:phone')}</h2>
           <ul className="enterprise-extended__phone-numbers">
             {jsx}
           </ul>
@@ -130,6 +140,8 @@ class EnterpriseComponent extends React.Component {
    * Build JSX for email information
    */
   build_emails() {
+    const { t } = this.props;
+
     var enterprise = this.props.enterprise,
       emails = enterprise.emails,
       jsx = [];
@@ -149,7 +161,7 @@ class EnterpriseComponent extends React.Component {
     if (jsx.length > 0) {
       jsx = (
         <div className="enterprise-extended__emails">
-          <h2>Email</h2>
+          <h2>{t('enterprise:email')}</h2>
           <ul className="enterprise-extended__email-addresses">
             {jsx}
           </ul>
@@ -164,6 +176,8 @@ class EnterpriseComponent extends React.Component {
    * Build JSX for purposes information
    */
   build_purposes() {
+    const { t } = this.props;
+
     var enterprise = this.props.enterprise,
       purposes = enterprise.purposes,
       jsx = [];
@@ -181,7 +195,7 @@ class EnterpriseComponent extends React.Component {
     if (jsx.length > 0) {
       jsx = (
         <div className="enterprise-extended__purposes">
-          <h2>Purpose</h2>
+          <h2>{t('enterprise:purpose')}</h2>
           <ul className="enterprise-extended__purpose-list">
             {jsx}
           </ul>
@@ -196,13 +210,15 @@ class EnterpriseComponent extends React.Component {
    * Build JSX for year started
    */
   build_year() {
+    const { t } = this.props;
+
     var year_started = this.props.enterprise.year_started,
       jsx = null;
 
     if (year_started) {
       jsx = (
         <div className="enterprise-extended__year-started">
-          <h2>Year Started</h2>
+          <h2>{t('enterprise:yearStarted')}</h2>
           <p>
             {year_started}
           </p>
@@ -225,7 +241,7 @@ class EnterpriseComponent extends React.Component {
 
     return (
       <div className="enterprise-component">
-        <a className="back" onClick={browserHistory.goBack}>Back</a>
+        <Back />
 
         <EnterpriseSummary enterprise={enterprise} linkto='external'>
           <div className="enterprise-extended">
@@ -255,4 +271,5 @@ class EnterpriseComponent extends React.Component {
 
 EnterpriseComponent.displayName = 'EnterpriseComponent';
 
-export default EnterpriseComponent;
+export { EnterpriseComponent };
+export default translate('enterprise')(EnterpriseComponent);

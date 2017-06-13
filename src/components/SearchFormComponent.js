@@ -3,7 +3,10 @@
 import React from 'react';
 
 import { Link } from 'react-router';
-import LocationDisambiguation from './LocationDisambiguationComponent.js';
+import LocationDisambiguation from './LocationDisambiguationComponent';
+import Loading from './LoadingComponent';
+
+import { translate } from 'react-i18next';
 
 const POSTAL_CODE_REGEX = /^[A-Za-z]\d[A-Za-z]/;
 
@@ -144,8 +147,10 @@ class SearchFormComponent extends React.Component {
   }
 
   render() {
+    const { t } = this.props;
+
     if (!this.context.config.geo_api_root) {
-      return (<p>Loading...</p>);
+      return (<Loading />);
     }
 
     if (this.state.locationDisambiguation && this.state.locationDisambiguation.length > 1) {
@@ -165,13 +170,13 @@ class SearchFormComponent extends React.Component {
     return (
       <form className="search-form js-search-form searchform-component" onSubmit={this.handleSubmit.bind(this)}>
         <div className="search-bar">
-          <input className="search-field" name="q" placeholder="Start Purchasing" type="search" ref="searchTextInput" defaultValue={searchText} />
-          <span className="search-near-label">Near:</span>
-          <input className="search-location-field" name="at" placeholder="Town / Postal code" type="search" ref="searchLocationInput" defaultValue={searchLocation} />
+          <input className="search-field" name="q" placeholder={t('searchForm:startPurchasing')} type="search" ref="searchTextInput" defaultValue={searchText} />
+          <span className="search-near-label">{t('searchForm:near')}</span>
+          <input className="search-location-field" name="at" placeholder={t('searchForm:townOrPostalCode')} type="search" ref="searchLocationInput" defaultValue={searchLocation} />
         </div>
 
-        <input className="search-button button button--search" type="submit" value="Search" />
-        <Link className='button' to='/directory'>Browse</Link>
+        <input className="search-button button button--search" type="submit" value={t('searchForm:search')} />
+        <Link className='button' to='/directory'>{t('searchForm:browse')}</Link>
       </form>
     );
   }
@@ -188,4 +193,5 @@ SearchFormComponent.contextTypes = {
 // SearchFormComponent.propTypes = {};
 // SearchFormComponent.defaultProps = {};
 
-export default SearchFormComponent;
+export { SearchFormComponent };
+export default translate('searchForm')(SearchFormComponent);

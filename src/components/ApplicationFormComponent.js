@@ -1,9 +1,12 @@
 'use strict';
 
 import React from 'react';
-import { browserHistory } from 'react-router';
 
-import Banner from './BannerComponent.js';
+import Banner from './BannerComponent';
+import Loading from './LoadingComponent';
+import Back from './BackComponent';
+
+import { translate } from 'react-i18next';
 
 var submitGoogleForm = require('google-form');
 
@@ -43,11 +46,13 @@ class ApplicationFormComponent extends React.Component {
   }
 
   render() {
+    const { t } = this.props;
+
     // Show "Loading..." and bail early if we don't have the configs yet
     if (this.props.config === null) {
       return (
         <div className='applicationform-component page'>
-          Loading...
+          <Loading />
         </div>
 
       );
@@ -56,10 +61,10 @@ class ApplicationFormComponent extends React.Component {
     if (this.state.status === 'success') {
       return (
         <div className='applicationform-component page'>
-          <a className="back" onClick={browserHistory.goBack}>Back</a>
+          <Back />
 
           <Banner type='success' title='Success'>
-            Your application will be processed shortly.
+            {t('applicationForm:processed')}
           </Banner>
         </div>
       );
@@ -67,35 +72,35 @@ class ApplicationFormComponent extends React.Component {
 
     return (
       <div className='applicationform-component page'>
-        <a className="back" onClick={browserHistory.goBack}>Back</a>
+        <Back />
 
-        <h1>Application</h1>
+        <h1>{t('applicationForm:title')}</h1>
 
         <form action='https://docs.google.com/forms/d/1pq5VthlSmoC9xxOUUZ9LBEGsa-OVHgkKZg0AgD1x-Dk'
           className='js-application-form' method='post' onSubmit={this.handleSubmit.bind(this)} ref='applicationForm' >
 
-          <label className='required' htmlFor='enterprise-name'>Enterprise Name</label>
+          <label className='required' htmlFor='enterprise-name'>{t('applicationForm:enterpriseName')}</label>
           <input id='enterprise-name' name='entry.2005620554' required='required' type='text' />
 
-          <label htmlFor='parent-organization'>Parent Organization (if applicable)</label>
+          <label htmlFor='parent-organization'>{t('applicationForm:parentOrganization')}</label>
           <input id='parent-organization' name='entry.1045781291' type='text' />
 
-          <label htmlFor='business-description'>Business Description</label>
+          <label htmlFor='business-description'>{t('applicationForm:businessDescription')}</label>
           <textarea id='business-description' name='entry.1065046570'></textarea>
 
-          <label htmlFor='offering'>Product/Service Offering</label>
+          <label htmlFor='offering'>{t('applicationForm:serviceOffering')}</label>
           <textarea id='offering' name='entry.1166974658'></textarea>
 
-          <label htmlFor='website'>Website</label>
+          <label htmlFor='website'>{t('applicationForm:website')}</label>
           <input id='website' name='entry.839337160' type='url' />
 
-          <label className='required' htmlFor='main-contact'>Main Contact Person</label>
+          <label className='required' htmlFor='main-contact'>{t('applicationForm:mainContact')}</label>
           <input id='main-contact' name='entry.1217363806' required='required' type='text' />
 
-          <label htmlFor='phone-number'>Phone Number</label>
+          <label htmlFor='phone-number'>{t('applicationForm:phoneNumber')}</label>
           <input id='phone-number' name='entry.1930753223' type='tel' />
 
-          <label htmlFor='email-address'>Email Address</label>
+          <label htmlFor='email-address'>{t('applicationForm:emailAddress')}</label>
           <input id='email-address' name='entry.1617852215' type='email' />
 
           <input type='submit' value='Submit' />
@@ -115,4 +120,5 @@ ApplicationFormComponent.contextTypes = {
 // ApplicationFormComponent.propTypes = {};
 // ApplicationFormComponent.defaultProps = {};
 
-export default ApplicationFormComponent;
+export { ApplicationFormComponent };
+export default translate('applicationForm')(ApplicationFormComponent);

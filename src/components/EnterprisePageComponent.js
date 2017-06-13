@@ -2,7 +2,8 @@
 
 import React from 'react';
 
-import Enterprise from './EnterpriseComponent.js';
+import Enterprise from './EnterpriseComponent';
+import Loading from './LoadingComponent';
 
 var slug = require('slug/slug-browser');
 slug.defaults.mode = 'rfc3986';
@@ -24,7 +25,6 @@ class EnterprisePageComponent extends React.Component {
       this.fetchEnterprise(this.context.config.api_root);
     }
   }
-
 
   componentWillReceiveProps(nextProps, nextContext) {
     let new_api_root = nextContext.config.api_root,
@@ -68,7 +68,7 @@ class EnterprisePageComponent extends React.Component {
       jsx = null;
 
     if (!this.state.enterprise) {
-      jsx = 'Loading...';
+      jsx = <Loading />;
     } else {
       jsx = <Enterprise enterprise={enterprise} />;
     }
