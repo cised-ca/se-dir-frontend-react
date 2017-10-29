@@ -17,10 +17,10 @@ class SearchResultsMapComponent extends React.Component {
   renderSearchNearCoords(tileLayer, popupMarkers) {
     // get search coords in lat/long order
     let coords = this.props.searchCoords.split(',').map(parseFloat);
-    coords = [coords[1], coords[0]];
+    let latLng = [coords[1], coords[0]];
     return (
       <div className="searchresultsmap-component">
-        <Map center={coords} zoom={11}>
+        <Map center={latLng} zoom={11}>
           {tileLayer}
           {popupMarkers}
         </Map>
@@ -70,7 +70,8 @@ class SearchResultsMapComponent extends React.Component {
         return;
       }
       enterprise.locations.coordinates.map(coordinates => {
-        allCoords.push(coordinates);
+        let latLng = [coordinates[1], coordinates[0]];
+        allCoords.push(latLng);
       });
     });
     return allCoords;
@@ -92,8 +93,9 @@ class SearchResultsMapComponent extends React.Component {
         return;
       }
       enterprise.locations.coordinates.map(coordinates => {
+        let latLng = [coordinates[1], coordinates[0]];
         jsx.push(
-          <Marker key={coordinates.toString()} position={coordinates}>
+          <Marker key={enterprise.name + latLng.toString()} position={latLng}>
             <Popup>
               <span>{enterprise.name}</span>
             </Popup>
