@@ -17,9 +17,10 @@ class EnterpriseMapComponent extends React.Component {
     let tileLayer = this.generateTileLayer();
 
     if (enterprise.locations.coordinates.length === 1) {
+      let latLng = [enterprise.locations.coordinates[0][1], enterprise.locations.coordinates[0][0]];
       return (
         <div className="enterprisemap-component">
-          <Map center={enterprise.locations.coordinates[0]} zoom={15}>
+          <Map center={latLng} zoom={15}>
             {tileLayer}
             {popupMarkers}
           </Map>
@@ -29,7 +30,7 @@ class EnterpriseMapComponent extends React.Component {
 
     return (
       <div className="enterprisemap-component">
-        <Map bounds={enterprise.locations.coordinates}>
+        <Map bounds={this.generateAllCoords(enterprise)}>
           {tileLayer}
           {popupMarkers}
         </Map>
@@ -49,9 +50,10 @@ class EnterpriseMapComponent extends React.Component {
   generatePopupMarkers(enterprise) {
     let jsx = [];
     enterprise.locations.coordinates.map(coordinates => {
-      let coordsStr = coordinates[0] + ',' + coordinates[1];
+      let latLng = [coordinates[1], coordinates[0]];
+      let coordsStr = latLng[0] + ',' + latLng[1];
       jsx.push(
-        <Marker key={coordsStr} position={coordinates}>
+        <Marker key={coordsStr} position={latLng}>
           <Popup>
             <span>{enterprise.name}</span>
           </Popup>
@@ -59,6 +61,15 @@ class EnterpriseMapComponent extends React.Component {
       );
     });
     return jsx;
+  }
+
+  generateAllCoords(enterprise) {
+    let allCoords = [];
+    enterprise.locations.coordinates.map(coordinates => {
+      let latLng = [coordinates[1], coordinates[0]];
+      allCoords.push(latLng);
+    });
+    return allCoords;
   }
 }
 
